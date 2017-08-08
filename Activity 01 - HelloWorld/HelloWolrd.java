@@ -7,7 +7,7 @@ package hellowolrd;
 
 /**
  *
- * @author a101334
+ * @author a101334, t187583
  */
 public class HelloWolrd {
 
