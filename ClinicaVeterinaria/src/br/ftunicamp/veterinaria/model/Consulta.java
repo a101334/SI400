@@ -13,15 +13,31 @@ import java.util.Date; //importacao para a classe Date
  * @author Thiago Henrique Viotto
  */
 public class Consulta { //Classe Consulta
+    private final int id;
     private Date data_consulta;
     private String historico;
 
     //construtor com os dados da consulta
-    public Consulta(Date data_consulta, String historico) {
+    public Consulta(int id,Date data_consulta, String historico) {
+        this.id = id;
         this.data_consulta = data_consulta;
         this.historico = historico;
     }
 
+    //Atualiza a data de consulta
+    public void setData_consulta(Date data_consulta) {
+        this.data_consulta = data_consulta;
+    }
+
+    //Atualiza o historico da consulta
+    public void setHistorico(String historico) {
+        this.historico = historico;
+    }
+
+    //retorna o id da consulta
+    public final int getId (){
+        return id;
+    }
     //retorna a data de consulta
     public Date getData_consulta() {
         return data_consulta;
@@ -31,7 +47,4 @@ public class Consulta { //Classe Consulta
     public String getHistorico() {
         return historico;
     }
-
-    
-    
 }

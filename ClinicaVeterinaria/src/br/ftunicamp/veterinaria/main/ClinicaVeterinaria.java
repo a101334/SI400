@@ -4,7 +4,7 @@
  * Curso: Tec.Análise e Desenvolvimento de Sistemas
  */
 
-package br.ftunicamp.veterinaria.model;
+package br.ftunicamp.veterinaria.main;
 /**
  * @authors thiago viotto,amadeu carvalho,alex rafael
  */
