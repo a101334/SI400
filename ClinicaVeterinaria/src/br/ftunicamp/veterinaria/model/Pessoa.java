@@ -10,7 +10,7 @@ package br.ftunicamp.veterinaria.model;
  *
  * @author Thiago Henrique Viotto
  */
-public class Pessoa { // classe super Pessoa
+public abstract class Pessoa { // classe abstrata super Pessoa
     private final int id;
     private final String nome;
     private String endereco;
@@ -23,7 +23,15 @@ public class Pessoa { // classe super Pessoa
         this.endereco = endereco;
         this.telefone = telefone;
     }
+    //retorna o id de pessoa
+    public int getID(){
+        return id;
+    }
 
+    //retorna o nome da Pessoa
+    public String getNome(){
+        return nome;
+    }
     //retorna o endereco de Pessoa
     public String getEndereco() {
         return endereco;
