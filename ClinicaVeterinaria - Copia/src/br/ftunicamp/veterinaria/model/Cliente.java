@@ -13,14 +13,14 @@ package br.ftunicamp.veterinaria.model;
 public class Cliente extends Pessoa { //Classe Cliente herda a classe Pessoa (é um)
     private float cep;
     private String email;
-
+    
     //cadastro de um cliente
     public Cliente(int id, String nome, String endereco, String telefone, float cep, String email) {
         super(id,nome,endereco,telefone); //chama o construtor de Pessoa
         this.cep = cep;
         this.email = email;
     }
-
+    
     //Atualiza o CEP do cliente
     public void setCep(float cep) {
         this.cep = cep;
