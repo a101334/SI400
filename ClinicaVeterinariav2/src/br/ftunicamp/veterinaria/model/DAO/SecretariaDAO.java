@@ -9,6 +9,6 @@ package br.ftunicamp.veterinaria.model.DAO;
  *
  * @author a101334
  */
-public class SecretariaDAO {
+public class SecretariaDAO extends GenericDAO  {
     
 }

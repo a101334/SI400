@@ -10,14 +10,14 @@ import java.util.Date;
  * @author a101334
  */
 public class Animal {
-     private int codAnimal;
+    private int codAnimal;
     private String nomeAnimal;
-    private Date nascimentoAnimal;
+    private String nascimentoAnimal;
     private String especie;
     private String raca;
     private int codPessoa;
 
-    public Animal(String nomeAnimal, Date nascimentoAnimal, String especie, String raca, int codPessoa) {
+    public Animal(String nomeAnimal, String nascimentoAnimal, String especie, String raca, int codPessoa) {
         this.codAnimal = 0;
         this.nomeAnimal = nomeAnimal;
         this.nascimentoAnimal = nascimentoAnimal;
@@ -42,11 +42,11 @@ public class Animal {
         this.nomeAnimal = nomeAnimal;
     }
 
-    public Date getNascimentoAnimal() {
+    public String getNascimentoAnimal() {
         return nascimentoAnimal;
     }
 
-    public void setNascimentoAnimal(Date nascimentoAnimal) {
+    public void setNascimentoAnimal(String nascimentoAnimal) {
         this.nascimentoAnimal = nascimentoAnimal;
     }
 

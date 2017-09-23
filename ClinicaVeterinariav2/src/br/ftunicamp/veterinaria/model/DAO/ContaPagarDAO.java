@@ -9,6 +9,6 @@ package br.ftunicamp.veterinaria.model.DAO;
  *
  * @author a101334
  */
-public class ContaPagarDAO {
+public class ContaPagarDAO extends GenericDAO {
     
 }

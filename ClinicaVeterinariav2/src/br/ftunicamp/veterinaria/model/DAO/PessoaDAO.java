@@ -9,6 +9,6 @@ package br.ftunicamp.veterinaria.model.DAO;
  *
  * @author a101334
  */
-public class PessoaDAO {
+public class PessoaDAO extends GenericDAO  {
     
 }
