@@ -45,7 +45,7 @@ public class AnimalDAO extends GenericDAO{
     {
         ResultSet rs;
         try{
-            String sql = "SELECT * FROM animal";
+            String sql = "SELECT * FROM animal INNER JOIN pessoa on animal.codPessoa = pessoa.codPessoa";
 
             Connection conn = this.accessDB();
             PreparedStatement stm = conn.prepareStatement(sql);

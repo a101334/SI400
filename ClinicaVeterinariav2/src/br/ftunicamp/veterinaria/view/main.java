@@ -7,6 +7,7 @@ package br.ftunicamp.veterinaria.view;
 import br.ftunicamp.veterinaria.model.Animal;
 import br.ftunicamp.veterinaria.model.DAO.AnimalDAO;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 /**
  *
  * @author a101334
@@ -221,6 +222,19 @@ public class main extends javax.swing.JFrame {
         AnimalDAO animalDAO = new AnimalDAO();
         
         rs = animalDAO.listarAnimais();
+        
+        try{
+            while(rs.next())
+            {
+                 for (int i = 1; i <= 8; i++) {
+            if (i > 1) System.out.print(" | ");
+            System.out.print(rs.getString(i));
+        }
+        System.out.println("");
+            }
+        }catch (SQLException e){
+            
+        }
         
         //System.out.println(rs.getString("nomeAnimal"));
     }//GEN-LAST:event_btnListarAnimaisActionPerformed
