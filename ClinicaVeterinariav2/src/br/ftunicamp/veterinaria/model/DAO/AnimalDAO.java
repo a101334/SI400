@@ -8,6 +8,7 @@ import br.ftunicamp.veterinaria.model.Animal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.ResultSet;
 
 /**
  *
@@ -38,6 +39,27 @@ public class AnimalDAO extends GenericDAO{
             System.out.println(e);
         }
       
+    }
+    
+    public ResultSet listarAnimais()
+    {
+        ResultSet rs;
+        try{
+            String sql = "SELECT * FROM animal";
+
+            Connection conn = this.accessDB();
+            PreparedStatement stm = conn.prepareStatement(sql);
+            stm.execute();
+            rs = stm.getResultSet();
+            return rs;
+            
+        }catch (SQLException e)
+        {
+            System.out.println("My Erro: " + e);
+        }
+        return null;
+      
+        
     }
         
 }

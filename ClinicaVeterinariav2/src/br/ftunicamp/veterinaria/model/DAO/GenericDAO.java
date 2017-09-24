@@ -19,8 +19,7 @@ public class GenericDAO {
 
    public Connection accessDB() throws SQLException
    {
-       java.sql.DriverManager.getDriver("jdbc:mysql");
-       this.setStringDeConexao("jdbc:mysql//localhost:3306/clinicaVeterinaria");
+       this.setStringDeConexao("jdbc:mysql://localhost:3306/clinicaVeterinaria");
        this.setUser("root");
        this.setPassword("12345");
        
