@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="0" failures="1" hostname="LAPTOP-N7FTRRSP" name="br.ftunicamp.veterinaria.model.DAO.PessoaDAOTest" skipped="0" tests="2" time="0.314" timestamp="2017-10-03T00:06:47">
+<testsuite errors="0" failures="0" hostname="LAPTOP-N7FTRRSP" name="br.ftunicamp.veterinaria.model.DAO.PessoaDAOTest" skipped="1" tests="2" time="0.432" timestamp="2017-10-03T18:30:25">
   <properties>
     <property name="netbeans.autoupdate.country" value="BR" />
     <property name="javac.test.classpath" value="C:\Program Files\NetBeans 8.2\ide\modules\ext\mysql-connector-java-5.1.23-bin.jar:build/classes:C:\Program Files\NetBeans 8.2\platform\modules\ext\junit-4.12.jar:C:\Program Files\NetBeans 8.2\platform\modules\ext\hamcrest-core-1.3.jar" />
@@ -39,7 +39,7 @@
     <property name="user.name" value="thiag" />
     <property name="copylibs.rebase" value="true" />
     <property name="libs.swing-layout.maven-pom" value="" />
-    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner br.ftunicamp.veterinaria.model.DAO.PessoaDAOTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\thiag\Desktop\ClinicaVeterinariav2\build\test\results\TEST-br.ftunicamp.veterinaria.model.DAO.PessoaDAOTest.xml crashfile=C:\Users\thiag\Desktop\ClinicaVeterinariav2\build\junitvmwatcher1597349269681769110.properties propsfile=C:\Users\thiag\Desktop\ClinicaVeterinariav2\build\junit7129234846622871833.properties" />
+    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner br.ftunicamp.veterinaria.model.DAO.PessoaDAOTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\thiag\Desktop\ClinicaVeterinariav2\build\test\results\TEST-br.ftunicamp.veterinaria.model.DAO.PessoaDAOTest.xml crashfile=C:\Users\thiag\Desktop\ClinicaVeterinariav2\build\junitvmwatcher3874881798375230121.properties propsfile=C:\Users\thiag\Desktop\ClinicaVeterinariav2\build\junit6653349862036673840.properties" />
     <property name="build.classes.dir" value="build/classes" />
     <property name="netbeans.accept_license_class" value="org.netbeans.license.AcceptLicense" />
     <property name="build.sysclasspath" value="ignore" />
@@ -71,7 +71,7 @@
     <property name="javac.debug" value="true" />
     <property name="javadoc.splitindex" value="true" />
     <property name="file.separator" value="\" />
-    <property name="javac.includesfile.binary" value="C:\Users\thiag\Desktop\ClinicaVeterinariav2\null1027151966" />
+    <property name="javac.includesfile.binary" value="C:\Users\thiag\Desktop\ClinicaVeterinariav2\null812390855" />
     <property name="libs.junit_4.maven-pom" value="" />
     <property name="mkdist.disabled" value="false" />
     <property name="javac.test.processorpath" value="C:\Program Files\NetBeans 8.2\ide\modules\ext\mysql-connector-java-5.1.23-bin.jar:build/classes:C:\Program Files\NetBeans 8.2\platform\modules\ext\junit-4.12.jar:C:\Program Files\NetBeans 8.2\platform\modules\ext\hamcrest-core-1.3.jar" />
@@ -316,13 +316,11 @@
     <property name="platform.active" value="default_platform" />
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit" />
   </properties>
-  <testcase classname="br.ftunicamp.veterinaria.model.DAO.PessoaDAOTest" name="listar" time="0.239" />
-  <testcase classname="br.ftunicamp.veterinaria.model.DAO.PessoaDAOTest" name="inserir" time="0.022">
-    <failure message="Erro ao inserir" type="junit.framework.AssertionFailedError">junit.framework.AssertionFailedError: Erro ao inserir
-	at br.ftunicamp.veterinaria.model.DAO.PessoaDAOTest.inserir(PessoaDAOTest.java:29)
-</failure>
+  <testcase classname="br.ftunicamp.veterinaria.model.DAO.PessoaDAOTest" name="listar" time="0.0">
+    <skipped />
   </testcase>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[Errojava.sql.SQLException: Parameter index out of range (0 < 1 ).
-]]></system-err>
+  <testcase classname="br.ftunicamp.veterinaria.model.DAO.PessoaDAOTest" name="inserir" time="0.386" />
+  <system-out><![CDATA[Salvo com sucesso
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
 </testsuite>

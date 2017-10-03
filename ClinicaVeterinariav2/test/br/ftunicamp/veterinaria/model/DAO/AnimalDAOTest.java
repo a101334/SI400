@@ -20,6 +20,7 @@ public class AnimalDAOTest {
     }
 
     @Test
+    @Ignore
     public void inserir() {
         Animal animal = new Animal("Garfield","2014", "Gato", "Cara", 1);
         AnimalDAO dao = new AnimalDAO();

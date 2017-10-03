@@ -32,8 +32,8 @@ public class Pessoa {
         this.cidade = cidade;
         this.bairro = bairro;
         this.rua = rua;
-        this.telefone = telefone;
         this.numCasa = numCasa;
+        this.telefone = telefone;
         this.email = email;
         this.tipo = tipo;
     }

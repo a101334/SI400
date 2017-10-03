@@ -23,7 +23,7 @@ public class PessoaDAOTest {
     public void inserir() {
         Pessoa pessoa = new Pessoa(1,"Lucas", "22-04-1987", "12345980", "SP", "São Paulo", "Jardim do Pedro", "Rua dos Donalds", 34, "08002132", "lucas@gmail.com", 0);
         PessoaDAO dao = new PessoaDAO();
-        if (dao.inserir(pessoa)) {
+        if (dao.inserir(pessoa)) { 
             System.out.println("Salvo com sucesso");
         } else {
              fail("Erro ao inserir");
@@ -31,6 +31,7 @@ public class PessoaDAOTest {
     }
 
     @Test
+    @Ignore
     public void listar() {
         PessoaDAO dao = new PessoaDAO();
         for (Pessoa p : dao.listar()) {

@@ -45,7 +45,7 @@ public class AnimalDAO extends GenericDAO {
         }
     }
     public List<Animal> listar(){
-        String sql = "SELECT * FROM animal INNER JOIN pessoa on animal.codPessoa = pessoa.codPessoa";
+        String sql = "SELECT * FROM animal";
         PreparedStatement stmt = null;
         ResultSet rs = null;
         List<Animal> animais = new ArrayList<>();
