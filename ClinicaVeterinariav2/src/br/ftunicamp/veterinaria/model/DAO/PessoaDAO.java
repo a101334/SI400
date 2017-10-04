@@ -25,22 +25,22 @@ private Connection con = null;
         con = GenericDAO.getConnection();
     }
     public boolean inserir(Pessoa pessoa){
-        String sql  = "INSERT INTO pessoa (codPessoa, nome, nascimentoPessoa, cep, estado, cidade, bairro, rua, numCasa, telefone, email, tipo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql  = "INSERT INTO pessoa (nome, nascimentoPessoa, cep, estado, cidade, bairro, rua, numCasa, telefone, email, tipo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement stmt = null;
         try {
             stmt = con.prepareStatement(sql);
-            stmt.setInt(1, pessoa.getCodPessoa());
-            stmt.setString(2, pessoa.getNome());
-            stmt.setString(3, pessoa.getNascimentoPessoa());
-            stmt.setString(4, pessoa.getCep());
-            stmt.setString(5, pessoa.getEstado());
-            stmt.setString(6, pessoa.getCidade());
-            stmt.setString(7, pessoa.getBairro());
-            stmt.setString(8, pessoa.getRua());
-            stmt.setInt(9, pessoa.getNumCasa());
-            stmt.setString(10, pessoa.getTelefone());
-            stmt.setString(11, pessoa.getEmail());
-            stmt.setInt(12, pessoa.getTipo());
+            //stmt.setInt(1, pessoa.getCodPessoa());
+            stmt.setString(1, pessoa.getNome());
+            stmt.setString(2, pessoa.getNascimentoPessoa());
+            stmt.setString(3, pessoa.getCep());
+            stmt.setString(4, pessoa.getEstado());
+            stmt.setString(5, pessoa.getCidade());
+            stmt.setString(6, pessoa.getBairro());
+            stmt.setString(7, pessoa.getRua());
+            stmt.setInt(8, pessoa.getNumCasa());
+            stmt.setString(9, pessoa.getTelefone());
+            stmt.setString(10, pessoa.getEmail());
+            stmt.setInt(11, pessoa.getTipo());
             stmt.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -60,9 +60,9 @@ private Connection con = null;
             rs = stmt.executeQuery();
             while(rs.next()){
                 Pessoa pessoa = new Pessoa();
-                pessoa.setCodPessoa(rs.getInt("codPessoa"));
-                pessoas.add(pessoa);
-                pessoa.setNome(rs.getString("Nome"));
+                //pessoa.setCodPessoa(rs.getInt("codPessoa"));
+                //pessoas.add(pessoa);
+                pessoa.setNome(rs.getString("nome"));
                 pessoas.add(pessoa);
                 pessoa.setNascimentoPessoa(rs.getString("nascimentoPessoa"));
                 pessoas.add(pessoa);
