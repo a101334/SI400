@@ -20,7 +20,7 @@ public class VeterinarioDAOTest {
 
     @Test
     public void inserir() {
-        Veterinario veterinario = new Veterinario(1,1);
+        Veterinario veterinario = new Veterinario(3);
         VeterinarioDAO dao = new VeterinarioDAO();
         if (dao.inserir(veterinario)) { 
             System.out.println("Salvo com sucesso");

@@ -15,8 +15,9 @@ public class Secretaria extends Pessoa{
     private String login;
     private String senha;
 
-    public Secretaria(int codPessoa,String nome, String nascimentoPessoa, String cep, String estado, String cidade, String bairro, String rua, String telefone, int numCasa, String email, int tipo, String login, String senha) {
-        super(codPessoa,nome, nascimentoPessoa, cep, estado, cidade, bairro, rua, numCasa, telefone, email, tipo);
+    public Secretaria(String nome, String nascimentoPessoa, String cep, String estado, String cidade, String bairro, String rua, String telefone, int numCasa, String email, int tipo, String login, String senha) {
+        super(nome, nascimentoPessoa, cep, estado, cidade, bairro, rua, numCasa, telefone, email, tipo);
+        this.codPessoa = 0;
         this.codSecretaria = 0;
         this.login = login;
         this.senha = senha;
