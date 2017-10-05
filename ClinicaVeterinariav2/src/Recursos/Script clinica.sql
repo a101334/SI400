@@ -1,3 +1,12 @@
+/* 
+ * Disciplina: Programação Orientada Objetos 2 
+ * Prof.Dr.Ivan Ricarte
+ * Curso: Tec.Análise e Desenvolvimento de Sistemas
+ */
+/*
+ * Author:  thiag
+ * Created: 04/10/2017 */
+
 DROP DATABASE IF EXISTS clinicaVeterinaria;
 
 CREATE DATABASE clinicaVeterinaria;
@@ -24,6 +33,7 @@ CREATE TABLE pessoa (
 	telefone VARCHAR(30) NOT NULL, 
 	email VARCHAR (100) NOT NULL, 
 	tipo INT NOT NULL DEFAULT 0,
+        genero CHAR(1) NOT NULL,
 	PRIMARY KEY (codPessoa) 
 ) Engine=InnoDB;
 
@@ -37,6 +47,7 @@ CREATE TABLE secretaria (
 	codPessoa INT NOT NULL,
 	login VARCHAR (50) NOT NULL,
 	senha VARCHAR(20) NOT NULL,
+        salario FLOAT NOT NULL,
 	PRIMARY KEY (codSecretaria),
 	FOREIGN KEY (codPessoa) REFERENCES pessoa (codPessoa),
 	UNIQUE (login)
@@ -49,9 +60,11 @@ DROP TABLE IF EXISTS veterinario;
 #codPessoa chave estrangeira referenciando Pessoa
 
 CREATE TABLE veterinario (
-	codVeterinario INT NOT NULL AUTO_INCREMENT,
 	codPessoa INT NOT NULL,
-	PRIMARY KEY (codVeterinario),
+	codVeterinario INT NOT NULL AUTO_INCREMENT,
+        salario FLOAT NOT NULL,
+	PRIMARY KEY (codPessoa),
+        UNIQUE(codVeterinario),
 	FOREIGN KEY (codPessoa) REFERENCES pessoa (codPessoa)
 )Engine=InnoDB;
 
@@ -66,11 +79,11 @@ CREATE TABLE animal (
 	nascimentoAnimal varchar(20) NOT NULL, 
 	especie VARCHAR(20) DEFAULT 'INDEFINIDO',
 	raca VARCHAR(20) DEFAULT 'INDEFINIDO',
-	codPessoa INT NOT NULL
-)
-	/*PRIMARY KEY (codAnimal),
+	codPessoa INT NOT NULL,
+        sexo CHAR(1) NOT NULL,
+	PRIMARY KEY (codAnimal),
 	FOREIGN KEY (codPessoa) REFERENCES pessoa (codPessoa) 
-) Engine=InnoDB;        */
+) Engine=InnoDB;        
 
 select*from animal
 
@@ -99,7 +112,8 @@ CREATE TABLE consulta (
 	codConsulta INT NOT NULL AUTO_INCREMENT,
 	codTratamento INT NOT NULL,
 	dataConsulta DATE NOT NULL,
-	PRIMARY KEY (codConsulta)
+	PRIMARY KEY (codConsulta),
+        FOREIGN KEY(codTratamento) REFERENCES Tratamento (codTratamento)
 ) Engine=InnoDB;
 
 DROP TABLE IF EXISTS contaPagar;
@@ -124,6 +138,7 @@ CREATE TABLE emitirNota(
 	consulta INT NOT NULL,
 	conta INT NOT NULL,
 	dataEmissao DATETIME NOT NULL,
+        FOREIGN KEY (veterinario) REFERENCES veterinario (codVeterinario),
 	FOREIGN KEY (consulta) REFERENCES consulta (codConsulta),
 	FOREIGN KEY (conta) REFERENCES contaPagar (codConta)
 )Engine=InnoDB;
@@ -150,6 +165,9 @@ SELECT * FROM secretaria;
 
 INSERT INTO veterinario (codPessoa)
 VALUES (1);
+
+delete from pessoa
+where codPessoa = 1
 
 SELECT * FROM veterinario;
 

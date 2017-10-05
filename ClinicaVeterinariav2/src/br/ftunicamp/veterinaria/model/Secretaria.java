@@ -14,15 +14,24 @@ public class Secretaria extends Pessoa{
     private int codPessoa;
     private String login;
     private String senha;
+    private float salario;
 
-    public Secretaria(String nome, String nascimentoPessoa, String cep, String estado, String cidade, String bairro, String rua, String telefone, int numCasa, String email, int tipo, String login, String senha) {
-        super(nome, nascimentoPessoa, cep, estado, cidade, bairro, rua, numCasa, telefone, email, tipo);
+    public Secretaria(String nome, String nascimentoPessoa, String cep, String estado, String cidade, String bairro, String rua, String telefone, int numCasa, String email, int tipo, String genero, String login, String senha, float salario) {
+        super(nome, nascimentoPessoa, cep, estado, cidade, bairro, rua, numCasa, telefone, email, tipo,genero);
         this.codPessoa = 0;
         this.codSecretaria = 0;
         this.login = login;
         this.senha = senha;
+        this.salario = salario;
+    }
+    
+    public void setSalario(float salario){
+        this.salario = salario;
     }
 
+    public float getSalario(){
+        return salario;
+    }
     public int getCodSecretaria() {
         return codSecretaria;
     }

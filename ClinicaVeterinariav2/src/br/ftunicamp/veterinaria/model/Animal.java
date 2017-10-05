@@ -16,18 +16,29 @@ public class Animal {
     private String especie;
     private String raca;
     private int codPessoa;
+    private String sexo;
 
-    public Animal(String nomeAnimal, String nascimentoAnimal, String especie, String raca, int codPessoa) {
+    public Animal(String nomeAnimal, String nascimentoAnimal, String especie, String raca, int codPessoa,String sexo) {
         this.codAnimal = 0;
         this.nomeAnimal = nomeAnimal;
         this.nascimentoAnimal = nascimentoAnimal;
         this.especie = especie;
         this.raca = raca;
         this.codPessoa = codPessoa;
+        this.sexo = sexo;
     }
 
     public Animal() {
     }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+    
 
     public int getCodAnimal() {
         return codAnimal;

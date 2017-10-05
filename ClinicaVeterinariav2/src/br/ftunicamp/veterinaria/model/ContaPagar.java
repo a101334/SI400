@@ -11,7 +11,7 @@ package br.ftunicamp.veterinaria.model;
  */
 public class ContaPagar {
      private int codConta;
-    private float valor;
+     private float valor;
 
     public ContaPagar(float valor) {
         this.codConta = 0;

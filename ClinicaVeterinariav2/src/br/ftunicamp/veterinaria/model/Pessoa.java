@@ -22,8 +22,9 @@ public class Pessoa {
     private String telefone;
     private String email;
     private int tipo;
+    private String genero;
 
-    public Pessoa(String nome, String nascimentoPessoa, String cep, String estado, String cidade, String bairro, String rua, int numCasa, String telefone, String email, int tipo) {
+    public Pessoa(String nome, String nascimentoPessoa, String cep, String estado, String cidade, String bairro, String rua, int numCasa, String telefone, String email, int tipo,String genero) {
         this.codPessoa = 0;
         this.nome = nome;
         this.nascimentoPessoa = nascimentoPessoa;
@@ -36,6 +37,7 @@ public class Pessoa {
         this.telefone = telefone;
         this.email = email;
         this.tipo = tipo;
+        this.genero = genero;
     }
 
     public Pessoa() {
@@ -45,6 +47,15 @@ public class Pessoa {
         this.codPessoa = codPessoa;
     }
 
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+
+    
     public int getCodPessoa() {
         return codPessoa;
     }

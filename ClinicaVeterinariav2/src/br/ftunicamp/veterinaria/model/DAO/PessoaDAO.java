@@ -25,7 +25,7 @@ private Connection con = null;
         con = GenericDAO.getConnection();
     }
     public boolean inserir(Pessoa pessoa){
-        String sql  = "INSERT INTO pessoa (nome, nascimentoPessoa, cep, estado, cidade, bairro, rua, numCasa, telefone, email, tipo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql  = "INSERT INTO pessoa (nome, nascimentoPessoa, cep, estado, cidade, bairro, rua, numCasa, telefone, email, tipo,genero) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement stmt = null;
         try {
             stmt = con.prepareStatement(sql);
@@ -41,6 +41,7 @@ private Connection con = null;
             stmt.setString(9, pessoa.getTelefone());
             stmt.setString(10, pessoa.getEmail());
             stmt.setInt(11, pessoa.getTipo());
+            stmt.setString(12, pessoa.getGenero());
             stmt.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -83,6 +84,8 @@ private Connection con = null;
                 pessoa.setEmail(rs.getString("email"));
                 pessoas.add(pessoa);
                 pessoa.setTipo(rs.getInt("tipo"));
+                pessoas.add(pessoa);
+                pessoa.setGenero(rs.getString("genero"));
                 pessoas.add(pessoa);
             }
         } catch (SQLException ex) {

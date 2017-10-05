@@ -26,11 +26,12 @@ public class VeterinarioDAO extends GenericDAO {
     }
     
     public boolean inserir(Veterinario veterinario){
-        String sql  = "INSERT INTO veterinario (codPessoa) VALUES (?)";
+        String sql  = "INSERT INTO veterinario (codPessoa,salario) VALUES (?,?)";
         PreparedStatement stmt = null;
         try {
             stmt = con.prepareStatement(sql);
             stmt.setInt(1, veterinario.getCodPessoa());
+            stmt.setFloat(2, veterinario.getSalario());
             stmt.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -52,6 +53,8 @@ public class VeterinarioDAO extends GenericDAO {
             while(rs.next()){
                 Veterinario veterinario = new Veterinario();
                 veterinario.setCodPessoa(rs.getInt("codPessoa"));
+                veterinarios.add(veterinario);
+                veterinario.setSalario(rs.getFloat("salario"));
                 veterinarios.add(veterinario);
                 //veterinario.setCodVeterinario(rs.getInt("codVeterinario"));
                 //veterinarios.add(veterinario);

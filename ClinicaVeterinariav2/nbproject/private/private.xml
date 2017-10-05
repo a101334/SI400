@@ -5,17 +5,14 @@
         <group>
             <file>file:/C:/Users/thiag/Desktop/ClinicaVeterinariav2/src/br/ftunicamp/veterinaria/model/DAO/VeterinarioDAO.java</file>
             <file>file:/C:/Users/thiag/Desktop/ClinicaVeterinariav2/src/br/ftunicamp/veterinaria/model/Tratamento.java</file>
-            <file>file:/C:/Users/thiag/Desktop/ClinicaVeterinariav2/src/br/ftunicamp/veterinaria/model/Veterinario.java</file>
-            <file>file:/C:/Users/thiag/Desktop/ClinicaVeterinariav2/test/br/ftunicamp/veterinaria/model/DAO/VeterinarioDAOTest.java</file>
-            <file>file:/C:/Users/thiag/Desktop/ClinicaVeterinariav2/src/br/ftunicamp/veterinaria/model/DAO/TratamentoDAO.java</file>
-            <file>file:/C:/Users/thiag/Desktop/ClinicaVeterinariav2/src/br/ftunicamp/veterinaria/model/Animal.java</file>
-            <file>file:/C:/Users/thiag/Desktop/ClinicaVeterinariav2/src/br/ftunicamp/veterinaria/model/DAO/AnimalDAO.java</file>
-            <file>file:/C:/Users/thiag/Desktop/ClinicaVeterinariav2/src/br/ftunicamp/veterinaria/model/Secretaria.java</file>
             <file>file:/C:/Users/thiag/Desktop/ClinicaVeterinariav2/src/br/ftunicamp/veterinaria/model/ContaPagar.java</file>
             <file>file:/C:/Users/thiag/Desktop/ClinicaVeterinariav2/test/br/ftunicamp/veterinaria/model/DAO/AnimalDAOTest.java</file>
-            <file>file:/C:/Users/thiag/Desktop/ClinicaVeterinariav2/test/br/ftunicamp/veterinaria/model/DAO/PessoaDAOTest.java</file>
-            <file>file:/C:/Users/thiag/Desktop/ClinicaVeterinariav2/src/br/ftunicamp/veterinaria/model/Pessoa.java</file>
             <file>file:/C:/Users/thiag/Desktop/ClinicaVeterinariav2/src/br/ftunicamp/veterinaria/model/DAO/PessoaDAO.java</file>
+            <file>file:/C:/Users/thiag/Desktop/ClinicaVeterinariav2/src/br/ftunicamp/veterinaria/model/DAO/ConsultaDAO.java</file>
+            <file>file:/C:/Users/thiag/Desktop/ClinicaVeterinariav2/src/br/ftunicamp/veterinaria/model/DAO/AnimalDAO.java</file>
+            <file>file:/C:/Users/thiag/Desktop/ClinicaVeterinariav2/src/Recursos/Script%20clinica.sql</file>
+            <file>file:/C:/Users/thiag/Desktop/ClinicaVeterinariav2/src/br/ftunicamp/veterinaria/model/EmitirNota.java</file>
+            <file>file:/C:/Users/thiag/Desktop/ClinicaVeterinariav2/src/br/ftunicamp/veterinaria/interfaceDAO/Crud.java</file>
             <file>file:/C:/Users/thiag/Desktop/ClinicaVeterinariav2/src/br/ftunicamp/veterinaria/model/DAO/GenericDAO.java</file>
         </group>
     </open-files>

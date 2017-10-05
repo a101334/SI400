@@ -22,7 +22,7 @@ public class PessoaDAOTest {
     @Test
     public void inserir() {
         //Pessoa pessoa = new Pessoa("Lucas", "22-04-1987", "12345980", "SP", "São Paulo", "Jardim do Pedro", "Rua dos Donalds", 34, "08002132", "lucas@gmail.com", 0);
-        Pessoa pessoa2 = new Pessoa("Emanuela", "23/09/1995", "13456789", "DF", "Brasilia", "Jardim Botanico","Rua das Plantas", 2344, "34567890", "manu@yahoo.com.br", 2);
+        Pessoa pessoa2 = new Pessoa("Emanuela", "23/09/1995", "13456789", "DF", "Brasilia", "Jardim Botanico","Rua das Plantas", 2344, "34567890", "manu@yahoo.com.br", 2,"F");
         PessoaDAO dao = new PessoaDAO();
         if (dao.inserir(pessoa2)) { 
             System.out.println("Salvo com sucesso");
@@ -48,6 +48,7 @@ public class PessoaDAOTest {
             System.out.println("Telefone da Pessoa: " + p.getTelefone());
             System.out.println("Email da Pessoa: " + p.getEmail());
             System.out.println("Tipo da Pessoa: " + p.getTipo());
+            System.out.println("Genero da Pessoa: " + p.getGenero());
         }
     }
    
