@@ -19,12 +19,13 @@ public class AnimalDAOTest {
     public AnimalDAOTest() {
     }
 
-    @Test
+    @Test 
     @Ignore
     public void inserir() {
-        Animal animal = new Animal("Garfield","2014", "Gato", "Cara", 1);
+        //Animal animal = new Animal("Garfield","2014", "Gato", "Cara", 1);
+        Animal animal2 = new Animal("Tim tim","2010", "Cachorro", "Pastor alemão", 3,"M");
         AnimalDAO dao = new AnimalDAO();
-        if(dao.inserir(animal)){
+        if(dao.inserir(animal2)){
             System.out.println("Salvo com sucesso");
         }else{
             fail("Erro ao inserir");
@@ -41,6 +42,7 @@ public class AnimalDAOTest {
             System.out.println("Especie do animal: "+a.getEspecie());
             System.out.println("Raça do animal: "+a.getRaca());
             System.out.println("Codigo da Pessoa do animal: "+a.getCodPessoa());
+            System.out.println("Sexo do animal: "+a.getSexo());
         }
     } 
     

@@ -25,8 +25,9 @@ public class AnimalDAO extends GenericDAO {
     public AnimalDAO() {
         con = GenericDAO.getConnection();
     }
-    public boolean inserir(Animal animal){
-        String sql  = "INSERT INTO animal (nomeAnimal,nascimentoAnimal, especie, raca, codPessoa) VALUES (?, ?, ?, ?, ?)";
+    
+    public boolean inserir(Animal animal){ //alterar incluir chave estrangeira
+        String sql  = "INSERT INTO animal (nomeAnimal,nascimentoAnimal, especie, raca, codPessoa,sexo) VALUES (?,?, ?, ?, ?, ?)";
         PreparedStatement stmt = null;
         try {
             stmt = con.prepareStatement(sql);
@@ -35,6 +36,7 @@ public class AnimalDAO extends GenericDAO {
             stmt.setString(3, animal.getEspecie());
             stmt.setString(4, animal.getRaca());
             stmt.setInt(5, animal.getCodPessoa());
+            stmt.setString(6, animal.getSexo());
             stmt.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -44,6 +46,7 @@ public class AnimalDAO extends GenericDAO {
             GenericDAO.closeConnection(con, stmt);
         }
     }
+
     public List<Animal> listar(){
         String sql = "SELECT * FROM animal";
         PreparedStatement stmt = null;
@@ -54,17 +57,19 @@ public class AnimalDAO extends GenericDAO {
             rs = stmt.executeQuery();
             while(rs.next()){
                 Animal animal = new Animal();
-                animal.setCodAnimal(rs.getInt("CodAnimal"));
+                animal.setCodAnimal(rs.getInt("codAnimal"));
                 animais.add(animal);
-                animal.setNomeAnimal(rs.getString("NomeAnimal"));
+                animal.setNomeAnimal(rs.getString("nomeAnimal"));
                 animais.add(animal);
-                animal.setNascimentoAnimal(rs.getString("NascimentoAnimal"));
+                animal.setNascimentoAnimal(rs.getString("nascimentoAnimal"));
                 animais.add(animal);
-                animal.setEspecie(rs.getString("Especie"));
+                animal.setEspecie(rs.getString("especie"));
                 animais.add(animal);
-                animal.setRaca(rs.getString("Raca"));
+                animal.setRaca(rs.getString("raca"));
                 animais.add(animal);
-                animal.setCodPessoa(rs.getInt("CodPessoa"));
+                animal.setCodPessoa(rs.getInt("codPessoa"));
+                animais.add(animal);
+                animal.setSexo(rs.getString("sexo"));
                 animais.add(animal);
             }
         } catch (SQLException ex) {

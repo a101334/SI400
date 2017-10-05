@@ -10,22 +10,32 @@ import java.util.Date;
  * @author a101334
  */
 public class Veterinario extends Pessoa {
-     private int codPessoa;
      private int codVeterinario;
-     
+     private float salario;
 
-    public Veterinario(int codPessoa,String nome, String nascimentoPessoa, String cep, String estado, String cidade, String bairro, String rua, String telefone, int numCasa, String email, int tipo) {
-        super(nome, nascimentoPessoa, cep, estado, cidade, bairro, rua, numCasa, telefone, email, tipo);
+    public Veterinario(String nome, String nascimentoPessoa, String cep, String estado, String cidade, String bairro, String rua, String telefone, int numCasa, String email, int tipo,String genero,float salario) {
+        super(nome, nascimentoPessoa, cep, estado, cidade, bairro, rua, numCasa, telefone, email, tipo,genero);
         this.codVeterinario = 0;
+        this.salario = salario;
     }
 
     public Veterinario() {
     }
     
-    public Veterinario(int codPessoa){
+    public Veterinario(int codPessoa,float salario){
         super(codPessoa);
+        this.salario = salario;
         this.codVeterinario = 0;
     }
+
+    public float getSalario() {
+        return salario;
+    }
+
+    public void setSalario(float salario) {
+        this.salario = salario;
+    }
+    
 
     public int getCodVeterinario() {
         return codVeterinario;
