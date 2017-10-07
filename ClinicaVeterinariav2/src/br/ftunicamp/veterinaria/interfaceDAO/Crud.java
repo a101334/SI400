@@ -12,10 +12,10 @@ import java.util.List;
  *
  * @author thiag
  */
-public interface Crud {
-    boolean inserir();
+public interface Crud<T> {
+    boolean inserir(T classe);
     ResultSet buscar(int id);
     List listar();
-    void atualizar(Object o);
-    void remover(Object o);
+    void atualizar(T classe);
+    void remover(T classe);
 }

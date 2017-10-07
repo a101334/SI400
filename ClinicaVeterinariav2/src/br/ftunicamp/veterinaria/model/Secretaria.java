@@ -24,6 +24,17 @@ public class Secretaria extends Pessoa{
         this.senha = senha;
         this.salario = salario;
     }
+
+    public Secretaria(int codPessoa,String login,String senha,float salario){
+        super(codPessoa);
+        this.codSecretaria = 0;
+        this.login = login;
+        this.senha = senha;
+        this.salario = salario;
+    }
+    
+    public Secretaria() {
+    }
     
     public void setSalario(float salario){
         this.salario = salario;

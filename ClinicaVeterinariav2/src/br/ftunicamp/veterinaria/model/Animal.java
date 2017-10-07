@@ -15,19 +15,19 @@ public class Animal {
     private String nascimentoAnimal;
     private String especie;
     private String raca;
-    private int codPessoa;
+    private Pessoa pessoa;
     private String sexo;
 
-    public Animal(String nomeAnimal, String nascimentoAnimal, String especie, String raca, int codPessoa,String sexo) {
+    public Animal(String nomeAnimal, String nascimentoAnimal, String especie, String raca, Pessoa pessoa,String sexo) {
         this.codAnimal = 0;
         this.nomeAnimal = nomeAnimal;
         this.nascimentoAnimal = nascimentoAnimal;
         this.especie = especie;
         this.raca = raca;
-        this.codPessoa = codPessoa;
         this.sexo = sexo;
-    }
-
+        this.pessoa = pessoa;
+    }        
+            
     public Animal() {
     }
 
@@ -80,11 +80,13 @@ public class Animal {
         this.raca = raca;
     }
 
-    public int getCodPessoa() {
-        return codPessoa;
+    public Pessoa getPessoa() {
+        return pessoa;
     }
 
-    public void setCodPessoa(int codPessoa) {
-        this.codPessoa = codPessoa;
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
+
+    
 }
