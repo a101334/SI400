@@ -10,16 +10,20 @@ package br.ftunicamp.veterinaria.model;
  * @author a101334
  */
 public class Tratamento {
-     private int codTratamento;
-    private int codAnimal;
-    private int codVeterinario;
+    private int codTratamento;
+    private Animal animal;
+    private Veterinario veterinario;
     private String historico;
 
-    public Tratamento(int codAnimal, int codVeterinario, String historico) {
+    public Tratamento(Animal animal, Veterinario veterinario, String historico) {
         this.codTratamento = 0;
-        this.codAnimal = codAnimal;
-        this.codVeterinario = codVeterinario;
+        this.animal = animal;
+        this.veterinario = veterinario;
         this.historico = historico;
+    }
+    
+
+    public Tratamento() {
     }
 
     public int getCodTratamento() {
@@ -30,20 +34,20 @@ public class Tratamento {
         this.codTratamento = codTratamento;
     }
 
-    public int getCodAnimal() {
-        return codAnimal;
+    public Animal getAnimal() {
+        return animal;
     }
 
-    public void setCodAnimal(int codAnimal) {
-        this.codAnimal = codAnimal;
+    public void setAnimal(Animal animal) {
+        this.animal = animal;
     }
 
-    public int getCodVeterinario() {
-        return codVeterinario;
+    public Veterinario getVeterinario() {
+        return veterinario;
     }
 
-    public void setCodVeterinario(int codVeterinario) {
-        this.codVeterinario = codVeterinario;
+    public void setVeterinario(Veterinario veterinario) {
+        this.veterinario = veterinario;
     }
 
     public String getHistorico() {

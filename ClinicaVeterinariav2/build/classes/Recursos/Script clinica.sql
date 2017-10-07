@@ -110,7 +110,7 @@ DROP TABLE IF EXISTS consulta;
 CREATE TABLE consulta (
 	codConsulta INT NOT NULL AUTO_INCREMENT,
 	codTratamento INT NOT NULL,
-	dataConsulta VARCHAR(20) NOT NULL,
+	dataConsulta DATE NOT NULL,
 	PRIMARY KEY (codConsulta),
         FOREIGN KEY(codTratamento) REFERENCES Tratamento (codTratamento)
 ) Engine=InnoDB;
@@ -194,7 +194,3 @@ INSERT INTO emitirNota (veterinario, consulta, conta, dataEmissao)
 VALUES (1, 1, 1, "2017-12-23");
 
 SELECT * FROM emitirNota;
-
-ALTER TABLE consulta ALTER COLUMN dataConsulta VARCHAR(20);
-
-drop table consulta 

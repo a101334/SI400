@@ -8,6 +8,7 @@ package br.ftunicamp.veterinaria.model.DAO;
 import br.ftunicamp.veterinaria.model.Veterinario;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Ignore;
 
 /**
  *
@@ -19,13 +20,23 @@ public class VeterinarioDAOTest {
     }
 
     @Test
+    @Ignore
     public void inserir() {
-        Veterinario veterinario = new Veterinario(3,1890);
+        Veterinario veterinario = new Veterinario(1,1890);
         VeterinarioDAO dao = new VeterinarioDAO();
         if (dao.inserir(veterinario)) { 
             System.out.println("Salvo com sucesso");
         } else {
              fail("Erro ao inserir");
+        }
+    }
+    
+    @Test
+    public void listar(){
+        VeterinarioDAO dao = new VeterinarioDAO();
+        for(Veterinario v: dao.listar()){
+            System.out.println("Codigo do Veterinario: "+v.getCodPessoa());
+            System.out.println("Salario do veterinario: "+v.getSalario());
         }
     }
     

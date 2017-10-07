@@ -11,13 +11,16 @@ import java.util.Date;
  */
 public class Consulta {
     private int codConsulta;
-    private int codTratamento;
-    private Date dataConsulta;
+    private Tratamento tratamento;
+    private String dataConsulta;
 
-    public Consulta(int codTratamento, Date dataConsulta) {
+    public Consulta(Tratamento tratamento, String dataConsulta) {
         this.codConsulta = 0;
-        this.codTratamento = codTratamento;
+        this.tratamento = tratamento;
         this.dataConsulta = dataConsulta;
+    }
+
+    public Consulta() {
     }
 
     public int getCodConsulta() {
@@ -28,19 +31,20 @@ public class Consulta {
         this.codConsulta = codConsulta;
     }
 
-    public int getCodTratamento() {
-        return codTratamento;
+    public Tratamento getTratamento() {
+        return tratamento;
     }
 
-    public void setCodTratamento(int codTratamento) {
-        this.codTratamento = codTratamento;
+    public void setTratamento(Tratamento tratamento) {
+        this.tratamento = tratamento;
     }
 
-    public Date getDataConsulta() {
+
+    public String getDataConsulta() {
         return dataConsulta;
     }
 
-    public void setDataConsulta(Date dataConsulta) {
+    public void setDataConsulta(String dataConsulta) {
         this.dataConsulta = dataConsulta;
     }
     

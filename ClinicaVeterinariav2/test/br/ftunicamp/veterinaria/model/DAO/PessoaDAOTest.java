@@ -20,11 +20,12 @@ public class PessoaDAOTest {
     }
 
     @Test
+    @Ignore
     public void inserir() {
-        //Pessoa pessoa = new Pessoa("Lucas", "22-04-1987", "12345980", "SP", "São Paulo", "Jardim do Pedro", "Rua dos Donalds", 34, "08002132", "lucas@gmail.com", 0);
-        Pessoa pessoa2 = new Pessoa("Emanuela", "23/09/1995", "13456789", "DF", "Brasilia", "Jardim Botanico","Rua das Plantas", 2344, "34567890", "manu@yahoo.com.br", 2,"F");
+        Pessoa pessoa = new Pessoa("Lucas", "22-04-1987", "12345980", "SP", "São Paulo", "Jardim do Pedro", "Rua dos Donalds", 34, "08002132", "lucas@gmail.com", 0,"M");
+        //Pessoa pessoa2 = new Pessoa("Emanuela", "23/09/1995", "13456789", "DF", "Brasilia", "Jardim Botanico","Rua das Plantas", 2344, "34567890", "manu@yahoo.com.br", 2,"F");
         PessoaDAO dao = new PessoaDAO();
-        if (dao.inserir(pessoa2)) { 
+        if (dao.inserir(pessoa)) { 
             System.out.println("Salvo com sucesso");
         } else {
              fail("Erro ao inserir");
@@ -32,11 +33,9 @@ public class PessoaDAOTest {
     }
 
     @Test
-    @Ignore
     public void listar() {
         PessoaDAO dao = new PessoaDAO();
         for (Pessoa p : dao.listar()) {
-            //System.out.println("Codigo da Pessoa: " + p.getCodPessoa());
             System.out.println("Nome da Pessoa: " + p.getNome());
             System.out.println("Nascimento da Pessoa: " + p.getNascimentoPessoa());
             System.out.println("CEP da Pessoa: " + p.getCep());

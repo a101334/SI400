@@ -3,9 +3,9 @@
  * Prof.Dr.Ivan Ricarte
  * Curso: Tec.Análise e Desenvolvimento de Sistemas
  */
-
 package br.ftunicamp.veterinaria.model.DAO;
 
+import br.ftunicamp.veterinaria.interfaceDAO.Crud;
 import br.ftunicamp.veterinaria.model.Pessoa;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,14 +18,16 @@ import java.util.List;
  *
  * @author Thiago Henrique Viotto
  */
-public class PessoaDAO extends GenericDAO {
-private Connection con = null;
+public class PessoaDAO extends GenericDAO implements Crud<Pessoa> {
+    private Connection con = null;
 
     public PessoaDAO() {
         con = GenericDAO.getConnection();
     }
-    public boolean inserir(Pessoa pessoa){
-        String sql  = "INSERT INTO pessoa (nome, nascimentoPessoa, cep, estado, cidade, bairro, rua, numCasa, telefone, email, tipo,genero) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+    @Override
+    public boolean inserir(Pessoa pessoa) {
+        String sql = "INSERT INTO pessoa (nome, nascimentoPessoa, cep, estado, cidade, bairro, rua, numCasa, telefone, email, tipo,genero) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement stmt = null;
         try {
             stmt = con.prepareStatement(sql);
@@ -45,13 +47,15 @@ private Connection con = null;
             stmt.executeUpdate();
             return true;
         } catch (SQLException ex) {
-            System.err.println("Erro"+ex);
+            System.err.println("Erro" + ex);
             return false;
-        }finally{
+        } finally {
             GenericDAO.closeConnection(con, stmt);
         }
     }
-    public List<Pessoa> listar(){
+
+    @Override
+    public List<Pessoa> listar() {
         String sql = "SELECT * FROM pessoa";
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -59,41 +63,40 @@ private Connection con = null;
         try {
             stmt = con.prepareStatement(sql);
             rs = stmt.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 Pessoa pessoa = new Pessoa();
-                //pessoa.setCodPessoa(rs.getInt("codPessoa"));
-                //pessoas.add(pessoa);
                 pessoa.setNome(rs.getString("nome"));
-                pessoas.add(pessoa);
                 pessoa.setNascimentoPessoa(rs.getString("nascimentoPessoa"));
-                pessoas.add(pessoa);
                 pessoa.setCep(rs.getString("cep"));
-                pessoas.add(pessoa);
                 pessoa.setEstado(rs.getString("estado"));
-                pessoas.add(pessoa);
                 pessoa.setCidade(rs.getString("cidade"));
-                pessoas.add(pessoa);
                 pessoa.setBairro(rs.getString("bairro"));
-                pessoas.add(pessoa);
                 pessoa.setRua(rs.getString("rua"));
-                pessoas.add(pessoa);
                 pessoa.setNumCasa(rs.getInt("numCasa"));
-                pessoas.add(pessoa);
                 pessoa.setTelefone(rs.getString("telefone"));
-                pessoas.add(pessoa);
                 pessoa.setEmail(rs.getString("email"));
-                pessoas.add(pessoa);
                 pessoa.setTipo(rs.getInt("tipo"));
-                pessoas.add(pessoa);
                 pessoa.setGenero(rs.getString("genero"));
                 pessoas.add(pessoa);
             }
         } catch (SQLException ex) {
-            System.err.println("Erro: "+ex);
-        }finally{
-            GenericDAO.closeConnection(con,stmt,rs);
+            System.err.println("Erro: " + ex);
+        } finally {
+            GenericDAO.closeConnection(con, stmt, rs);
         }
         return pessoas;
     }
-}
 
+    @Override
+    public ResultSet buscar(int id) {
+        return null;
+    }
+
+    @Override
+    public void atualizar(Pessoa classe) {
+    }
+
+    @Override
+    public void remover(Pessoa classe) {
+    }
+}

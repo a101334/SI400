@@ -6,6 +6,7 @@
 package br.ftunicamp.veterinaria.model.DAO;
 
 import br.ftunicamp.veterinaria.model.Animal;
+import br.ftunicamp.veterinaria.model.Pessoa;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Ignore;
@@ -22,10 +23,18 @@ public class AnimalDAOTest {
     @Test 
     @Ignore
     public void inserir() {
-        //Animal animal = new Animal("Garfield","2014", "Gato", "Cara", 1);
-        Animal animal2 = new Animal("Tim tim","2010", "Cachorro", "Pastor alemão", 3,"M");
+        Pessoa pessoa = new Pessoa();
+        pessoa.setCodPessoa(1);
+        Animal animal = new Animal();
+        animal.setCodAnimal(0);
+        animal.setNomeAnimal("Garfield");
+        animal.setNascimentoAnimal("2016");
+        animal.setEspecie("gato");
+        animal.setRaca("Pedigree");
+        animal.setPessoa(pessoa);
+        animal.setSexo("M");
         AnimalDAO dao = new AnimalDAO();
-        if(dao.inserir(animal2)){
+        if(dao.inserir(animal)){
             System.out.println("Salvo com sucesso");
         }else{
             fail("Erro ao inserir");
@@ -41,7 +50,7 @@ public class AnimalDAOTest {
             System.out.println("Nascimento do animal: "+a.getNascimentoAnimal());
             System.out.println("Especie do animal: "+a.getEspecie());
             System.out.println("Raça do animal: "+a.getRaca());
-            System.out.println("Codigo da Pessoa do animal: "+a.getCodPessoa());
+            System.out.println("Codigo da Pessoa do animal: "+a.getPessoa().getCodPessoa());
             System.out.println("Sexo do animal: "+a.getSexo());
         }
     } 

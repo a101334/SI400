@@ -6,6 +6,7 @@
 
 package br.ftunicamp.veterinaria.model.DAO;
 
+import br.ftunicamp.veterinaria.interfaceDAO.Crud;
 import br.ftunicamp.veterinaria.model.Veterinario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,13 +19,14 @@ import java.util.List;
  *
  * @author Thiago Henrique Viotto
  */
-public class VeterinarioDAO extends GenericDAO {
+public class VeterinarioDAO extends GenericDAO implements Crud<Veterinario> {
     private Connection con = null;
 
     public VeterinarioDAO() {
         con = GenericDAO.getConnection();
     }
     
+    @Override
     public boolean inserir(Veterinario veterinario){
         String sql  = "INSERT INTO veterinario (codPessoa,salario) VALUES (?,?)";
         PreparedStatement stmt = null;
@@ -42,6 +44,7 @@ public class VeterinarioDAO extends GenericDAO {
         }
     }
     
+    @Override
     public List<Veterinario> listar(){
         String sql = "SELECT * FROM veterinario";
         PreparedStatement stmt = null;
@@ -53,11 +56,8 @@ public class VeterinarioDAO extends GenericDAO {
             while(rs.next()){
                 Veterinario veterinario = new Veterinario();
                 veterinario.setCodPessoa(rs.getInt("codPessoa"));
-                veterinarios.add(veterinario);
                 veterinario.setSalario(rs.getFloat("salario"));
                 veterinarios.add(veterinario);
-                //veterinario.setCodVeterinario(rs.getInt("codVeterinario"));
-                //veterinarios.add(veterinario);
             }
         } catch (SQLException ex) {
             System.err.println("Erro: "+ex);
@@ -66,6 +66,18 @@ public class VeterinarioDAO extends GenericDAO {
         }
         return veterinarios;
     }
-    
-    
+
+    @Override
+    public ResultSet buscar(int id) {
+        return null;
+    }
+
+    @Override
+    public void atualizar(Veterinario veterinario) {
+    }
+
+    @Override
+    public void remover(Veterinario veterinario) {
+    }
+ 
 }
