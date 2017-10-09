@@ -81,11 +81,13 @@ public class TratamentoDAO extends GenericDAO implements Crud<Tratamento> {
     }
 
     @Override
-    public void atualizar(Tratamento tratamento) {
+    public boolean atualizar(Tratamento tratamento) {
+        return false;
     }
 
     @Override
-    public void remover(Tratamento tratamento) {
+    public boolean remover(Tratamento tratamento) {
+        return false;
     }
     
     

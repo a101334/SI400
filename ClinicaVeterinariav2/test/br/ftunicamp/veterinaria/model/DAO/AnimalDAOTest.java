@@ -42,6 +42,7 @@ public class AnimalDAOTest {
     }
     
     @Test
+    @Ignore
     public void listar(){
         AnimalDAO dao = new AnimalDAO();
         for(Animal a: dao.listar()){
@@ -54,5 +55,32 @@ public class AnimalDAOTest {
             System.out.println("Sexo do animal: "+a.getSexo());
         }
     } 
+    
+    @Test 
+    @Ignore
+    public void atualizar() {
+        Animal animal = new Animal();
+        animal.setCodAnimal(2);
+        animal.setRaca("Sianês");
+        AnimalDAO dao = new AnimalDAO();
+        if(dao.atualizar(animal)){
+            System.out.println("Atualização realizada com sucesso");
+        }else{
+            fail("Erro ao atualizar");
+        }
+    }
+    
+    @Test
+    public void remover() {
+        Animal animal = new Animal();
+        animal.setCodAnimal(3);
+        AnimalDAO dao = new AnimalDAO();
+        if(dao.remover(animal)){
+            System.out.println("Remoção realizada com sucesso");
+        }else{
+            fail("Erro ao remover");
+        }
+    }
+    
     
 }

@@ -75,11 +75,13 @@ public class ConsultaDAO extends GenericDAO implements Crud<Consulta> {
     }
 
     @Override
-    public void atualizar(Consulta consulta) {
+    public boolean atualizar(Consulta consulta) {
+        return false;
     }
 
     @Override
-    public void remover(Consulta consulta) {
+    public boolean remover(Consulta consulta) {
+        return false;
     }
     
     

@@ -3,13 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/thiag/Desktop/ClinicaVeterinariav2/src/br/ftunicamp/veterinaria/model/DAO/VeterinarioDAO.java</file>
             <file>file:/C:/Users/thiag/Desktop/ClinicaVeterinariav2/src/br/ftunicamp/veterinaria/model/DAO/SecretariaDAO.java</file>
-            <file>file:/C:/Users/thiag/Desktop/ClinicaVeterinariav2/src/br/ftunicamp/veterinaria/model/Consulta.java</file>
-            <file>file:/C:/Users/thiag/Desktop/ClinicaVeterinariav2/src/br/ftunicamp/veterinaria/model/DAO/TratamentoDAO.java</file>
-            <file>file:/C:/Users/thiag/Desktop/ClinicaVeterinariav2/test/br/ftunicamp/veterinaria/model/DAO/ConsultaDAOTest.java</file>
+            <file>file:/C:/Users/thiag/Desktop/ClinicaVeterinariav2/test/br/ftunicamp/veterinaria/model/DAO/AnimalDAOTest.java</file>
+            <file>file:/C:/Users/thiag/Desktop/ClinicaVeterinariav2/src/br/ftunicamp/veterinaria/model/DAO/ContaPagarDAO.java</file>
             <file>file:/C:/Users/thiag/Desktop/ClinicaVeterinariav2/src/br/ftunicamp/veterinaria/model/DAO/ConsultaDAO.java</file>
+            <file>file:/C:/Users/thiag/Desktop/ClinicaVeterinariav2/src/br/ftunicamp/veterinaria/model/DAO/PessoaDAO.java</file>
+            <file>file:/C:/Users/thiag/Desktop/ClinicaVeterinariav2/src/br/ftunicamp/veterinaria/model/DAO/TratamentoDAO.java</file>
             <file>file:/C:/Users/thiag/Desktop/ClinicaVeterinariav2/src/Recursos/Script%20clinica.sql</file>
-            <file>file:/C:/Users/thiag/Desktop/ClinicaVeterinariav2/test/br/ftunicamp/veterinaria/model/DAO/TratamentoDAOTest.java</file>
+            <file>file:/C:/Users/thiag/Desktop/ClinicaVeterinariav2/src/br/ftunicamp/veterinaria/model/DAO/AnimalDAO.java</file>
+            <file>file:/C:/Users/thiag/Desktop/ClinicaVeterinariav2/src/br/ftunicamp/veterinaria/interfaceDAO/Crud.java</file>
         </group>
     </open-files>
 </project-private>
