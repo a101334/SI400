@@ -73,11 +73,13 @@ public class VeterinarioDAO extends GenericDAO implements Crud<Veterinario> {
     }
 
     @Override
-    public void atualizar(Veterinario veterinario) {
+    public boolean atualizar(Veterinario veterinario) {
+        return false;
     }
 
     @Override
-    public void remover(Veterinario veterinario) {
+    public boolean remover(Veterinario veterinario) {
+        return false;
     }
  
 }

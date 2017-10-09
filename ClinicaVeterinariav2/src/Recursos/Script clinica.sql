@@ -198,3 +198,5 @@ SELECT * FROM emitirNota;
 ALTER TABLE consulta ALTER COLUMN dataConsulta VARCHAR(20);
 
 drop table consulta 
+
+CREATE VIEW BUSCAR_ANIMAL AS SELECT *FROM animal inner join pessoa on animal.codPessoa=pessoa.codPessoa

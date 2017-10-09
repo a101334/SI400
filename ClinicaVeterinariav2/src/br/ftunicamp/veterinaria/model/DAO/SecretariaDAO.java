@@ -77,11 +77,13 @@ public class SecretariaDAO extends GenericDAO implements Crud<Secretaria>{
     }
 
     @Override
-    public void atualizar(Secretaria classe) {
+    public boolean atualizar(Secretaria classe) {
+        return false;
     }
 
     @Override
-    public void remover(Secretaria classe) {
+    public boolean remover(Secretaria classe) {
+        return false;
     }
 
 }

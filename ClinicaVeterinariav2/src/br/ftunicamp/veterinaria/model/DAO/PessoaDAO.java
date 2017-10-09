@@ -93,10 +93,12 @@ public class PessoaDAO extends GenericDAO implements Crud<Pessoa> {
     }
 
     @Override
-    public void atualizar(Pessoa classe) {
+    public boolean atualizar(Pessoa classe) {
+        return false;
     }
 
     @Override
-    public void remover(Pessoa classe) {
+    public boolean remover(Pessoa classe) {
+        return false;
     }
 }

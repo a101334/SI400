@@ -81,12 +81,38 @@ public class AnimalDAO extends GenericDAO implements Crud<Animal> {
     }
     
     @Override
-    public void atualizar(Animal animal){
-        
+    public boolean atualizar(Animal animal){
+        String sql  = "UPDATE animal set raca = ? WHERE codAnimal = ? ";
+        PreparedStatement stmt = null;
+        try {
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, animal.getRaca());
+            stmt.setInt(2, animal.getCodAnimal());
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            System.err.println("Erro"+ex);
+            return false;
+        }finally{
+            GenericDAO.closeConnection(con, stmt);
+        }      
     }
+    
     @Override
-    public void remover(Animal animal){
-        
+    public boolean remover(Animal animal){
+        String sql  = "DELETE FROM animal WHERE codAnimal = ? ";
+        PreparedStatement stmt = null;
+        try {
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(1, animal.getCodAnimal());
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            System.err.println("Erro"+ex);
+            return false;
+        }finally{
+            GenericDAO.closeConnection(con, stmt);
+        }  
     }
 
     @Override
