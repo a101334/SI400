@@ -82,12 +82,37 @@ public class TratamentoDAO extends GenericDAO implements Crud<Tratamento> {
 
     @Override
     public boolean atualizar(Tratamento tratamento) {
-        return false;
+        String sql  = "UPDATE tratamento set historico = ? WHERE codTratamento = ? ";
+        PreparedStatement stmt = null;
+        try {
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, tratamento.getHistorico());
+            stmt.setInt(2, tratamento.getCodTratamento());
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            System.err.println("Erro"+ex);
+            return false;
+        }finally{
+            GenericDAO.closeConnection(con, stmt);
+        }   
     }
 
     @Override
     public boolean remover(Tratamento tratamento) {
-        return false;
+        String sql  = "DELETE FROM tratamento WHERE codTratamento = ? ";
+        PreparedStatement stmt = null;
+        try {
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(1, tratamento.getCodTratamento());
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            System.err.println("Erro"+ex);
+            return false;
+        }finally{
+            GenericDAO.closeConnection(con, stmt);
+        }  
     }
     
     

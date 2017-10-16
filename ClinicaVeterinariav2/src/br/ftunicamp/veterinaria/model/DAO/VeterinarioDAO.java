@@ -74,12 +74,37 @@ public class VeterinarioDAO extends GenericDAO implements Crud<Veterinario> {
 
     @Override
     public boolean atualizar(Veterinario veterinario) {
-        return false;
+        String sql  = "UPDATE veterinario set salario = ? WHERE codVeterinario = ? ";
+        PreparedStatement stmt = null;
+        try {
+            stmt = con.prepareStatement(sql);
+            stmt.setFloat(1, veterinario.getSalario());
+            stmt.setInt(2, veterinario.getCodVeterinario());
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            System.err.println("Erro"+ex);
+            return false;
+        }finally{
+            GenericDAO.closeConnection(con, stmt);
+        }    
     }
 
     @Override
     public boolean remover(Veterinario veterinario) {
-        return false;
+        String sql  = "DELETE FROM veterinario WHERE codVeterinario = ? ";
+        PreparedStatement stmt = null;
+        try {
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(1, veterinario.getCodVeterinario());
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            System.err.println("Erro"+ex);
+            return false;
+        }finally{
+            GenericDAO.closeConnection(con, stmt);
+        }  
     }
  
 }

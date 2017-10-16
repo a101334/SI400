@@ -24,9 +24,9 @@ public class TratamentoDAOTest {
     @Test
     public void inserir() {
         Veterinario veterinario = new Veterinario();
-        veterinario.setCodVeterinario(2);
+        veterinario.setCodVeterinario(1);
         Animal animal = new Animal();
-        animal.setCodAnimal(2);
+        animal.setCodAnimal(4);
         Tratamento tratamento = new Tratamento();
         tratamento.setCodTratamento(0);
         tratamento.setAnimal(animal);
@@ -50,6 +50,33 @@ public class TratamentoDAOTest {
             System.out.println("Historico do tratamento: "+t.getHistorico());
         }
     } 
+    
+    @Test 
+    @Ignore
+    public void atualizar() {
+        Tratamento tratamento = new Tratamento();
+        tratamento.setCodTratamento(6);
+        tratamento.setHistorico("Não encontrado");
+        TratamentoDAO dao = new TratamentoDAO();
+        if(dao.remover(tratamento)){
+            System.out.println("Atualização realizada com sucesso");
+        }else{
+            fail("Erro ao atualizar");
+        }
+    }
+    
+    @Test
+    @Ignore
+    public void remover() {
+        Tratamento tratamento = new Tratamento();
+        tratamento.setCodTratamento(6);
+        TratamentoDAO dao = new TratamentoDAO();
+        if(dao.remover(tratamento)){
+            System.out.println("Remoção realizada com sucesso");
+        }else{
+            fail("Erro ao remover");
+        }
+    }
 
 }
 

@@ -5,9 +5,11 @@
  */
 package br.ftunicamp.veterinaria.model.DAO;
 
+import br.ftunicamp.veterinaria.model.Pessoa;
 import br.ftunicamp.veterinaria.model.Secretaria;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Ignore;
 
 /**
  *
@@ -39,4 +41,32 @@ public class SecretariaDAOTest {
             System.out.println("Salario da secretaria: " +s.getSalario());
         }
     }
+    
+    @Test 
+    @Ignore
+    public void atualizar() {
+        Secretaria secretaria = new Secretaria();
+        secretaria.setCodSecretaria(2);
+        secretaria.setLogin("MariaRoberta");
+        SecretariaDAO dao = new SecretariaDAO();
+        if(dao.remover(secretaria)){
+            System.out.println("Atualização realizada com sucesso");
+        }else{
+            fail("Erro ao atualizar");
+        }
+    }
+    
+    @Test
+    @Ignore
+    public void remover() {
+        Secretaria secretaria = new Secretaria();
+        secretaria.setCodSecretaria(2);
+        SecretariaDAO dao = new SecretariaDAO();
+        if(dao.remover(secretaria)){
+            System.out.println("Remoção realizada com sucesso");
+        }else{
+            fail("Erro ao remover");
+        }
+    }
+   
 }

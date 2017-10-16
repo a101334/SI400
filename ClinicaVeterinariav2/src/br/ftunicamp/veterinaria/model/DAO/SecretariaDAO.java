@@ -77,13 +77,38 @@ public class SecretariaDAO extends GenericDAO implements Crud<Secretaria>{
     }
 
     @Override
-    public boolean atualizar(Secretaria classe) {
-        return false;
+    public boolean atualizar(Secretaria secretaria) {
+        String sql  = "UPDATE secretaria set login = ? WHERE codSecretaria = ? ";
+        PreparedStatement stmt = null;
+        try {
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, secretaria.getLogin());
+            stmt.setInt(2, secretaria.getCodSecretaria());
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            System.err.println("Erro"+ex);
+            return false;
+        }finally{
+            GenericDAO.closeConnection(con, stmt);
+        }    
     }
 
     @Override
-    public boolean remover(Secretaria classe) {
-        return false;
+    public boolean remover(Secretaria secretaria) {
+        String sql  = "DELETE FROM secretaria WHERE codSecretaria = ? ";
+        PreparedStatement stmt = null;
+        try {
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(1, secretaria.getCodSecretaria());
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            System.err.println("Erro"+ex);
+            return false;
+        }finally{
+            GenericDAO.closeConnection(con, stmt);
+        }  
     }
 
 }
