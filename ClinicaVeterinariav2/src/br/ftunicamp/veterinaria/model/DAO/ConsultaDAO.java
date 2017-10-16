@@ -76,15 +76,37 @@ public class ConsultaDAO extends GenericDAO implements Crud<Consulta> {
 
     @Override
     public boolean atualizar(Consulta consulta) {
-        return false;
+        String sql  = "UPDATE consulta set dataConsulta = ? WHERE codConsulta = ? ";
+        PreparedStatement stmt = null;
+        try {
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, consulta.getDataConsulta());
+            stmt.setInt(2, consulta.getCodConsulta());
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            System.err.println("Erro"+ex);
+            return false;
+        }finally{
+            GenericDAO.closeConnection(con, stmt);
+        }   
     }
 
     @Override
     public boolean remover(Consulta consulta) {
-        return false;
-    }
-    
-    
-    
+        String sql  = "DELETE FROM consulta WHERE codConsulta = ? ";
+        PreparedStatement stmt = null;
+        try {
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(1, consulta.getCodConsulta());
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            System.err.println("Erro"+ex);
+            return false;
+        }finally{
+            GenericDAO.closeConnection(con, stmt);
+        }  
+    }  
     
 }

@@ -33,6 +33,7 @@ public class PessoaDAOTest {
     }
 
     @Test
+    @Ignore
     public void listar() {
         PessoaDAO dao = new PessoaDAO();
         for (Pessoa p : dao.listar()) {
@@ -48,6 +49,33 @@ public class PessoaDAOTest {
             System.out.println("Email da Pessoa: " + p.getEmail());
             System.out.println("Tipo da Pessoa: " + p.getTipo());
             System.out.println("Genero da Pessoa: " + p.getGenero());
+        }
+    }
+    
+    @Test 
+    @Ignore
+    public void atualizar() {
+        Pessoa pessoa = new Pessoa();
+        pessoa.setCodPessoa(1);
+        pessoa.setEstado("DF");
+        PessoaDAO dao = new PessoaDAO();
+        if(dao.atualizar(pessoa)){
+            System.out.println("Atualização realizada com sucesso");
+        }else{
+            fail("Erro ao atualizar");
+        }
+    }
+    
+    @Test
+    @Ignore
+    public void remover() {
+        Pessoa pessoa = new Pessoa();
+        pessoa.setCodPessoa(1);
+        PessoaDAO dao = new PessoaDAO();
+        if(dao.remover(pessoa)){
+            System.out.println("Remoção realizada com sucesso");
+        }else{
+            fail("Erro ao remover");
         }
     }
    

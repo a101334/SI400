@@ -93,12 +93,37 @@ public class PessoaDAO extends GenericDAO implements Crud<Pessoa> {
     }
 
     @Override
-    public boolean atualizar(Pessoa classe) {
-        return false;
+    public boolean atualizar(Pessoa pessoa) {
+        String sql  = "UPDATE pessoa set estado = ? WHERE codPessoa = ? ";
+        PreparedStatement stmt = null;
+        try {
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, pessoa.getEstado());
+            stmt.setInt(2, pessoa.getCodPessoa());
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            System.err.println("Erro"+ex);
+            return false;
+        }finally{
+            GenericDAO.closeConnection(con, stmt);
+        }      
     }
 
     @Override
-    public boolean remover(Pessoa classe) {
-        return false;
+    public boolean remover(Pessoa pessoa) {
+        String sql  = "DELETE FROM pessoa WHERE codPessoa = ? ";
+        PreparedStatement stmt = null;
+        try {
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(1, pessoa.getCodPessoa());
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            System.err.println("Erro"+ex);
+            return false;
+        }finally{
+            GenericDAO.closeConnection(con, stmt);
+        }  
     }
 }
