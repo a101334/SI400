@@ -48,11 +48,6 @@ public class TratamentoDAO extends GenericDAO implements Crud<Tratamento> {
     }
 
     @Override
-    public ResultSet buscar(int id) {
-        return null;
-    }
-
-    @Override
     public List<Tratamento> listar() {
         String sql = "SELECT *FROM tratamento t inner join Veterinario v on t.codVeterinario=v.codVeterinario inner join Animal a on t.codAnimal=a.codAnimal";
         PreparedStatement stmt = null;
@@ -67,6 +62,7 @@ public class TratamentoDAO extends GenericDAO implements Crud<Tratamento> {
                 Veterinario veterinario = new Veterinario();
                 animal.setCodAnimal(rs.getInt("codAnimal"));
                 veterinario.setCodVeterinario(rs.getInt("codVeterinario"));
+                tratamento.setCodTratamento(rs.getInt("codTratamento"));
                 tratamento.setAnimal(animal);
                 tratamento.setVeterinario(veterinario);
                 tratamento.setHistorico(rs.getString("historico"));
@@ -114,7 +110,33 @@ public class TratamentoDAO extends GenericDAO implements Crud<Tratamento> {
             GenericDAO.closeConnection(con, stmt);
         }  
     }
-    
-    
 
+    @Override
+    public List buscar(int id) {
+        String sql = "SELECT *FROM tratamento t inner join Veterinario v on t.codVeterinario=v.codVeterinario inner join Animal a on t.codAnimal=a.codAnimal where codTratamento = ?";
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Tratamento> tratamentos = new ArrayList<>();
+        try {
+            stmt = con.prepareStatement(sql);
+            rs = stmt.executeQuery();
+            while(rs.next()){
+                Tratamento tratamento = new Tratamento();
+                Animal animal = new Animal();
+                Veterinario veterinario = new Veterinario();
+                animal.setCodAnimal(rs.getInt("codAnimal"));
+                veterinario.setCodVeterinario(rs.getInt("codVeterinario"));
+                tratamento.setCodTratamento(rs.getInt("codTratamento"));
+                tratamento.setAnimal(animal);
+                tratamento.setVeterinario(veterinario);
+                tratamento.setHistorico(rs.getString("historico"));
+                tratamentos.add(tratamento);
+            }
+        } catch (SQLException ex) {
+            System.err.println("Erro: "+ex);
+        }finally{
+            GenericDAO.closeConnection(con,stmt,rs);
+        }
+        return tratamentos;
+    }
 }

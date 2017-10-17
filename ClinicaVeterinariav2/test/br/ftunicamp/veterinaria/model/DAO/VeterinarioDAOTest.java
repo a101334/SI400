@@ -5,7 +5,6 @@
  */
 package br.ftunicamp.veterinaria.model.DAO;
 
-import br.ftunicamp.veterinaria.model.Secretaria;
 import br.ftunicamp.veterinaria.model.Veterinario;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -16,56 +15,71 @@ import org.junit.Ignore;
  * @author thiag
  */
 public class VeterinarioDAOTest {
-    
+
     public VeterinarioDAOTest() {
     }
 
     @Test
+    @Ignore
     public void inserir() {
-        Veterinario veterinario = new Veterinario(1,1890);
+        Veterinario veterinario = new Veterinario(1, 1890);
         VeterinarioDAO dao = new VeterinarioDAO();
-        if (dao.inserir(veterinario)) { 
+        if (dao.inserir(veterinario)) {
             System.out.println("Salvo com sucesso");
         } else {
-             fail("Erro ao inserir");
+            fail("Erro ao inserir");
         }
     }
-    
+
     @Test
     @Ignore
-    public void listar(){
+    public void listar() {
         VeterinarioDAO dao = new VeterinarioDAO();
-        for(Veterinario v: dao.listar()){
-            System.out.println("Codigo do Veterinario: "+v.getCodPessoa());
-            System.out.println("Salario do veterinario: "+v.getSalario());
+        for (Veterinario v : dao.listar()) {
+            System.out.println("Codigo do veterinario: " + v.getCodVeterinario());
+            System.out.println("Codigo da Pessoa: " + v.getCodPessoa());
+            System.out.println("Salario do veterinario: " + v.getSalario());
         }
     }
-    
-    @Test 
+
+    @Test
     @Ignore
     public void atualizar() {
         Veterinario veterinario = new Veterinario();
         veterinario.setCodVeterinario(1);
         veterinario.setSalario(2300);
         VeterinarioDAO dao = new VeterinarioDAO();
-        if(dao.remover(veterinario)){
+        if (dao.remover(veterinario)) {
             System.out.println("Atualização realizada com sucesso");
-        }else{
+        } else {
             fail("Erro ao atualizar");
         }
     }
-    
+
     @Test
     @Ignore
     public void remover() {
         Veterinario veterinario = new Veterinario();
         veterinario.setCodVeterinario(1);
         VeterinarioDAO dao = new VeterinarioDAO();
-        if(dao.remover(veterinario)){
+        if (dao.remover(veterinario)) {
             System.out.println("Remoção realizada com sucesso");
-        }else{
+        } else {
             fail("Erro ao remover");
         }
     }
-    
+
+    @Test
+    //@Ignore
+    public void buscar() {
+        VeterinarioDAO dao = new VeterinarioDAO();
+        for (Veterinario v : dao.listar()) {
+            if (v.getCodVeterinario() == 1) {
+                System.out.println("Codigo do veterinario: " + v.getCodVeterinario());
+                System.out.println("Codigo da Pessoa: " + v.getCodPessoa());
+                System.out.println("Salario do veterinario: " + v.getSalario());
+            }
+        }
+    }
+
 }

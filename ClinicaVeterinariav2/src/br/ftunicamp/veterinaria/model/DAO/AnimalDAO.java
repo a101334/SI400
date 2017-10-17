@@ -116,8 +116,33 @@ public class AnimalDAO extends GenericDAO implements Crud<Animal> {
     }
 
     @Override
-    public ResultSet buscar(int id) {
-        return null;
-        
+    public List buscar(int id) {
+        String sql = "SELECT *FROM animal a inner join Pessoa p on a.codPessoa=p.codPessoa where codAnimal = ?";
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Animal> animais = new ArrayList<>();
+        try {
+            stmt = con.prepareStatement(sql);
+            rs = stmt.executeQuery();
+            while(rs.next()){
+                Animal animal = new Animal();
+                animal.setCodAnimal(rs.getInt("codAnimal"));
+                animal.setNomeAnimal(rs.getString("nomeAnimal"));
+                animal.setNascimentoAnimal(rs.getString("nascimentoAnimal"));
+                animal.setEspecie(rs.getString("especie"));
+                animal.setRaca(rs.getString("raca"));
+                Pessoa pessoa = new Pessoa();
+                pessoa.setCodPessoa(rs.getInt("codPessoa"));
+                animal.setPessoa(pessoa);
+                animal.setSexo(rs.getString("sexo"));
+                animais.add(animal);
+            }
+        } catch (SQLException ex) {
+            System.err.println("Erro: "+ex);
+        }finally{
+            GenericDAO.closeConnection(con,stmt,rs);
+        }
+        return animais;
     }
+    
 }

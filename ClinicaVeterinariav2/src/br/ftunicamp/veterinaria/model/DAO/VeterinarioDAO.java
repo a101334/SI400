@@ -55,6 +55,7 @@ public class VeterinarioDAO extends GenericDAO implements Crud<Veterinario> {
             rs = stmt.executeQuery();
             while(rs.next()){
                 Veterinario veterinario = new Veterinario();
+                veterinario.setCodVeterinario(rs.getInt("codVeterinario"));
                 veterinario.setCodPessoa(rs.getInt("codPessoa"));
                 veterinario.setSalario(rs.getFloat("salario"));
                 veterinarios.add(veterinario);
@@ -65,11 +66,6 @@ public class VeterinarioDAO extends GenericDAO implements Crud<Veterinario> {
             GenericDAO.closeConnection(con,stmt,rs);
         }
         return veterinarios;
-    }
-
-    @Override
-    public ResultSet buscar(int id) {
-        return null;
     }
 
     @Override
@@ -105,6 +101,30 @@ public class VeterinarioDAO extends GenericDAO implements Crud<Veterinario> {
         }finally{
             GenericDAO.closeConnection(con, stmt);
         }  
+    }
+
+    @Override
+    public List buscar(int id) {
+        String sql = "SELECT * FROM veterinario where codVeterinario = ?";
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Veterinario> veterinarios = new ArrayList<>();
+        try {
+            stmt = con.prepareStatement(sql);
+            rs = stmt.executeQuery();
+            while(rs.next()){
+                Veterinario veterinario = new Veterinario();
+                veterinario.setCodVeterinario(rs.getInt("codVeterinario"));
+                veterinario.setCodPessoa(rs.getInt("codPessoa"));
+                veterinario.setSalario(rs.getFloat("salario"));
+                veterinarios.add(veterinario);
+            }
+        } catch (SQLException ex) {
+            System.err.println("Erro: "+ex);
+        }finally{
+            GenericDAO.closeConnection(con,stmt,rs);
+        }
+        return veterinarios;
     }
  
 }

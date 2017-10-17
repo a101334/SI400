@@ -22,13 +22,13 @@ public class PessoaDAOTest {
     @Test
     @Ignore
     public void inserir() {
-        Pessoa pessoa = new Pessoa("Lucas", "22-04-1987", "12345980", "SP", "São Paulo", "Jardim do Pedro", "Rua dos Donalds", 34, "08002132", "lucas@gmail.com", 0,"M");
+        Pessoa pessoa = new Pessoa("Lucas", "22-04-1987", "12345980", "SP", "São Paulo", "Jardim do Pedro", "Rua dos Donalds", 34, "08002132", "lucas@gmail.com", 0, "M");
         //Pessoa pessoa2 = new Pessoa("Emanuela", "23/09/1995", "13456789", "DF", "Brasilia", "Jardim Botanico","Rua das Plantas", 2344, "34567890", "manu@yahoo.com.br", 2,"F");
         PessoaDAO dao = new PessoaDAO();
-        if (dao.inserir(pessoa)) { 
+        if (dao.inserir(pessoa)) {
             System.out.println("Salvo com sucesso");
         } else {
-             fail("Erro ao inserir");
+            fail("Erro ao inserir");
         }
     }
 
@@ -37,6 +37,7 @@ public class PessoaDAOTest {
     public void listar() {
         PessoaDAO dao = new PessoaDAO();
         for (Pessoa p : dao.listar()) {
+            System.out.println("Codigo da pessoa: " + p.getCodPessoa());
             System.out.println("Nome da Pessoa: " + p.getNome());
             System.out.println("Nascimento da Pessoa: " + p.getNascimentoPessoa());
             System.out.println("CEP da Pessoa: " + p.getCep());
@@ -51,33 +52,53 @@ public class PessoaDAOTest {
             System.out.println("Genero da Pessoa: " + p.getGenero());
         }
     }
-    
-    @Test 
+
+    @Test
     @Ignore
     public void atualizar() {
         Pessoa pessoa = new Pessoa();
         pessoa.setCodPessoa(1);
         pessoa.setEstado("DF");
         PessoaDAO dao = new PessoaDAO();
-        if(dao.atualizar(pessoa)){
+        if (dao.atualizar(pessoa)) {
             System.out.println("Atualização realizada com sucesso");
-        }else{
+        } else {
             fail("Erro ao atualizar");
         }
     }
-    
+
     @Test
     @Ignore
     public void remover() {
         Pessoa pessoa = new Pessoa();
         pessoa.setCodPessoa(1);
         PessoaDAO dao = new PessoaDAO();
-        if(dao.remover(pessoa)){
+        if (dao.remover(pessoa)) {
             System.out.println("Remoção realizada com sucesso");
-        }else{
+        } else {
             fail("Erro ao remover");
         }
     }
-   
-}
 
+    @Test
+    public void buscar() {
+        PessoaDAO dao = new PessoaDAO();
+        for (Pessoa p : dao.listar()) {
+            if (p.getCodPessoa() == 0) {
+                System.out.println("Codigo da pessoa: " + p.getCodPessoa());
+                System.out.println("Nome da Pessoa: " + p.getNome());
+                System.out.println("Nascimento da Pessoa: " + p.getNascimentoPessoa());
+                System.out.println("CEP da Pessoa: " + p.getCep());
+                System.out.println("Estado da Pessoa: " + p.getEstado());
+                System.out.println("Cidade da Pessoa: " + p.getCidade());
+                System.out.println("Bairro da Pessoa: " + p.getBairro());
+                System.out.println("Rua da Pessoa: " + p.getRua());
+                System.out.println("NumCasa da Pessoa: " + p.getNumCasa());
+                System.out.println("Telefone da Pessoa: " + p.getTelefone());
+                System.out.println("Email da Pessoa: " + p.getEmail());
+                System.out.println("Tipo da Pessoa: " + p.getTipo());
+                System.out.println("Genero da Pessoa: " + p.getGenero());
+            }
+        }
+    }
+}
