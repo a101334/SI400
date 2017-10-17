@@ -57,6 +57,7 @@ public class SecretariaDAO extends GenericDAO implements Crud<Secretaria>{
             rs = stmt.executeQuery();
             while(rs.next()){
                 Secretaria secretaria = new Secretaria();
+                secretaria.setCodSecretaria(rs.getInt("codSecretaria"));
                 secretaria.setCodPessoa(rs.getInt("codPessoa"));
                 secretaria.setLogin(rs.getString("login"));
                 secretaria.setSenha(rs.getString("senha"));
@@ -69,11 +70,6 @@ public class SecretariaDAO extends GenericDAO implements Crud<Secretaria>{
             GenericDAO.closeConnection(con,stmt,rs);
         }
         return secretarias;
-    }
-    
-    @Override
-    public ResultSet buscar(int id) {
-        return null;
     }
 
     @Override
@@ -109,6 +105,32 @@ public class SecretariaDAO extends GenericDAO implements Crud<Secretaria>{
         }finally{
             GenericDAO.closeConnection(con, stmt);
         }  
+    }
+
+    @Override
+    public List buscar(int id) {
+        String sql = "SELECT * FROM secretaria where codSecretaria = ?";
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Secretaria> secretarias = new ArrayList<>();
+        try {
+            stmt = con.prepareStatement(sql);
+            rs = stmt.executeQuery();
+            while(rs.next()){
+                Secretaria secretaria = new Secretaria();
+                secretaria.setCodSecretaria(rs.getInt("codSecretaria"));
+                secretaria.setCodPessoa(rs.getInt("codPessoa"));
+                secretaria.setLogin(rs.getString("login"));
+                secretaria.setSenha(rs.getString("senha"));
+                secretaria.setSalario(rs.getFloat("salario"));
+                secretarias.add(secretaria);
+            }
+        } catch (SQLException ex) {
+            System.err.println("Erro: "+ex);
+        }finally{
+            GenericDAO.closeConnection(con,stmt,rs);
+        }
+        return secretarias;
     }
 
 }

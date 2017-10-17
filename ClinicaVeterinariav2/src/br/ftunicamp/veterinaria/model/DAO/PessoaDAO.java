@@ -19,6 +19,7 @@ import java.util.List;
  * @author Thiago Henrique Viotto
  */
 public class PessoaDAO extends GenericDAO implements Crud<Pessoa> {
+
     private Connection con = null;
 
     public PessoaDAO() {
@@ -65,6 +66,7 @@ public class PessoaDAO extends GenericDAO implements Crud<Pessoa> {
             rs = stmt.executeQuery();
             while (rs.next()) {
                 Pessoa pessoa = new Pessoa();
+                pessoa.setCodPessoa(rs.getInt("codPessoa"));
                 pessoa.setNome(rs.getString("nome"));
                 pessoa.setNascimentoPessoa(rs.getString("nascimentoPessoa"));
                 pessoa.setCep(rs.getString("cep"));
@@ -88,13 +90,8 @@ public class PessoaDAO extends GenericDAO implements Crud<Pessoa> {
     }
 
     @Override
-    public ResultSet buscar(int id) {
-        return null;
-    }
-
-    @Override
     public boolean atualizar(Pessoa pessoa) {
-        String sql  = "UPDATE pessoa set estado = ? WHERE codPessoa = ? ";
+        String sql = "UPDATE pessoa set estado = ? WHERE codPessoa = ? ";
         PreparedStatement stmt = null;
         try {
             stmt = con.prepareStatement(sql);
@@ -103,16 +100,16 @@ public class PessoaDAO extends GenericDAO implements Crud<Pessoa> {
             stmt.executeUpdate();
             return true;
         } catch (SQLException ex) {
-            System.err.println("Erro"+ex);
+            System.err.println("Erro" + ex);
             return false;
-        }finally{
+        } finally {
             GenericDAO.closeConnection(con, stmt);
-        }      
+        }
     }
 
     @Override
     public boolean remover(Pessoa pessoa) {
-        String sql  = "DELETE FROM pessoa WHERE codPessoa = ? ";
+        String sql = "DELETE FROM pessoa WHERE codPessoa = ? ";
         PreparedStatement stmt = null;
         try {
             stmt = con.prepareStatement(sql);
@@ -120,10 +117,44 @@ public class PessoaDAO extends GenericDAO implements Crud<Pessoa> {
             stmt.executeUpdate();
             return true;
         } catch (SQLException ex) {
-            System.err.println("Erro"+ex);
+            System.err.println("Erro" + ex);
             return false;
-        }finally{
+        } finally {
             GenericDAO.closeConnection(con, stmt);
-        }  
+        }
+    }
+
+    @Override
+    public List buscar(int id) {
+        String sql = "SELECT * FROM pessoa where codPessoa = ?";
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Pessoa> pessoas = new ArrayList<>();
+        try {
+            stmt = con.prepareStatement(sql);
+            rs = stmt.executeQuery();
+            while (rs.next()) {
+                Pessoa pessoa = new Pessoa();
+                pessoa.setCodPessoa(rs.getInt("codPessoa"));
+                pessoa.setNome(rs.getString("nome"));
+                pessoa.setNascimentoPessoa(rs.getString("nascimentoPessoa"));
+                pessoa.setCep(rs.getString("cep"));
+                pessoa.setEstado(rs.getString("estado"));
+                pessoa.setCidade(rs.getString("cidade"));
+                pessoa.setBairro(rs.getString("bairro"));
+                pessoa.setRua(rs.getString("rua"));
+                pessoa.setNumCasa(rs.getInt("numCasa"));
+                pessoa.setTelefone(rs.getString("telefone"));
+                pessoa.setEmail(rs.getString("email"));
+                pessoa.setTipo(rs.getInt("tipo"));
+                pessoa.setGenero(rs.getString("genero"));
+                pessoas.add(pessoa);
+            }
+        } catch (SQLException ex) {
+            System.err.println("Erro: " + ex);
+        } finally {
+            GenericDAO.closeConnection(con, stmt, rs);
+        }
+        return pessoas;
     }
 }

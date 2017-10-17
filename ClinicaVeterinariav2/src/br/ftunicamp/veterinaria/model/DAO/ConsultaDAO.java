@@ -45,11 +45,6 @@ public class ConsultaDAO extends GenericDAO implements Crud<Consulta> {
     }
 
     @Override
-    public ResultSet buscar(int id) {
-        return null;
-    }
-
-    @Override
     public List<Consulta> listar() {
         String sql = "SELECT *FROM consulta c inner join Tratamento t on c.codTratamento=t.codTratamento";
         PreparedStatement stmt = null;
@@ -61,6 +56,7 @@ public class ConsultaDAO extends GenericDAO implements Crud<Consulta> {
             while(rs.next()){
                 Consulta consulta = new Consulta();
                 Tratamento tratamento = new Tratamento();
+                consulta.setCodConsulta(rs.getInt("codConsulta"));
                 tratamento.setCodTratamento(rs.getInt("codTratamento"));
                 consulta.setTratamento(tratamento);
                 consulta.setDataConsulta(rs.getString("dataConsulta"));  
@@ -108,5 +104,31 @@ public class ConsultaDAO extends GenericDAO implements Crud<Consulta> {
             GenericDAO.closeConnection(con, stmt);
         }  
     }  
+
+    @Override
+    public List buscar(int id) {
+        String sql = "SELECT *FROM consulta c inner join Tratamento t on c.codTratamento=t.codTratamento where codConsulta = ?";
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Consulta> consultas = new ArrayList<>();
+        try {
+            stmt = con.prepareStatement(sql);
+            rs = stmt.executeQuery();
+            while(rs.next()){
+                Consulta consulta = new Consulta();
+                Tratamento tratamento = new Tratamento();
+                tratamento.setCodTratamento(rs.getInt("codTratamento"));
+                consulta.setCodConsulta(rs.getInt("codConsulta"));
+                consulta.setTratamento(tratamento);
+                consulta.setDataConsulta(rs.getString("dataConsulta"));  
+                consultas.add(consulta);
+            }
+        } catch (SQLException ex) {
+            System.err.println("Erro: "+ex);
+        }finally{
+            GenericDAO.closeConnection(con,stmt,rs);
+        }
+        return consultas;
+    }
     
 }
