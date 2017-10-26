@@ -29,11 +29,11 @@ public class ConsultaTest {
         Deserializacao d = new Deserializacao();
         try {
 
-            s.serializar("/Users/thiag/Desktop/consulta.ser", consultas); //chama serializar passando o path e o Object
+            s.serializar("/Users/AmadeuCarvalho/Desktop/animal.ser", consultas); //chama serializar passando o path e o Object
             System.out.println("Codigo-" + "Tratamento-" + "----DataConsulta-");
 
             consultas = null;
-            consultas = (ArrayList<Consulta>) d.deserializar("/Users/thiag/Desktop/consulta.ser"); //chama deserializar passando o path
+            consultas = (ArrayList<Consulta>) d.deserializar("/Users/AmadeuCarvalho/Desktop/animal.ser"); //chama deserializar passando o path
             for (Consulta c : consultas) { //percorre a listas listando  na memoria
                 System.out.println("  " + c.getCodConsulta() + "    " + c.getTratamento() + "   " + c.getDataConsulta());
             }

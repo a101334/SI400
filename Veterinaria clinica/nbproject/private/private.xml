@@ -3,23 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/thiag/Desktop/Veterinaria%20clinica/src/br/ftunicamp/veterinaria/model/ContaPagar.java</file>
-            <file>file:/C:/Users/thiag/Desktop/Veterinaria%20clinica/test/br/ftunicamp/veterinaria/model/PessoaTest.java</file>
-            <file>file:/C:/Users/thiag/Desktop/Veterinaria%20clinica/test/br/ftunicamp/veterinaria/model/AnimalTest.java</file>
-            <file>file:/C:/Users/thiag/Desktop/Veterinaria%20clinica/src/br/ftunicamp/veterinaria/arquivos/Serializacao.java</file>
-            <file>file:/C:/Users/thiag/Desktop/Veterinaria%20clinica/test/br/ftunicamp/veterinaria/model/ContaPagarTest.java</file>
-            <file>file:/C:/Users/thiag/Desktop/Veterinaria%20clinica/test/br/ftunicamp/veterinaria/model/SecretariaTest.java</file>
-            <file>file:/C:/Users/thiag/Desktop/Veterinaria%20clinica/test/br/ftunicamp/veterinaria/model/ConsultaTest.java</file>
-            <file>file:/C:/Users/thiag/Desktop/Veterinaria%20clinica/src/br/ftunicamp/veterinaria/model/Secretaria.java</file>
-            <file>file:/C:/Users/thiag/Desktop/Veterinaria%20clinica/src/br/ftunicamp/veterinaria/model/Pessoa.java</file>
-            <file>file:/C:/Users/thiag/Desktop/Veterinaria%20clinica/test/br/ftunicamp/veterinaria/model/VeterinarioTest.java</file>
-            <file>file:/C:/Users/thiag/Desktop/Veterinaria%20clinica/src/br/ftunicamp/veterinaria/model/Tratamento.java</file>
-            <file>file:/C:/Users/thiag/Desktop/Veterinaria%20clinica/test/br/ftunicamp/veterinaria/model/TratamentoTest.java</file>
-            <file>file:/C:/Users/thiag/Desktop/Veterinaria%20clinica/src/br/ftunicamp/veterinaria/model/EmitirNota.java</file>
-            <file>file:/C:/Users/thiag/Desktop/Veterinaria%20clinica/test/br/ftunicamp/veterinaria/model/EmitirNotaTest.java</file>
-            <file>file:/C:/Users/thiag/Desktop/Veterinaria%20clinica/src/br/ftunicamp/veterinaria/model/Veterinario.java</file>
             <file>file:/C:/Users/thiag/Desktop/Veterinaria%20clinica/src/br/ftunicamp/veterinaria/model/Animal.java</file>
-            <file>file:/C:/Users/thiag/Desktop/Veterinaria%20clinica/src/br/ftunicamp/veterinaria/model/Consulta.java</file>
+            <file>file:/C:/Users/thiag/Desktop/Veterinaria%20clinica/src/br/ftunicamp/veterinaria/arquivos/Serializacao.java</file>
+            <file>file:/C:/Users/thiag/Desktop/Veterinaria%20clinica/src/br/ftunicamp/veterinaria/arquivos/Deserializacao.java</file>
+            <file>file:/C:/Users/thiag/Desktop/Veterinaria%20clinica/test/br/ftunicamp/veterinaria/model/AnimalTest.java</file>
         </group>
     </open-files>
 </project-private>
