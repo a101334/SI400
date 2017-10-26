@@ -6,6 +6,7 @@
 package br.ftunicamp.veterinaria.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  *
@@ -19,6 +20,7 @@ public class Animal implements Serializable{
     private String raca;
     private Pessoa pessoa;
     private String sexo;
+    private List<Animal> animais;
 
     public Animal(int codAnimal, String nomeAnimal, String nascimentoAnimal, String especie, String raca, Pessoa pessoa,String sexo) {
         this.codAnimal = codAnimal;
@@ -31,6 +33,13 @@ public class Animal implements Serializable{
     }        
             
     public Animal() {
+        pessoa = new Pessoa();
+    }
+    
+    public Animal(List<Animal> animal) {
+        pessoa = new Pessoa();
+        animais = animal;
+    
     }
 
     public String getSexo() {
@@ -90,6 +99,14 @@ public class Animal implements Serializable{
         this.pessoa = pessoa;
     }
 
+    public List<Animal> getAnimais() {
+        return animais;
+    }
+
+    public void setAnimais(List<Animal> animais) {
+        this.animais = animais;
+    }
+    
     private void writeObject(java.io.ObjectOutputStream stream) throws java.io.IOException {
         // liberar o stream
         stream.defaultWriteObject();

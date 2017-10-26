@@ -29,11 +29,11 @@ public class AnimalTest {
         Deserializacao d = new Deserializacao();
         try {
 
-            s.serializar("/Users/thiag/Desktop/animal.ser", animais); //chama serializar passando o path e o Object
+            s.serializar("/Users/AmadeuCarvalho/Desktop/animal.ser", animais); //chama serializar passando o path e o Object
             System.out.println("Codigo-" + "Nome-" + "----Nascimento-" + "----Especie-" + "--Raça-" + "---Pessoa-" + "-------Sexo-");
 
             animais = null;
-            animais = (ArrayList<Animal>) d.deserializar("/Users/thiag/Desktop/animal.ser"); //chama deserializar passando o path
+            animais = (ArrayList<Animal>) d.deserializar("/Users/AmadeuCarvalho/Desktop/animal.ser"); //chama deserializar passando o path
             for (Animal a : animais) { //percorre a listas listando  na memoria
                 System.out.println("  " + a.getCodAnimal() + "    " + a.getNomeAnimal() + "   " + a.getNascimentoAnimal() + "   " + a.getEspecie() + "   " + a.getRaca() + "   " + a.getPessoa() + "   " + a.getSexo());
             }

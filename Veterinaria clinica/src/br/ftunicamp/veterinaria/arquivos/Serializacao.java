@@ -25,5 +25,4 @@ public class Serializacao {
         s.close(); //fecha o arquivo
         System.out.println("Objeto gravado com sucesso!\n");
     }
-
 }
