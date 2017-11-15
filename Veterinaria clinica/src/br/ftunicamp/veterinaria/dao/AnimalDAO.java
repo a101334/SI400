@@ -39,6 +39,7 @@ public class AnimalDAO extends Serializa implements Crud<Animal> {
      *
      * @author Amadeu Carvalho
      * @param a - animal a ser cadastrado
+     * @return 
      */
     @Override
     public boolean inserir(Animal a) {
@@ -109,6 +110,7 @@ public class AnimalDAO extends Serializa implements Crud<Animal> {
      *
      * @author Amadeu Carvalho
      * @param animal
+     * @return 
      */
     @Override
     public boolean atualizar(Animal animal) {
@@ -132,6 +134,7 @@ public class AnimalDAO extends Serializa implements Crud<Animal> {
      * Busca por id de um animal cadastrado
      *
      * @author Amadeu Carvalho
+     * @param id
      * @return Animal
      */
     @Override
@@ -145,6 +148,7 @@ public class AnimalDAO extends Serializa implements Crud<Animal> {
      *
      * @author Amadeu Carvalho
      * @return Animal
+     * @throws java.lang.Exception
      */
     public Animal load() throws Exception {
         if (Files.exists(arquivoSerializado)) {

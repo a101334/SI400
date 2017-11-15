@@ -30,6 +30,7 @@ public abstract class Serializa {
      * @author Amadeu Carvalho
      * @param arq - arquivo que deseja serializar
      * @param obj - conteudo do arquivo para serializar
+     * @throws java.lang.Exception
      */
     public void serializar(Path arq, Object obj) throws Exception {
         try {
@@ -45,6 +46,7 @@ public abstract class Serializa {
      * Carrega um arquivo .dat pré-definido e retorna um objeto
      *
      * @author Amadeu Carvalho
+     * @param arq
      * @return Object
      */
     public Object loadSerialized(Path arq) {
