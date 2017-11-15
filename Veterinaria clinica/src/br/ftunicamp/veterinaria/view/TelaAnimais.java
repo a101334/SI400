@@ -82,7 +82,6 @@ public class TelaAnimais extends javax.swing.JInternalFrame {
         lblNome = new javax.swing.JLabel();
         txtNomeAnimal = new javax.swing.JTextField();
         lblNascimento = new javax.swing.JLabel();
-        dtNascimento = new com.toedter.calendar.JCalendar();
         lblSexo = new javax.swing.JLabel();
         cbxSexo = new javax.swing.JComboBox<>();
         lblEspecie = new javax.swing.JLabel();
@@ -164,9 +163,7 @@ public class TelaAnimais extends javax.swing.JInternalFrame {
                                     .addComponent(lblNome)))
                             .addComponent(btnInserir))
                         .addGap(55, 55, 55)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(dtNascimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtNomeAnimal))
+                        .addComponent(txtNomeAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(43, 43, 43)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblSexo)
@@ -194,7 +191,6 @@ public class TelaAnimais extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblNascimento)
-                    .addComponent(dtNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblEspecie)
@@ -207,7 +203,7 @@ public class TelaAnimais extends javax.swing.JInternalFrame {
                 .addComponent(btnInserir)
                 .addGap(32, 32, 32)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(438, Short.MAX_VALUE))
+                .addContainerGap(441, Short.MAX_VALUE))
         );
 
         pack();
@@ -255,7 +251,6 @@ public class TelaAnimais extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnInserir;
     private javax.swing.JComboBox<String> cbxEspecie;
     private javax.swing.JComboBox<String> cbxSexo;
-    private com.toedter.calendar.JCalendar dtNascimento;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblEspecie;
     private javax.swing.JLabel lblNascimento;

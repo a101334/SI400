@@ -30,7 +30,10 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
-        setClosable(true);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setMaximumSize(new java.awt.Dimension(6045, 4039));
+        setPreferredSize(new java.awt.Dimension(1200, 1000));
+        setRequestFocusEnabled(false);
 
         jLabel1.setText("Cliente");
 
