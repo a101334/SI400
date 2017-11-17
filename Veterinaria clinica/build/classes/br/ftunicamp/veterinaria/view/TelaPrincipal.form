@@ -99,18 +99,21 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="Veterinario">
+        <Menu class="javax.swing.JMenu" name="menuVeterinario">
           <Properties>
             <Property name="text" type="java.lang.String" value="Veterin&#xe1;rio"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="VeterinarioActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuVeterinarioActionPerformed"/>
           </Events>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="veterinario">
+            <MenuItem class="javax.swing.JMenuItem" name="itemVeterinario">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Veterin&#xe1;rios"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemVeterinarioActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

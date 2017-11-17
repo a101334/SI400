@@ -59,7 +59,13 @@ public class PessoaDAO extends Serializa implements Crud<Pessoa> {
     public Pessoa buscar(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
+  
+    /**
+     * @author Thiago Viotto
+     * @return List<Pessoa>
+     * Retorna uma lista de pessoas
+     */
     @Override
     public List listar() {
         try {

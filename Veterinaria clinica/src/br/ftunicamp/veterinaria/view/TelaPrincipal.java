@@ -46,8 +46,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         itemClientes = new javax.swing.JMenuItem();
         menuAnimais = new javax.swing.JMenu();
         itemAnimais = new javax.swing.JMenuItem();
-        Veterinario = new javax.swing.JMenu();
-        veterinario = new javax.swing.JMenuItem();
+        menuVeterinario = new javax.swing.JMenu();
+        itemVeterinario = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -130,17 +130,22 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(menuAnimais);
 
-        Veterinario.setText("Veterinário");
-        Veterinario.addActionListener(new java.awt.event.ActionListener() {
+        menuVeterinario.setText("Veterinário");
+        menuVeterinario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                VeterinarioActionPerformed(evt);
+                menuVeterinarioActionPerformed(evt);
             }
         });
 
-        veterinario.setText("Veterinários");
-        Veterinario.add(veterinario);
+        itemVeterinario.setText("Veterinários");
+        itemVeterinario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemVeterinarioActionPerformed(evt);
+            }
+        });
+        menuVeterinario.add(itemVeterinario);
 
-        jMenuBar1.add(Veterinario);
+        jMenuBar1.add(menuVeterinario);
 
         setJMenuBar(jMenuBar1);
 
@@ -202,8 +207,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         jDesktopMain.add(telSecretaria);
 
-        telVeterinario.setVisible(false);
         telSecretaria.setVisible(true);
+        telVeterinario.setVisible(false);
         telAgenda.setVisible(false);
         telCliente.setVisible(false);
         telAnimais.setVisible(false);
@@ -233,7 +238,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         telAnimais.setVisible(true);
     }//GEN-LAST:event_itemAnimaisActionPerformed
 
-    private void VeterinarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VeterinarioActionPerformed
+    private void menuVeterinarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuVeterinarioActionPerformed
         // TODO add your handling code here:
         jDesktopMain.add(telVeterinario);
 
@@ -242,15 +247,26 @@ public class TelaPrincipal extends javax.swing.JFrame {
         telAgenda.setVisible(false);
         telCliente.setVisible(false);
         telAnimais.setVisible(false);
-    }//GEN-LAST:event_VeterinarioActionPerformed
+    }//GEN-LAST:event_menuVeterinarioActionPerformed
+
+    private void itemVeterinarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemVeterinarioActionPerformed
+        // TODO add your handling code here:
+        jDesktopMain.add(telVeterinario);
+
+        telVeterinario.setVisible(true);
+        telSecretaria.setVisible(false);
+        telAgenda.setVisible(false);
+        telCliente.setVisible(false);
+        telAnimais.setVisible(false);
+    }//GEN-LAST:event_itemVeterinarioActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu Veterinario;
     private javax.swing.JMenuItem itemAgenda;
     private javax.swing.JMenuItem itemAnimais;
     private javax.swing.JMenuItem itemClientes;
     private javax.swing.JMenuItem itemSecretaria;
+    private javax.swing.JMenuItem itemVeterinario;
     private javax.swing.JDesktopPane jDesktopMain;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
@@ -259,6 +275,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu menuArquivo;
     private javax.swing.JMenu menuClientes;
     private javax.swing.JMenu menuSecretaria;
-    private javax.swing.JMenuItem veterinario;
+    private javax.swing.JMenu menuVeterinario;
     // End of variables declaration//GEN-END:variables
 }

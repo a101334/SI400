@@ -6,6 +6,7 @@
 package br.ftunicamp.veterinaria.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -44,16 +45,18 @@ public class Pessoa implements Serializable {
         this.tipo = tipo;
         this.genero = genero;
     }
-
-    public Pessoa() {
+    
+    public Pessoa(){
+        pessoas = new ArrayList<>();
     }
 
     public Pessoa(int codPessoa) {
         this.codPessoa = codPessoa;
     }
     
-    public Pessoa(List<Pessoa> pessoa) {
-        pessoas = pessoa;
+    public Pessoa(List<Pessoa> p) {
+        pessoas = new ArrayList<>();
+        pessoas = p;
     }
     
 
