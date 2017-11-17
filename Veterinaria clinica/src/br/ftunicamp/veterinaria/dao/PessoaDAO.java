@@ -7,190 +7,145 @@ package br.ftunicamp.veterinaria.dao;
 
 import br.ftunicamp.veterinaria.interfaces.Crud;
 import br.ftunicamp.veterinaria.model.Pessoa;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-/**
- *
- * @author Thiago Henrique Viotto
 
-public class PessoaDAO extends GenericDAO implements Crud<Pessoa> {
+ // @author Thiago Henrique Viotto
 
-    private Connection con = null;
+public class PessoaDAO extends Serializa implements Crud<Pessoa> {
+    
+    private static final Logger LOG = Logger.getLogger(PessoaDAO.class.getName());
+    private static final String CSV_FILENAME = "pessoa.csv";
+    private static final String SERIAL_FILENAME = "pessoa.dat";
+    private final Path arquivo2Csv;
+    private final Path arquivo2Serializado;
+    private Pessoa pessoa = new Pessoa();
 
-    public PessoaDAO() {
-        con = GenericDAO.getConnection();
-    }
-
-    @Override
-    public boolean inserir(Pessoa pessoa) {
-        String sql = "INSERT INTO pessoa (nome, nascimentoPessoa, cep, estado, cidade, bairro, rua, numCasa, telefone, email, tipo,genero) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        PreparedStatement stmt = null;
-        try {
-            stmt = con.prepareStatement(sql);
-            //stmt.setInt(1, pessoa.getCodPessoa());
-            stmt.setString(1, pessoa.getNome());
-            stmt.setDate(2, (Date) pessoa.getNascimentoPessoa());
-            stmt.setString(3, pessoa.getCep());
-            stmt.setString(4, pessoa.getEstado());
-            stmt.setString(5, pessoa.getCidade());
-            stmt.setString(6, pessoa.getBairro());
-            stmt.setString(7, pessoa.getRua());
-            stmt.setInt(8, pessoa.getNumCasa());
-            stmt.setString(9, pessoa.getTelefone());
-            stmt.setString(10, pessoa.getEmail());
-            stmt.setInt(11, pessoa.getTipo());
-            stmt.setString(12, pessoa.getGenero());
-            stmt.executeUpdate();
-            return true;
-        } catch (SQLException ex) {
-            System.err.println("Erro" + ex);
-            return false;
-        } finally {
-            GenericDAO.closeConnection(con, stmt);
-        }
-    }
-
-    @Override
-    public List<Pessoa> listar() {
-        String sql = "SELECT * FROM pessoa";
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        List<Pessoa> pessoas = new ArrayList<>();
-        try {
-            stmt = con.prepareStatement(sql);
-            rs = stmt.executeQuery();
-            while (rs.next()) {
-                Pessoa pessoa = new Pessoa();
-                pessoa.setCodPessoa(rs.getInt("codPessoa"));
-                pessoa.setNome(rs.getString("nome"));
-                pessoa.setNascimentoPessoa(rs.getDate("nascimentoPessoa"));
-                pessoa.setCep(rs.getString("cep"));
-                pessoa.setEstado(rs.getString("estado"));
-                pessoa.setCidade(rs.getString("cidade"));
-                pessoa.setBairro(rs.getString("bairro"));
-                pessoa.setRua(rs.getString("rua"));
-                pessoa.setNumCasa(rs.getInt("numCasa"));
-                pessoa.setTelefone(rs.getString("telefone"));
-                pessoa.setEmail(rs.getString("email"));
-                pessoa.setTipo(rs.getInt("tipo"));
-                pessoa.setGenero(rs.getString("genero"));
-                pessoas.add(pessoa);
-            }
-        } catch (SQLException ex) {
-            System.err.println("Erro: " + ex);
-        } finally {
-            GenericDAO.closeConnection(con, stmt, rs);
-        }
-        return pessoas;
-    }
-
-    @Override
-    public boolean atualizar(Pessoa pessoa) {
-        String sql = "UPDATE pessoa set estado = ? WHERE codPessoa = ? ";
-        PreparedStatement stmt = null;
-        try {
-            stmt = con.prepareStatement(sql);
-            stmt.setString(1, pessoa.getEstado());
-            stmt.setInt(2, pessoa.getCodPessoa());
-            stmt.executeUpdate();
-            return true;
-        } catch (SQLException ex) {
-            System.err.println("Erro" + ex);
-            return false;
-        } finally {
-            GenericDAO.closeConnection(con, stmt);
-        }
-    }
-
-    @Override
-    public boolean remover(Pessoa pessoa) {
-        String sql = "DELETE FROM pessoa WHERE codPessoa = ? ";
-        PreparedStatement stmt = null;
-        try {
-            stmt = con.prepareStatement(sql);
-            stmt.setInt(1, pessoa.getCodPessoa());
-            stmt.executeUpdate();
-            return true;
-        } catch (SQLException ex) {
-            System.err.println("Erro" + ex);
-            return false;
-        } finally {
-            GenericDAO.closeConnection(con, stmt);
-        }
-    }
-
-    @Override
-    public List buscar(int id) {
-        String sql = "SELECT * FROM pessoa where codPessoa = ?";
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        List<Pessoa> pessoas = new ArrayList<>();
-        try {
-            stmt = con.prepareStatement(sql);
-            rs = stmt.executeQuery();
-            while (rs.next()) {
-                Pessoa pessoa = new Pessoa();
-                pessoa.setCodPessoa(rs.getInt("codPessoa"));
-                pessoa.setNome(rs.getString("nome"));
-                pessoa.setNascimentoPessoa(rs.getDate("nascimentoPessoa"));
-                pessoa.setCep(rs.getString("cep"));
-                pessoa.setEstado(rs.getString("estado"));
-                pessoa.setCidade(rs.getString("cidade"));
-                pessoa.setBairro(rs.getString("bairro"));
-                pessoa.setRua(rs.getString("rua"));
-                pessoa.setNumCasa(rs.getInt("numCasa"));
-                pessoa.setTelefone(rs.getString("telefone"));
-                pessoa.setEmail(rs.getString("email"));
-                pessoa.setTipo(rs.getInt("tipo"));
-                pessoa.setGenero(rs.getString("genero"));
-                pessoas.add(pessoa);
-            }
-        } catch (SQLException ex) {
-            System.err.println("Erro: " + ex);
-        } finally {
-            GenericDAO.closeConnection(con, stmt, rs);
-        }
-        return pessoas;
+    public PessoaDAO() throws Exception {
+        LOG.setLevel(Level.INFO);
+        arquivo2Csv = FileSystems.getDefault().getPath(CSV_FILENAME);
+        arquivo2Serializado = FileSystems.getDefault().getPath(SERIAL_FILENAME);
+        pessoa = load();
     }
     
-    public ArrayList<Pessoa> buscarNome(String nome) {
-        String sql = "SELECT * FROM pessoa where nome like ?";
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-        ArrayList<Pessoa> pessoas = new ArrayList<>();
+    /**
+     * Insere a pessoa na lista e em seguida serializa
+     *
+     * @author Thiago
+     * @param p - pessoa a ser cadastrado
+     * @return 
+     */
+    @Override
+    public boolean inserir(Pessoa p) {
         try {
-            stmt = con.prepareStatement(sql);
-            stmt.setString(1,"%" + nome + "%");
-            rs = stmt.executeQuery();
-            while (rs.next()) {
-                Pessoa pessoa = new Pessoa();
-                pessoa.setCodPessoa(rs.getInt("codPessoa"));
-                pessoa.setNome(rs.getString("nome"));
-                /*pessoa.setNascimentoPessoa(rs.getDate("nascimentoPessoa"));
-                pessoa.setCep(rs.getString("cep"));
-                pessoa.setEstado(rs.getString("estado"));
-                pessoa.setCidade(rs.getString("cidade"));
-                pessoa.setBairro(rs.getString("bairro"));
-                pessoa.setRua(rs.getString("rua"));
-                pessoa.setNumCasa(rs.getInt("numCasa"));
-                pessoa.setTelefone(rs.getString("telefone"));
-                pessoa.setEmail(rs.getString("email"));
-                pessoa.setTipo(rs.getInt("tipo"));
-                pessoa.setGenero(rs.getString("genero"));
+            pessoa.getPessoas().add(p);
+            serializar(arquivo2Serializado, pessoa);
+        } catch (Exception ex) {
+            Logger.getLogger(PessoaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return true;
+    }
+
+    @Override
+    public Pessoa buscar(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+  
+    /**
+     * @author Thiago Viotto
+     * @return List<Pessoa>
+     * Retorna uma lista de pessoas
+     */
+    @Override
+    public List listar() {
+        try {
+            return pessoa.getPessoas();
+        } catch (Exception ex) {
+            Logger.getLogger(PessoaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    @Override
+    public boolean atualizar(Pessoa classe) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean remover(Pessoa classe) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * @author Pessoa
+     * @return List<Pessoa>
+     * Carrega um arquivo csv pré-definido e retorna uma lista
+     */
+    @Override
+    public List<Pessoa> carregarArquivo() {
+        List<Pessoa> pessoas = new ArrayList<>();
+        Pessoa pessoa = new Pessoa();
+        BufferedReader source;
+        try {
+            // serializar(arquivoCsv, pessoa);
+            source = Files.newBufferedReader(arquivo2Csv,
+                    StandardCharsets.ISO_8859_1);
+            String header = source.readLine();
+            String line = null;
+
+            while ((line = source.readLine()) != null) {
+                String dado[] = line.split(";");
+                //System.out.println(line);
+                pessoa.setCodPessoa(Integer.parseInt(dado[0]));
+                pessoa.setNome(dado[1]);
+                pessoa.setNascimentoPessoa(dado[2]);
+                pessoa.setCep(dado[3]);
+                pessoa.setEstado(dado[4]);
+                pessoa.setCidade(dado[5]);
+                pessoa.setBairro(dado[6]);
+                pessoa.setRua(dado[7]);
+                pessoa.setNumCasa(Integer.parseInt(dado[8]));
+                pessoa.setTelefone(dado[9]);
+                pessoa.setEmail(dado[10]);
+                pessoa.setTipo(Integer.parseInt(dado[11]));
+                pessoa.setGenero(dado[12]);
                 pessoas.add(pessoa);
             }
-        } catch (SQLException ex) {
-            System.err.println("Erro: " + ex);
-        } finally {
-            GenericDAO.closeConnection(con, stmt, rs);
+            return pessoas;
+        } catch (IOException ex) {
+            Logger.getLogger(PessoaDAO.class.getName()).
+                    log(Level.SEVERE, "carregarPessoas", ex);
         }
-        return pessoas;
+        return null;
+    }
+    
+    /**
+     * Verifica se um arquivo .dat existe caso não exista chama o método para
+     * carregar um csv
+     *
+     * @author Thiago
+     * @return Pessoa
+     * @throws java.lang.Exception
+     */
+    public Pessoa load() throws Exception {
+        if (Files.exists(arquivo2Serializado)) {
+            LOG.info("Usando " + arquivo2Serializado.toString());
+            return (Pessoa) loadSerialized(arquivo2Serializado);
+        } else {
+            LOG.info("Usando " + arquivo2Csv.toString());
+            return new Pessoa(carregarArquivo());
+        }
     }
 }
- */
+
+    
