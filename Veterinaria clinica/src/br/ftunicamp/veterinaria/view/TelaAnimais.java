@@ -91,6 +91,7 @@ public class TelaAnimais extends javax.swing.JInternalFrame {
         btnInserir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaAnimal = new javax.swing.JTable();
+        dtNascimento = new com.toedter.calendar.JDateChooser();
 
         setClosable(true);
         setMaximizable(true);
@@ -162,9 +163,11 @@ public class TelaAnimais extends javax.swing.JInternalFrame {
                                     .addComponent(lblNascimento)
                                     .addComponent(lblNome)))
                             .addComponent(btnInserir))
-                        .addGap(55, 55, 55)
-                        .addComponent(txtNomeAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(43, 43, 43)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(dtNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNomeAnimal, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lblSexo)
                             .addComponent(lblEspecie)
@@ -192,9 +195,11 @@ public class TelaAnimais extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblNascimento)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblEspecie)
-                            .addComponent(cbxEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lblEspecie)
+                                .addComponent(cbxEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(dtNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblRaca)
@@ -203,7 +208,7 @@ public class TelaAnimais extends javax.swing.JInternalFrame {
                 .addComponent(btnInserir)
                 .addGap(32, 32, 32)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(441, Short.MAX_VALUE))
+                .addContainerGap(444, Short.MAX_VALUE))
         );
 
         pack();
@@ -217,21 +222,22 @@ public class TelaAnimais extends javax.swing.JInternalFrame {
         Animal animal = new Animal();
         AnimalControle animalControle = new AnimalControle();
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        java.util.Date dateStr = null;
         try {
-            java.util.Date dateStr = formatter.parse(formatter.format(dtNascimento.getCalendar().getTime()));
-            animal.setCodAnimal(0);
-            animal.setNomeAnimal(txtNomeAnimal.getText());
-            animal.setEspecie(cbxEspecie.getModel().getSelectedItem().toString());
-            animal.setRaca(txtRaca.getText());
-            animal.setNascimentoAnimal(formatter.format(dateStr));
-            animal.getPessoa().setCodPessoa(0);
-            animal.setSexo(cbxSexo.getModel().getSelectedItem().toString());
-            animalControle.insertAnimal(animal);
-            preencherTabelaAnimal();
-            limparTela();
+            dateStr = formatter.parse(formatter.format(dtNascimento.getCalendar().getTime()));
         } catch (ParseException ex) {
             Logger.getLogger(TelaAnimais.class.getName()).log(Level.SEVERE, null, ex);
         }
+        animal.setCodAnimal(0);
+        animal.setNomeAnimal(txtNomeAnimal.getText());
+        animal.setEspecie(cbxEspecie.getModel().getSelectedItem().toString());
+        animal.setRaca(txtRaca.getText());
+        animal.setNascimentoAnimal(formatter.format(dateStr));
+        animal.getPessoa().setCodPessoa(0);
+        animal.setSexo(cbxSexo.getModel().getSelectedItem().toString());
+        animalControle.insertAnimal(animal);
+        preencherTabelaAnimal();
+        limparTela();
     }//GEN-LAST:event_btnInserirActionPerformed
 
     private void limparTela() {
@@ -251,6 +257,7 @@ public class TelaAnimais extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnInserir;
     private javax.swing.JComboBox<String> cbxEspecie;
     private javax.swing.JComboBox<String> cbxSexo;
+    private com.toedter.calendar.JDateChooser dtNascimento;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblEspecie;
     private javax.swing.JLabel lblNascimento;

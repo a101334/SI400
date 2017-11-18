@@ -13,13 +13,13 @@ import java.io.Serializable;
  */
 public class Tratamento implements Serializable {
     transient private int codTratamento;
-    private Animal animal;
-    private Veterinario veterinario;
+    private int codAnimal;
+    private int codVeterinario;
     private String historico;
 
-    public Tratamento(int codTratamento, Animal animal, Veterinario veterinario, String historico) {
-        this.animal = animal;
-        this.veterinario = veterinario;
+    public Tratamento(int codTratamento, int codAnimal, int  codVeterinario, String historico) {
+        this.codAnimal = codAnimal;
+        this.codVeterinario = codVeterinario;
         this.historico = historico;
     }
     
@@ -35,20 +35,20 @@ public class Tratamento implements Serializable {
         this.codTratamento = codTratamento;
     }
 
-    public Animal getAnimal() {
-        return animal;
+    public int getAnimal() {
+        return codAnimal;
     }
 
-    public void setAnimal(Animal animal) {
-        this.animal = animal;
+    public void setAnimal(int animal) {
+        this.codAnimal = animal;
     }
 
-    public Veterinario getVeterinario() {
-        return veterinario;
+    public int getVeterinario() {
+        return codVeterinario;
     }
 
-    public void setVeterinario(Veterinario veterinario) {
-        this.veterinario = veterinario;
+    public void setVeterinario(int veterinario) {
+        this.codVeterinario = veterinario;
     }
 
     public String getHistorico() {

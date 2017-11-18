@@ -6,6 +6,7 @@
 package br.ftunicamp.veterinaria.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  *
@@ -13,16 +14,21 @@ import java.io.Serializable;
  */
 public class Consulta implements Serializable {
     transient private int codConsulta;
-    private Tratamento tratamento;
+    private int codTratamento;
     private String dataConsulta;
+    private List<Consulta> consultas;
 
-    public Consulta(int codConsulta, Tratamento tratamento, String dataConsulta) {
+    public Consulta(int codConsulta, int codTratamento, String dataConsulta) {
         this.codConsulta = codConsulta;
-        this.tratamento = tratamento;
+        this.codTratamento = codTratamento;
         this.dataConsulta = dataConsulta;
     }
 
     public Consulta() {
+    }
+    
+    public List<Consulta> getConsultas() {
+        return consultas;
     }
 
     public int getCodConsulta() {
@@ -33,12 +39,12 @@ public class Consulta implements Serializable {
         this.codConsulta = codConsulta;
     }
 
-    public Tratamento getTratamento() {
-        return tratamento;
+    public int getTratamento() {
+        return codTratamento;
     }
 
-    public void setTratamento(Tratamento tratamento) {
-        this.tratamento = tratamento;
+    public void setTratamento(int tratamento) {
+        this.codTratamento = tratamento;
     }
 
 
