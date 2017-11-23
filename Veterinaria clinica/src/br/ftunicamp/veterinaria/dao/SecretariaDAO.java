@@ -55,8 +55,23 @@ public class SecretariaDAO extends Serializa implements Crud<Secretaria>  {
         return true;
     }
 
+    /**
+     * Busca por um nome de uma secretaria cadastrada
+     *
+     * @author Thiago Viotto
+     * @param nome
+     * @return Secretaria
+     */
     @Override
-    public Secretaria buscar(int id) {
+    public Secretaria buscar(String nome) {
+        try {
+            for(int i=0;i<secretaria.getSecretarias().size();i++){
+                if(secretaria.getSecretarias().get(i).getNome().substring(0, 1).equals(nome.substring(0, 1)) || (secretaria.getSecretarias().get(i).getNome().substring(0, 2).equals(nome.substring(0,2)))) 
+                    return secretaria.getSecretarias().get(i);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return null;
     }
 
@@ -81,7 +96,7 @@ public class SecretariaDAO extends Serializa implements Crud<Secretaria>  {
     }
 
     @Override
-    public boolean remover(Secretaria secretaria) {
+    public boolean remover(int id) {
         return true;
     }
 

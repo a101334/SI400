@@ -6,7 +6,6 @@
 package br.ftunicamp.veterinaria.dao;
 
 import br.ftunicamp.veterinaria.interfaces.Crud;
-import br.ftunicamp.veterinaria.model.Secretaria;
 import br.ftunicamp.veterinaria.model.Veterinario;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -56,8 +55,23 @@ public class VeterinarioDAO extends Serializa implements Crud<Veterinario>{
         return true;
     }
 
+    /**
+     * Busca por um nome de um Veterinario cadastrado
+     *
+     * @author Thiago Viotto
+     * @param nome
+     * @return Veterinario
+     */
     @Override
-    public Veterinario buscar(int id) {
+    public Veterinario buscar(String nome) {
+        try {
+            for(int i=0;i<veterinario.getVeterinarios().size();i++){
+                if(veterinario.getVeterinarios().get(i).getNome().substring(0, 1).equals(nome.substring(0, 1)) || (veterinario.getVeterinarios().get(i).getNome().substring(0, 2).equals(nome.substring(0,2)))) 
+                    return veterinario.getVeterinarios().get(i);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return null;
     }
 
@@ -82,7 +96,7 @@ public class VeterinarioDAO extends Serializa implements Crud<Veterinario>{
     }
 
     @Override
-    public boolean remover(Veterinario classe) {
+    public boolean remover(int id) {
         return false;
     }
 

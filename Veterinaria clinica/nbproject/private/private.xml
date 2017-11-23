@@ -5,6 +5,7 @@
         <group>
             <file>file:/C:/Users/thiag/Desktop/Veterinaria%20clinica/src/br/ftunicamp/veterinaria/view/TelaVeterinario.java</file>
             <file>file:/C:/Users/thiag/Desktop/Veterinaria%20clinica/src/br/ftunicamp/veterinaria/control/PessoaControle.java</file>
+            <file>file:/C:/Users/thiag/Desktop/Veterinaria%20clinica/src/br/ftunicamp/veterinaria/interfaces/Crud.java</file>
             <file>file:/C:/Users/thiag/Desktop/Veterinaria%20clinica/src/br/ftunicamp/veterinaria/control/VeterinarioControle.java</file>
             <file>file:/C:/Users/thiag/Desktop/Veterinaria%20clinica/src/br/ftunicamp/veterinaria/model/Secretaria.java</file>
             <file>file:/C:/Users/thiag/Desktop/Veterinaria%20clinica/src/br/ftunicamp/veterinaria/view/TelaLogin.java</file>
@@ -22,6 +23,7 @@
             <file>file:/C:/Users/thiag/Desktop/Veterinaria%20clinica/src/br/ftunicamp/veterinaria/dao/PessoaDAO.java</file>
             <file>file:/C:/Users/thiag/Desktop/Veterinaria%20clinica/src/br/ftunicamp/veterinaria/model/Veterinario.java</file>
             <file>file:/C:/Users/thiag/Desktop/Veterinaria%20clinica/src/br/ftunicamp/veterinaria/dao/VeterinarioDAO.java</file>
+            <file>file:/C:/Users/thiag/Desktop/Veterinaria%20clinica/src/br/ftunicamp/veterinaria/control/AnimalControle.java</file>
         </group>
     </open-files>
 </project-private>

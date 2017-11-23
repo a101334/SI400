@@ -12,8 +12,9 @@ import java.util.List;
  *
  * @author Thiago Henrique Viotto
  */
-public class Animal implements Serializable{
-    transient private int codAnimal;
+public class Animal implements Serializable {
+
+    private int codAnimal;
     private String nomeAnimal;
     private String nascimentoAnimal;
     private String especie;
@@ -22,7 +23,7 @@ public class Animal implements Serializable{
     private String sexo;
     private List<Animal> animais;
 
-    public Animal(int codAnimal, String nomeAnimal, String nascimentoAnimal, String especie, String raca, Pessoa pessoa,String sexo) {
+    public Animal(int codAnimal, String nomeAnimal, String nascimentoAnimal, String especie, String raca, Pessoa pessoa, String sexo) {
         this.codAnimal = codAnimal;
         this.nomeAnimal = nomeAnimal;
         this.nascimentoAnimal = nascimentoAnimal;
@@ -30,16 +31,27 @@ public class Animal implements Serializable{
         this.raca = raca;
         this.sexo = sexo;
         this.pessoa = pessoa;
-    }        
-            
+    }
+
+    public Animal(int codAnimal, String nomeAnimal, String nascimentoAnimal, String especie, String raca, int idPessoa, String sexo) {
+        this.codAnimal = codAnimal;
+        this.nomeAnimal = nomeAnimal;
+        this.nascimentoAnimal = nascimentoAnimal;
+        this.especie = especie;
+        this.raca = raca;
+        this.sexo = sexo;
+        pessoa = new Pessoa();
+        this.pessoa.setCodPessoa(idPessoa);
+    }
+
     public Animal() {
         pessoa = new Pessoa();
     }
-    
+
     public Animal(List<Animal> animal) {
         pessoa = new Pessoa();
         animais = animal;
-    
+
     }
 
     public String getSexo() {
@@ -49,7 +61,6 @@ public class Animal implements Serializable{
     public void setSexo(String sexo) {
         this.sexo = sexo;
     }
-    
 
     public int getCodAnimal() {
         return codAnimal;
@@ -106,7 +117,7 @@ public class Animal implements Serializable{
     public void setAnimais(List<Animal> animais) {
         this.animais = animais;
     }
-    
+
     private void writeObject(java.io.ObjectOutputStream stream) throws java.io.IOException {
         // liberar o stream
         stream.defaultWriteObject();
@@ -116,5 +127,5 @@ public class Animal implements Serializable{
         // liberar stream
         stream.defaultReadObject();
     }
-    
+
 }

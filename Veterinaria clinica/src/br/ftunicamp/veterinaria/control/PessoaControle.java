@@ -53,5 +53,16 @@ public class PessoaControle {
         }
         return null;
     }
+    
+    public Pessoa buscar(String nome) {
+        PessoaDAO dao;
+        try {
+            dao = new PessoaDAO();
+            return (dao.buscar(nome));
+        } catch (Exception ex) {
+            Logger.getLogger(AnimalControle.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 
 }
