@@ -17,7 +17,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form TelaPrincipal
      */
-    TelaAgenda telAgenda = new TelaAgenda();
+    TelaConsulta telaConsulta = new TelaConsulta();
     TelaAnimais telAnimais = new TelaAnimais();
     TelaCliente telCliente = new TelaCliente();
     TelaSecretaria telSecretaria = new TelaSecretaria();
@@ -25,15 +25,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     public TelaPrincipal() {
         initComponents();
-        jDesktopMain.add(telAgenda);
+        jDesktopMain.add(telaConsulta);
         jDesktopMain.add(telAnimais);
         jDesktopMain.add(telCliente);
         jDesktopMain.add(telSecretaria);
         jDesktopMain.add(telVeterinario);
-
-    }
-
-    public static void main(String[] args) {
 
     }
 
@@ -172,9 +168,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void menuAgendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAgendaActionPerformed
         // TODO add your handling code here:
-        TelaAgenda telAgenda = new TelaAgenda();
+        TelaConsulta telaConsulta = new TelaConsulta();
 
-        telAgenda.setVisible(true);
+        telaConsulta.setVisible(true);
     }//GEN-LAST:event_menuAgendaActionPerformed
 
     private void menuSecretariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSecretariaActionPerformed
@@ -199,7 +195,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void itemAgendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAgendaActionPerformed
         // TODO add your handling code here:
 
-        telAgenda.setVisible(true);
+        telaConsulta.setVisible(true);
         telVeterinario.setVisible(false);
         telCliente.setVisible(false);
         telAnimais.setVisible(false);
@@ -211,7 +207,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         telSecretaria.setVisible(true);
         telVeterinario.setVisible(false);
-        telAgenda.setVisible(false);
+        telaConsulta.setVisible(false);
         telCliente.setVisible(false);
         telAnimais.setVisible(false);
 
@@ -222,7 +218,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         telVeterinario.setVisible(false);
         telSecretaria.setVisible(false);
-        telAgenda.setVisible(false);
+        telaConsulta.setVisible(false);
         telCliente.setVisible(true);
         telAnimais.setVisible(false);
     }//GEN-LAST:event_itemClientesActionPerformed
@@ -232,7 +228,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         telVeterinario.setVisible(false);
         telSecretaria.setVisible(false);
-        telAgenda.setVisible(false);
+        telaConsulta.setVisible(false);
         telCliente.setVisible(false);
         telAnimais = new TelaAnimais();
         jDesktopMain.add(telAnimais);
@@ -245,7 +241,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         telVeterinario.setVisible(true);
         telSecretaria.setVisible(false);
-        telAgenda.setVisible(false);
+        telaConsulta.setVisible(false);
         telCliente.setVisible(false);
         telAnimais.setVisible(false);
     }//GEN-LAST:event_menuVeterinarioActionPerformed
@@ -255,7 +251,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         telVeterinario.setVisible(true);
         telSecretaria.setVisible(false);
-        telAgenda.setVisible(false);
+        telaConsulta.setVisible(false);
         telCliente.setVisible(false);
         telAnimais.setVisible(false);
     }//GEN-LAST:event_itemVeterinarioActionPerformed

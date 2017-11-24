@@ -63,11 +63,12 @@ public class PessoaDAO extends Serializa implements Crud<Pessoa> {
      * @return Pessoa
      */
     @Override
-    public Pessoa buscar(String nome) {
+    public Pessoa buscar(int id) {
         try {
-            for(int i=0;i<pessoa.getPessoas().size();i++){
-                if(pessoa.getPessoas().get(i).getNome().substring(0, 1).equals(nome.substring(0, 1)) || (pessoa.getPessoas().get(i).getNome().substring(0, 2).equals(nome.substring(0,2)))) 
-                    return pessoa.getPessoas().get(i);
+            for (Pessoa p : pessoa.getPessoas()){
+                if(p.getCodPessoa()== id){
+                    return p;
+                }
             }
         } catch (Exception ex) {
             Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -92,7 +93,7 @@ public class PessoaDAO extends Serializa implements Crud<Pessoa> {
     }
 
     @Override
-    public boolean atualizar(Pessoa classe) {
+    public boolean atualizar(Pessoa p , int linha) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -134,6 +135,7 @@ public class PessoaDAO extends Serializa implements Crud<Pessoa> {
                 pessoa.setEmail(dado[10]);
                 pessoa.setTipo(Integer.parseInt(dado[11]));
                 pessoa.setGenero(dado[12]);
+                pessoa.setCpf(dado[13]);
                 pessoas.add(pessoa);
             }
             return pessoas;

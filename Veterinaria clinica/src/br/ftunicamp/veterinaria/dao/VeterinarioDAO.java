@@ -22,7 +22,8 @@ import java.util.logging.Logger;
  *
  * @author Thiago Viotto
  */
-public class VeterinarioDAO extends Serializa implements Crud<Veterinario>{
+public class VeterinarioDAO extends Serializa implements Crud<Veterinario> {
+
     private static final Logger LOG = Logger.getLogger(VeterinarioDAO.class.getName());
     private static final String CSV_FILENAME = "veterinario.csv";
     private static final String SERIAL_FILENAME = "veterinario.dat";
@@ -36,13 +37,13 @@ public class VeterinarioDAO extends Serializa implements Crud<Veterinario>{
         arquivo2Serializado = FileSystems.getDefault().getPath(SERIAL_FILENAME);
         veterinario = load();
     }
-    
+
     /**
      * Insere a secretaria na lista e em seguida serializa
      *
      * @author Thiago
      * @param s - secretaria a ser cadastrada
-     * @return 
+     * @return
      */
     @Override
     public boolean inserir(Veterinario v) {
@@ -63,15 +64,7 @@ public class VeterinarioDAO extends Serializa implements Crud<Veterinario>{
      * @return Veterinario
      */
     @Override
-    public Veterinario buscar(String nome) {
-        try {
-            for(int i=0;i<veterinario.getVeterinarios().size();i++){
-                if(veterinario.getVeterinarios().get(i).getNome().substring(0, 1).equals(nome.substring(0, 1)) || (veterinario.getVeterinarios().get(i).getNome().substring(0, 2).equals(nome.substring(0,2)))) 
-                    return veterinario.getVeterinarios().get(i);
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public Veterinario buscar(int id) {
         return null;
     }
 
@@ -91,7 +84,7 @@ public class VeterinarioDAO extends Serializa implements Crud<Veterinario>{
     }
 
     @Override
-    public boolean atualizar(Veterinario classe) {
+    public boolean atualizar(Veterinario v, int linha) {
         return false;
     }
 
@@ -134,6 +127,7 @@ public class VeterinarioDAO extends Serializa implements Crud<Veterinario>{
                 veterinario.setTipo(Integer.parseInt(dado[11]));
                 veterinario.setGenero(dado[12]);
                 veterinario.setSalario(Float.parseFloat(dado[14]));
+                veterinario.setCpf(dado[15]);
                 veterinarios.add(veterinario);
             }
             return veterinarios;
@@ -143,7 +137,7 @@ public class VeterinarioDAO extends Serializa implements Crud<Veterinario>{
         }
         return null;
     }
-    
+
     /**
      * Verifica se um arquivo .dat existe caso não exista chama o método para
      * carregar um csv
@@ -162,5 +156,4 @@ public class VeterinarioDAO extends Serializa implements Crud<Veterinario>{
         }
     }
 
-    
 }

@@ -6,6 +6,7 @@
 package br.ftunicamp.veterinaria.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,7 +22,7 @@ public class Animal implements Serializable {
     private String raca;
     private Pessoa pessoa;
     private String sexo;
-    private List<Animal> animais;
+    private List<Animal> animais =new ArrayList<>();
 
     public Animal(int codAnimal, String nomeAnimal, String nascimentoAnimal, String especie, String raca, Pessoa pessoa, String sexo) {
         this.codAnimal = codAnimal;

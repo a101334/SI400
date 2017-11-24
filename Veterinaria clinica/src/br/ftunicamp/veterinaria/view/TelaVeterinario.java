@@ -62,7 +62,7 @@ public class TelaVeterinario extends javax.swing.JInternalFrame {
         }
     }
     
-    private void preencherTabelaBuscar(String nome) {
+/*    private void preencherTabelaBuscar(String nome) {
         DefaultTableModel tabela = (DefaultTableModel) tabelaVeterinario.getModel();
         tabela.setNumRows(0);
         Veterinario v = new Veterinario();
@@ -85,7 +85,7 @@ public class TelaVeterinario extends javax.swing.JInternalFrame {
                 });
         } catch (Exception e) {
         }
-    }
+    }*/
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -126,6 +126,8 @@ public class TelaVeterinario extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         txtBuscar = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        txtCpf = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -222,6 +224,8 @@ public class TelaVeterinario extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel2.setText("CPF");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -237,7 +241,7 @@ public class TelaVeterinario extends javax.swing.JInternalFrame {
                             .addGap(18, 18, 18)
                             .addComponent(lblNumero)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(txtNumero))
+                            .addComponent(txtNumero, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE))
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(lblNome)
                             .addGap(10, 10, 10)
@@ -247,21 +251,30 @@ public class TelaVeterinario extends javax.swing.JInternalFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(nascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createSequentialGroup()
-                            .addComponent(lblCep)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(txtCEP, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(lblEstado)
-                            .addGap(10, 10, 10)
-                            .addComponent(txtEstado))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(lblCidade)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(txtCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
                             .addComponent(lblRua)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(txtRua)))
+                            .addComponent(txtRua))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(lblCidade)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(txtCidade))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(lblCep)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(txtCEP, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(lblEstado)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(10, 10, 10)
+                                    .addComponent(txtEstado))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel2)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtCpf)))))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addComponent(lblTelefone)
@@ -320,7 +333,9 @@ public class TelaVeterinario extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblCidade)
-                            .addComponent(txtCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)
+                            .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblBairoo)
@@ -378,6 +393,7 @@ public class TelaVeterinario extends javax.swing.JInternalFrame {
         try {
             dateStr = formatter.parse(formatter.format(nascimento.getCalendar().getTime()));
             veterinario.setCodPessoa(0);
+            veterinario.setCpf(txtCpf.getText());
             veterinario.setNome(txtNome.getText());
             veterinario.setNascimentoPessoa(formatter.format(dateStr));
             veterinario.setCep(txtCEP.getText());
@@ -394,6 +410,8 @@ public class TelaVeterinario extends javax.swing.JInternalFrame {
             veterinarioControle.insertPessoa(veterinario);
             preencherTabelaVeterinario();
             limparTela();
+            TelaConsulta consulta = new TelaConsulta();
+            consulta.preencherCombo();
         } catch (ParseException ex) {
             Logger.getLogger(TelaVeterinario.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -405,7 +423,7 @@ public class TelaVeterinario extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String aux = txtBuscar.getText();
-        preencherTabelaBuscar(aux);
+      //  preencherTabelaBuscar(aux);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void limparTela() {
@@ -426,6 +444,7 @@ public class TelaVeterinario extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnInserir1;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblBairoo;
     private javax.swing.JLabel lblCep;
@@ -445,6 +464,7 @@ public class TelaVeterinario extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtCEP;
     private javax.swing.JTextField txtCidade;
+    private javax.swing.JTextField txtCpf;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtEstado;
     private javax.swing.JTextField txtGenero;

@@ -108,7 +108,13 @@ public class AnimalDAO extends Serializa implements Crud<Animal> {
      * @return 
      */
     @Override
-    public boolean atualizar(Animal animal) {
+    public boolean atualizar(Animal a, int linha) {
+        animal.getAnimais().set(linha, a);
+        try {
+            serializar(arquivoSerializado, animal);
+        } catch (Exception ex) {
+            Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return true;
     }
 
@@ -139,15 +145,8 @@ public class AnimalDAO extends Serializa implements Crud<Animal> {
      * @return Animal
      */
     @Override
-    public Animal buscar(String nome) {
-        try {
-            for(int i=0;i<animal.getAnimais().size();i++){
-                if(animal.getAnimais().get(i).getNomeAnimal().substring(0, 1).equals(nome.substring(0, 1)) || (animal.getAnimais().get(i).getNomeAnimal().substring(0, 2).equals(nome.substring(0,2)))) 
-                    return animal.getAnimais().get(i);
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public Animal buscar(int id) {
+
         return null;
     }
 
@@ -167,5 +166,15 @@ public class AnimalDAO extends Serializa implements Crud<Animal> {
             LOG.info("Usando " + arquivoCsv.toString());
             return new Animal(carregarArquivo());
         }
+    }
+
+    public List<Animal> buscarNome(String nomeAnimal) {
+         List<Animal> animais = new ArrayList<>();         
+         for(Animal a : animal.getAnimais()){
+             if (a.getNomeAnimal().contains(nomeAnimal)){
+                 animais.add(a);
+             }
+         }                
+        return animais;
     }
 }

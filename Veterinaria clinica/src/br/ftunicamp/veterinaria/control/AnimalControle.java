@@ -36,12 +36,12 @@ public class AnimalControle {
             Logger.getLogger(AnimalControle.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public Animal buscar(String nome) {
+
+    public Animal buscar(int id) {
         AnimalDAO dao;
         try {
             dao = new AnimalDAO();
-            return (dao.buscar(nome));
+            return (dao.buscar(id));
         } catch (Exception ex) {
             Logger.getLogger(AnimalControle.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -57,6 +57,27 @@ public class AnimalControle {
         } catch (Exception ex) {
             Logger.getLogger(AnimalControle.class
                     .getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public void atualizar(Animal a, int linha) {
+        AnimalDAO dao;
+        try {
+            dao = new AnimalDAO();
+            dao.atualizar(a, linha);
+        } catch (Exception ex) {
+            Logger.getLogger(AnimalControle.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public List<Animal> buscarNome(String nomeAnimal) {
+        AnimalDAO dao;
+        try {
+            dao = new AnimalDAO();
+            return dao.buscarNome(nomeAnimal);
+        } catch (Exception ex) {
+            Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }

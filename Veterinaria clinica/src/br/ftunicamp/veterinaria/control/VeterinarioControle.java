@@ -38,11 +38,11 @@ public class VeterinarioControle {
         return null;
     }
     
-    public Veterinario buscar(String nome) {
+    public Veterinario buscar(int id) {
         VeterinarioDAO dao;
         try {
             dao = new VeterinarioDAO();
-            return (dao.buscar(nome));
+            return (dao.buscar(id));
         } catch (Exception ex) {
             Logger.getLogger(AnimalControle.class.getName()).log(Level.SEVERE, null, ex);
         }

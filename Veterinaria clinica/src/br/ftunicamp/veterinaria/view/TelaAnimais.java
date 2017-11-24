@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
@@ -72,25 +71,25 @@ public class TelaAnimais extends javax.swing.JInternalFrame {
         }
     }
 
-    private void preencherTabelaBuscar(String nome) {
+  /*  private void preencherTabelaBuscar(String nome) {
         DefaultTableModel tabela = (DefaultTableModel) tabelaAnimal.getModel();
         tabela.setNumRows(0);
         Animal a = new Animal();
         AnimalControle animalControle = new AnimalControle();
         try {
-            a = animalControle.buscar(nome); 
-                tabela.addRow(new Object[]{
-                    a.getCodAnimal(),
-                    a.getNomeAnimal(),
-                    a.getRaca(),
-                    a.getSexo(),
-                    a.getNascimentoAnimal(),
-                    a.getEspecie()
-                });
+            a = animalControle.buscar(nome);
+            tabela.addRow(new Object[]{
+                a.getCodAnimal(),
+                a.getNomeAnimal(),
+                a.getRaca(),
+                a.getSexo(),
+                a.getNascimentoAnimal(),
+                a.getEspecie()
+            });
         } catch (Exception e) {
 
         }
-    }
+    }*/
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -119,6 +118,7 @@ public class TelaAnimais extends javax.swing.JInternalFrame {
         btnBuscar = new javax.swing.JButton();
         txtBuscar = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        btnAtualizar = new javax.swing.JButton();
 
         setClosable(true);
         setMaximizable(true);
@@ -207,6 +207,14 @@ public class TelaAnimais extends javax.swing.JInternalFrame {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/source/icon/turkey-icon_36959.png"))); // NOI18N
         jLabel2.setText("               ");
 
+        btnAtualizar.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
+        btnAtualizar.setText("Atualizar");
+        btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtualizarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -244,7 +252,9 @@ public class TelaAnimais extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnInserir, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnRemover))
+                                .addComponent(btnRemover)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnAtualizar))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 583, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(195, 195, 195)
@@ -269,12 +279,11 @@ public class TelaAnimais extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(5, 5, 5)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(43, 43, 43)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnInserir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(3, 3, 3))))
+                        .addGap(46, 46, 46)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnInserir, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -332,7 +341,7 @@ public class TelaAnimais extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnInserirActionPerformed
 
     private void selecionarAnimal(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_selecionarAnimal
-        int linhaSelecionada = tabelaAnimal.getSelectedRow();//pegar a linha selecionada  
+        // int linhaSelecionada = tabelaAnimal.getSelectedRow();//pegar a linha selecionada  
         List<Animal> animais = new ArrayList<Animal>();
         AnimalControle animalControle = new AnimalControle();
         animais = animalControle.listar();
@@ -352,8 +361,19 @@ public class TelaAnimais extends javax.swing.JInternalFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         String aux = txtBuscar.getText();
-        preencherTabelaBuscar(aux);
+//        preencherTabelaBuscar(aux);
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
+        AnimalControle animalControle = new AnimalControle();
+        animal.setNomeAnimal(txtNomeAnimal.getText());
+        animal.setEspecie(cbxEspecie.getModel().getSelectedItem().toString());
+        animal.setRaca(txtRaca.getText());
+        animal.setSexo(cbxSexo.getModel().getSelectedItem().toString());
+        animalControle.atualizar(animal, tabelaAnimal.getSelectedRow());
+        preencherTabelaAnimal();
+        limparTela();
+    }//GEN-LAST:event_btnAtualizarActionPerformed
 
     private void limparTela() {
         for (int i = 0; i < getContentPane().getComponentCount(); i++) {
@@ -369,6 +389,7 @@ public class TelaAnimais extends javax.swing.JInternalFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAtualizar;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnInserir;
     private javax.swing.JButton btnRemover;

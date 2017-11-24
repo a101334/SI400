@@ -18,8 +18,8 @@ public class Veterinario extends Pessoa implements Serializable {
      private float salario;
      private List<Veterinario>veterinarios;
 
-    public Veterinario(int codPessoa, String nome, String nascimentoPessoa, String cep, String estado, String cidade, String bairro, String rua, String telefone, int numCasa, String email, int tipo,String genero,int codVeterinario, float salario) {
-        super(codPessoa, nome, nascimentoPessoa, cep, estado, cidade, bairro, rua, numCasa, telefone, email, tipo,genero);
+    public Veterinario(int codPessoa,String cpf, String nome, String nascimentoPessoa, String cep, String estado, String cidade, String bairro, String rua, String telefone, int numCasa, String email, int tipo,String genero,int codVeterinario, float salario) {
+        super(codPessoa,cpf, nome, nascimentoPessoa, cep, estado, cidade, bairro, rua, numCasa, telefone, email, tipo,genero);
         this.salario = salario;
     }
 
@@ -62,14 +62,9 @@ public class Veterinario extends Pessoa implements Serializable {
     public void setVeterinarios(List<Veterinario> veterinarios) {
         this.veterinarios = veterinarios;
     }
-    
-    private void writeObject(java.io.ObjectOutputStream stream) throws java.io.IOException {
-        // liberar o stream
-        stream.defaultWriteObject();
-    }
-
-    private void readObject(java.io.ObjectInputStream stream) throws java.io.IOException, ClassNotFoundException {
-        // liberar stream
-        stream.defaultReadObject();
+ 
+    @Override
+    public String toString(){
+        return getNome();
     }
 }
