@@ -27,13 +27,57 @@ public class AnimalControle {
         }
     }
 
+    public void remover(int animal) {
+        AnimalDAO dao;
+        try {
+            dao = new AnimalDAO();
+            dao.remover(animal);
+        } catch (Exception ex) {
+            Logger.getLogger(AnimalControle.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public Animal buscar(int id) {
+        AnimalDAO dao;
+        try {
+            dao = new AnimalDAO();
+            return (dao.buscar(id));
+        } catch (Exception ex) {
+            Logger.getLogger(AnimalControle.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
     public List<Animal> listar() {
         AnimalDAO dao;
         try {
             dao = new AnimalDAO();
             return dao.listar();
+
+        } catch (Exception ex) {
+            Logger.getLogger(AnimalControle.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public void atualizar(Animal a, int linha) {
+        AnimalDAO dao;
+        try {
+            dao = new AnimalDAO();
+            dao.atualizar(a, linha);
         } catch (Exception ex) {
             Logger.getLogger(AnimalControle.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public List<Animal> buscarNome(String nomeAnimal) {
+        AnimalDAO dao;
+        try {
+            dao = new AnimalDAO();
+            return dao.buscarNome(nomeAnimal);
+        } catch (Exception ex) {
+            Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }

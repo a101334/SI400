@@ -55,8 +55,16 @@ public class SecretariaDAO extends Serializa implements Crud<Secretaria>  {
         return true;
     }
 
+    /**
+     * Busca por um nome de uma secretaria cadastrada
+     *
+     * @author Thiago Viotto
+     * @param nome
+     * @return Secretaria
+     */
     @Override
     public Secretaria buscar(int id) {
+
         return null;
     }
 
@@ -76,12 +84,12 @@ public class SecretariaDAO extends Serializa implements Crud<Secretaria>  {
     }
 
     @Override
-    public boolean atualizar(Secretaria secretaria) {
+    public boolean atualizar(Secretaria s, int linha) {
         return true;
     }
 
     @Override
-    public boolean remover(Secretaria secretaria) {
+    public boolean remover(int id) {
         return true;
     }
 
@@ -120,6 +128,7 @@ public class SecretariaDAO extends Serializa implements Crud<Secretaria>  {
                 secretaria.setGenero(dado[12]);
                 secretaria.setLogin(dado[13]);
                 secretaria.setSalario(Float.parseFloat(dado[14]));
+                secretaria.setCpf(dado[15]);
                 secretarias.add(secretaria);
             }
             return secretarias;

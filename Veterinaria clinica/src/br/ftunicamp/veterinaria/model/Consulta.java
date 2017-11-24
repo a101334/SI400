@@ -6,25 +6,38 @@
 package br.ftunicamp.veterinaria.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  *
  * @author Thiago Henrique Viotto
  */
 public class Consulta implements Serializable {
-    transient private int codConsulta;
-    private Tratamento tratamento;
+    private int codConsulta;
     private String dataConsulta;
-
-    public Consulta(int codConsulta, Tratamento tratamento, String dataConsulta) {
+    private Animal animal;
+    private Veterinario veterinario;
+    private String historico;
+    private Pessoa pessoa;
+    private List<Consulta>consultas;
+    
+    public Consulta(int codConsulta, String dataConsulta, int codAnimal, int codVeterinario, String historico,int codPessoa) {
+        animal = new Animal();
+        veterinario = new Veterinario();
         this.codConsulta = codConsulta;
-        this.tratamento = tratamento;
         this.dataConsulta = dataConsulta;
+        this.animal.setCodAnimal(codAnimal);
+        this.veterinario.setCodVeterinario(codVeterinario);
+        this.pessoa.setCodPessoa(codPessoa);
+        this.historico = historico;
     }
 
-    public Consulta() {
-    }
+    public Consulta(){}
 
+    public Consulta(List<Consulta> consulta) {
+        consultas = consulta;
+
+    }
     public int getCodConsulta() {
         return codConsulta;
     }
@@ -33,15 +46,6 @@ public class Consulta implements Serializable {
         this.codConsulta = codConsulta;
     }
 
-    public Tratamento getTratamento() {
-        return tratamento;
-    }
-
-    public void setTratamento(Tratamento tratamento) {
-        this.tratamento = tratamento;
-    }
-
-
     public String getDataConsulta() {
         return dataConsulta;
     }
@@ -49,14 +53,49 @@ public class Consulta implements Serializable {
     public void setDataConsulta(String dataConsulta) {
         this.dataConsulta = dataConsulta;
     }
-    
-    private void writeObject(java.io.ObjectOutputStream stream) throws java.io.IOException {
-        // liberar o stream
-        stream.defaultWriteObject();
+
+    public Animal getAnimal() {
+        return animal;
     }
 
-    private void readObject(java.io.ObjectInputStream stream) throws java.io.IOException, ClassNotFoundException {
-        // liberar stream
-        stream.defaultReadObject();
+    public void setAnimal(Animal animal) {
+        this.animal = animal;
     }
+
+    public Veterinario getVeterinario() {
+        return veterinario;
+    }
+
+    public void setVeterinario(Veterinario veterinario) {
+        this.veterinario = veterinario;
+    }
+
+   
+
+    public String getHistorico() {
+        return historico;
+    }
+
+    public List<Consulta> getConsultas() {
+        return consultas;
+    }
+
+    public void setConsultas(List<Consulta> consultas) {
+        this.consultas = consultas;
+    }
+
+    
+    public void setHistorico(String historico) {
+        this.historico = historico;
+    }
+
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
+    }
+    
+    
 }

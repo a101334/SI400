@@ -15,7 +15,8 @@ import java.util.List;
  */
 public class Pessoa implements Serializable {
 
-    transient private int codPessoa;
+    private int codPessoa;
+    private String cpf;
     private String nome;
     private String nascimentoPessoa;
     private String cep;
@@ -30,7 +31,7 @@ public class Pessoa implements Serializable {
     private String genero;
     private List<Pessoa> pessoas;
 
-    public Pessoa(int codPessoa, String nome, String nascimentoPessoa, String cep, String estado, String cidade, String bairro, String rua, int numCasa, String telefone, String email, int tipo, String genero) {
+    public Pessoa(int codPessoa, String cpf,String nome, String nascimentoPessoa, String cep, String estado, String cidade, String bairro, String rua, int numCasa, String telefone, String email, int tipo, String genero) {
         this.codPessoa = codPessoa;
         this.nome = nome;
         this.nascimentoPessoa = nascimentoPessoa;
@@ -44,6 +45,7 @@ public class Pessoa implements Serializable {
         this.email = email;
         this.tipo = tipo;
         this.genero = genero;
+        this.cpf = cpf;
     }
     
     public Pessoa(){
@@ -76,6 +78,15 @@ public class Pessoa implements Serializable {
         this.codPessoa = codPessoa;
     }
 
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    
     public String getNome() {
         return nome;
     }
@@ -172,13 +183,4 @@ public class Pessoa implements Serializable {
         this.pessoas = pessoas;
     }
 
-    private void writeObject(java.io.ObjectOutputStream stream) throws java.io.IOException {
-        // liberar o stream
-        stream.defaultWriteObject();
-    }
-
-    private void readObject(java.io.ObjectInputStream stream) throws java.io.IOException, ClassNotFoundException {
-        // liberar stream
-        stream.defaultReadObject();
-    }
 }

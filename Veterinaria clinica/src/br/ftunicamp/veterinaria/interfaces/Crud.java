@@ -15,7 +15,7 @@ public interface Crud<T> {
     boolean inserir(T classe);
     T buscar(int id);
     List listar();
-    boolean atualizar(T classe);
-    boolean remover(T classe);
+    boolean atualizar(T classe, int linha);
+    boolean remover(int id);
     List<T> carregarArquivo();
 }

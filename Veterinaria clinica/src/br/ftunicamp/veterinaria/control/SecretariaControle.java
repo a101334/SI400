@@ -58,4 +58,15 @@ public class SecretariaControle {
         }
         return null;
     }
+    
+    public Secretaria buscar(int id) {
+        SecretariaDAO dao;
+        try {
+            dao = new SecretariaDAO();
+            return (dao.buscar(id));
+        } catch (Exception ex) {
+            Logger.getLogger(AnimalControle.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 }

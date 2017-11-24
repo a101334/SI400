@@ -21,8 +21,8 @@ public class Secretaria extends Pessoa implements Serializable{
     private float salario;
     private List<Secretaria>secretarias;
 
-    public Secretaria(int codPessoa, String nome, String nascimentoPessoa, String cep, String estado, String cidade, String bairro, String rua, String telefone, int numCasa, String email, int tipo, String genero,int codigoSecretaria, int codigoPessoa, String login, String senha, float salario) {
-        super(codPessoa, nome, nascimentoPessoa, cep, estado, cidade, bairro, rua, numCasa, telefone, email, tipo,genero);
+    public Secretaria(int codPessoa,String cpf, String nome, String nascimentoPessoa, String cep, String estado, String cidade, String bairro, String rua, String telefone, int numCasa, String email, int tipo, String genero,int codigoSecretaria, int codigoPessoa, String login, String senha, float salario) {
+        super(codPessoa, cpf,nome, nascimentoPessoa, cep, estado, cidade, bairro, rua, numCasa, telefone, email, tipo,genero);
         this.login = login;
         this.senha = senha;
         this.salario = salario;
