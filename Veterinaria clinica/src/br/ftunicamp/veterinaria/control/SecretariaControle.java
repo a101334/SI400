@@ -69,4 +69,24 @@ public class SecretariaControle {
         }
         return null;
     }
+
+    public void remover(int secretariaId) {
+       SecretariaDAO dao;
+        try {
+            dao = new SecretariaDAO();
+            dao.remover(secretariaId);
+        } catch (Exception ex) {
+            Logger.getLogger(AnimalControle.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void atualizar(Secretaria s, int linha) {
+       SecretariaDAO dao;
+        try {
+            dao = new SecretariaDAO();
+            dao.atualizar(s, linha);
+        } catch (Exception ex) {
+            Logger.getLogger(AnimalControle.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

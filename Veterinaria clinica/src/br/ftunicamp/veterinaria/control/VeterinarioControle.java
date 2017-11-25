@@ -44,7 +44,7 @@ public class VeterinarioControle {
             dao = new VeterinarioDAO();
             return (dao.buscar(id));
         } catch (Exception ex) {
-            Logger.getLogger(AnimalControle.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(VeterinarioControle.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -54,6 +54,16 @@ public class VeterinarioControle {
         try {
             dao = new VeterinarioDAO();
             dao.atualizar(v, linha);
+        } catch (Exception ex) {
+            Logger.getLogger(VeterinarioControle.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void remover(int veterinario) {
+      VeterinarioDAO dao;
+        try {
+            dao = new VeterinarioDAO();
+            dao.remover(veterinario);
         } catch (Exception ex) {
             Logger.getLogger(VeterinarioControle.class.getName()).log(Level.SEVERE, null, ex);
         }

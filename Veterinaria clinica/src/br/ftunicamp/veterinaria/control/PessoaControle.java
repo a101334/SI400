@@ -15,6 +15,16 @@ import javax.swing.JOptionPane;
  */
 public class PessoaControle {
 
+    public static void atualizar(Pessoa p, int linha) {
+       PessoaDAO dao;
+        try {
+            dao = new PessoaDAO();
+            dao.atualizar(p, linha);
+        } catch (Exception ex) {
+            Logger.getLogger(PessoaControle.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     public void login(String usuario, String senha) {
         if (usuario.equals("secretaria") && senha.equals("1234")) {
             new TelaPrincipal().setVisible(true);
@@ -63,6 +73,16 @@ public class PessoaControle {
             Logger.getLogger(AnimalControle.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+
+    public void remover(int clienteId) {
+         PessoaDAO dao;
+        try {
+            dao = new PessoaDAO();
+            dao.remover(clienteId);
+        } catch (Exception ex) {
+            Logger.getLogger(AnimalControle.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

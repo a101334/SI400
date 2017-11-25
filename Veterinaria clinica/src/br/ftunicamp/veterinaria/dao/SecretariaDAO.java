@@ -85,11 +85,23 @@ public class SecretariaDAO extends Serializa implements Crud<Secretaria>  {
 
     @Override
     public boolean atualizar(Secretaria s, int linha) {
+       secretaria.getSecretarias().set(linha, s);
+        try {
+            serializar(arquivo2Serializado, secretaria);
+        } catch (Exception ex) {
+            Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return true;
     }
 
     @Override
     public boolean remover(int id) {
+         try {
+            secretaria.getSecretarias().remove(id);
+            serializar(arquivo2Serializado, secretaria);
+        } catch (Exception ex) {
+            Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return true;
     }
 
