@@ -48,4 +48,14 @@ public class VeterinarioControle {
         }
         return null;
     }
+
+    public void atualizarPessoa(Veterinario v, int linha) {
+          VeterinarioDAO dao;
+        try {
+            dao = new VeterinarioDAO();
+            dao.atualizar(v, linha);
+        } catch (Exception ex) {
+            Logger.getLogger(VeterinarioControle.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

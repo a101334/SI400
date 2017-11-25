@@ -40,7 +40,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jDesktopMain = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuArquivo = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        itemSair = new javax.swing.JMenuItem();
         menuAgenda = new javax.swing.JMenu();
         itemAgenda = new javax.swing.JMenuItem();
         menuSecretaria = new javax.swing.JMenu();
@@ -60,8 +60,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         menuArquivo.setText("Arquivo");
 
-        jMenuItem1.setText("Sair");
-        menuArquivo.add(jMenuItem1);
+        itemSair.setText("Sair");
+        itemSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemSairActionPerformed(evt);
+            }
+        });
+        menuArquivo.add(itemSair);
 
         jMenuBar1.add(menuArquivo);
 
@@ -256,16 +261,21 @@ public class TelaPrincipal extends javax.swing.JFrame {
         telAnimais.setVisible(false);
     }//GEN-LAST:event_itemVeterinarioActionPerformed
 
+    private void itemSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemSairActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_itemSairActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem itemAgenda;
     private javax.swing.JMenuItem itemAnimais;
     private javax.swing.JMenuItem itemClientes;
+    private javax.swing.JMenuItem itemSair;
     private javax.swing.JMenuItem itemSecretaria;
     private javax.swing.JMenuItem itemVeterinario;
     private javax.swing.JDesktopPane jDesktopMain;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenu menuAgenda;
     private javax.swing.JMenu menuAnimais;
     private javax.swing.JMenu menuArquivo;
