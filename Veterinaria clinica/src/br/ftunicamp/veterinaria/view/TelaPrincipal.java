@@ -5,7 +5,7 @@
  */
 package br.ftunicamp.veterinaria.view;
 
-import static javafx.application.Platform.exit;
+import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 
 /**
@@ -17,23 +17,22 @@ public class TelaPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form TelaPrincipal
      */
-    TelaAgenda telAgenda = new TelaAgenda();
+    TelaConsulta telaConsulta = new TelaConsulta();
     TelaAnimais telAnimais = new TelaAnimais();
     TelaCliente telCliente = new TelaCliente();
     TelaSecretaria telSecretaria = new TelaSecretaria();
     TelaVeterinario telVeterinario = new TelaVeterinario();
-    
-   
+
     public TelaPrincipal() {
         initComponents();
-        jDesktopMain.add(telAgenda);
-        telAgenda.setVisible(true);
+        jDesktopMain.add(telaConsulta);
+        jDesktopMain.add(telAnimais);
+        jDesktopMain.add(telCliente);
+        jDesktopMain.add(telSecretaria);
+        jDesktopMain.add(telVeterinario);
+
     }
 
-    public static void main(String[] args) {
-       
-    }
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -44,13 +43,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         menuAgenda = new javax.swing.JMenu();
         itemAgenda = new javax.swing.JMenuItem();
-        menuUsuarios = new javax.swing.JMenu();
+        menuSecretaria = new javax.swing.JMenu();
         itemSecretaria = new javax.swing.JMenuItem();
-        itemVeterinario = new javax.swing.JMenuItem();
         menuClientes = new javax.swing.JMenu();
         itemClientes = new javax.swing.JMenuItem();
         menuAnimais = new javax.swing.JMenu();
         itemAnimais = new javax.swing.JMenuItem();
+        menuVeterinario = new javax.swing.JMenu();
+        itemVeterinario = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,11 +61,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuArquivo.setText("Arquivo");
 
         jMenuItem1.setText("Sair");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
         menuArquivo.add(jMenuItem1);
 
         jMenuBar1.add(menuArquivo);
@@ -87,10 +82,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(menuAgenda);
 
-        menuUsuarios.setText("Usuarios");
-        menuUsuarios.addActionListener(new java.awt.event.ActionListener() {
+        menuSecretaria.setText("Secretaria");
+        menuSecretaria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuUsuariosActionPerformed(evt);
+                menuSecretariaActionPerformed(evt);
             }
         });
 
@@ -100,17 +95,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 itemSecretariaActionPerformed(evt);
             }
         });
-        menuUsuarios.add(itemSecretaria);
+        menuSecretaria.add(itemSecretaria);
 
-        itemVeterinario.setText("Veterinario");
-        itemVeterinario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemVeterinarioActionPerformed(evt);
-            }
-        });
-        menuUsuarios.add(itemVeterinario);
-
-        jMenuBar1.add(menuUsuarios);
+        jMenuBar1.add(menuSecretaria);
 
         menuClientes.setText("Clientes");
         menuClientes.addActionListener(new java.awt.event.ActionListener() {
@@ -146,6 +133,23 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(menuAnimais);
 
+        menuVeterinario.setText("Veterinário");
+        menuVeterinario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuVeterinarioActionPerformed(evt);
+            }
+        });
+
+        itemVeterinario.setText("Veterinários");
+        itemVeterinario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemVeterinarioActionPerformed(evt);
+            }
+        });
+        menuVeterinario.add(itemVeterinario);
+
+        jMenuBar1.add(menuVeterinario);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -161,83 +165,96 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-  
+
     private void menuAgendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAgendaActionPerformed
         // TODO add your handling code here:
+        TelaConsulta telaConsulta = new TelaConsulta();
+
+        telaConsulta.setVisible(true);
     }//GEN-LAST:event_menuAgendaActionPerformed
 
-    private void menuUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuUsuariosActionPerformed
+    private void menuSecretariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSecretariaActionPerformed
         // TODO add your handling code here:
+        TelaSecretaria telSecretaria = new TelaSecretaria();
+        telSecretaria.setVisible(true);
 
-    }//GEN-LAST:event_menuUsuariosActionPerformed
+    }//GEN-LAST:event_menuSecretariaActionPerformed
 
     private void menuClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuClientesActionPerformed
         // TODO add your handling code here:
+        TelaCliente telCliente = new TelaCliente();
+        telCliente.setVisible(true);
     }//GEN-LAST:event_menuClientesActionPerformed
 
     private void menuAnimaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAnimaisActionPerformed
         // TODO add your handling code here:
+        TelaAnimais telAnimais = new TelaAnimais();
+        telAnimais.setVisible(true);
     }//GEN-LAST:event_menuAnimaisActionPerformed
 
     private void itemAgendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAgendaActionPerformed
         // TODO add your handling code here:
-        telAnimais.setVisible(false);
-        telCliente.setVisible(false);
-        telSecretaria.setVisible(false);
+
+        telaConsulta.setVisible(true);
         telVeterinario.setVisible(false);
-        
-        jDesktopMain.add(telAgenda);
-        telAgenda.setVisible(true);
+        telCliente.setVisible(false);
+        telAnimais.setVisible(false);
+        telSecretaria.setVisible(false);
     }//GEN-LAST:event_itemAgendaActionPerformed
 
     private void itemSecretariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemSecretariaActionPerformed
         // TODO add your handling code here:
-        telAgenda.setVisible(false);
-        telAnimais.setVisible(false);
-        telCliente.setVisible(false);
-        telVeterinario.setVisible(false);
-        
-        jDesktopMain.add(telSecretaria);
+
         telSecretaria.setVisible(true);
+        telVeterinario.setVisible(false);
+        telaConsulta.setVisible(false);
+        telCliente.setVisible(false);
+        telAnimais.setVisible(false);
+
+
     }//GEN-LAST:event_itemSecretariaActionPerformed
 
     private void itemClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemClientesActionPerformed
         // TODO add your handling code here:
-        telAgenda.setVisible(false);
-        telAnimais.setVisible(false);
-        telSecretaria.setVisible(false);
         telVeterinario.setVisible(false);
-        
-        jDesktopMain.add(telCliente);
+        telSecretaria.setVisible(false);
+        telaConsulta.setVisible(false);
         telCliente.setVisible(true);
+        telAnimais.setVisible(false);
     }//GEN-LAST:event_itemClientesActionPerformed
 
     private void itemAnimaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAnimaisActionPerformed
         // TODO add your handling code here:
-        telAgenda.setVisible(false);
-        telCliente.setVisible(false);
-        telSecretaria.setVisible(false);
+
         telVeterinario.setVisible(false);
-        
+        telSecretaria.setVisible(false);
+        telaConsulta.setVisible(false);
+        telCliente.setVisible(false);
+        telAnimais = new TelaAnimais();
         jDesktopMain.add(telAnimais);
         telAnimais.setVisible(true);
+
     }//GEN-LAST:event_itemAnimaisActionPerformed
+
+    private void menuVeterinarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuVeterinarioActionPerformed
+        // TODO add your handling code here:
+
+        telVeterinario.setVisible(true);
+        telSecretaria.setVisible(false);
+        telaConsulta.setVisible(false);
+        telCliente.setVisible(false);
+        telAnimais.setVisible(false);
+    }//GEN-LAST:event_menuVeterinarioActionPerformed
 
     private void itemVeterinarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemVeterinarioActionPerformed
         // TODO add your handling code here:
-        telAgenda.setVisible(false);
-        telAnimais.setVisible(false);
-        telCliente.setVisible(false);
-        telSecretaria.setVisible(false);
-        
-        jDesktopMain.add(telVeterinario);
-        telVeterinario.setVisible(true);
-    }//GEN-LAST:event_itemVeterinarioActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+        telVeterinario.setVisible(true);
+        telSecretaria.setVisible(false);
+        telaConsulta.setVisible(false);
+        telCliente.setVisible(false);
+        telAnimais.setVisible(false);
+    }//GEN-LAST:event_itemVeterinarioActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -253,6 +270,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu menuAnimais;
     private javax.swing.JMenu menuArquivo;
     private javax.swing.JMenu menuClientes;
-    private javax.swing.JMenu menuUsuarios;
+    private javax.swing.JMenu menuSecretaria;
+    private javax.swing.JMenu menuVeterinario;
     // End of variables declaration//GEN-END:variables
 }

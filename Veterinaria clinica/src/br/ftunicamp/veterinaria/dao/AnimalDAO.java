@@ -39,6 +39,7 @@ public class AnimalDAO extends Serializa implements Crud<Animal> {
      *
      * @author Amadeu Carvalho
      * @param a - animal a ser cadastrado
+     * @return 
      */
     @Override
     public boolean inserir(Animal a) {
@@ -86,13 +87,8 @@ public class AnimalDAO extends Serializa implements Crud<Animal> {
             while ((line = source.readLine()) != null) {
                 String dado[] = line.split(";");
                 //System.out.println(line);
-                animal.setCodAnimal(Integer.parseInt(dado[0]));
-                animal.setNomeAnimal(dado[1]);
-                animal.setNascimentoAnimal(dado[2]);
-                animal.setEspecie(dado[3]);
-                animal.setRaca(dado[4]);
-                animal.getPessoa().setCodPessoa(Integer.parseInt(dado[5]));
-                animal.setSexo(dado[6]);
+                animal = new Animal(Integer.parseInt(dado[0]), dado[1],
+                        dado[2], dado[3], dado[4], Integer.parseInt(dado[5]), dado[6]);                
                 animais.add(animal);
             }
             return animais;
@@ -109,9 +105,16 @@ public class AnimalDAO extends Serializa implements Crud<Animal> {
      *
      * @author Amadeu Carvalho
      * @param animal
+     * @return 
      */
     @Override
-    public boolean atualizar(Animal animal) {
+    public boolean atualizar(Animal a, int linha) {
+        animal.getAnimais().set(linha, a);
+        try {
+            serializar(arquivoSerializado, animal);
+        } catch (Exception ex) {
+            Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return true;
     }
 
@@ -124,18 +127,26 @@ public class AnimalDAO extends Serializa implements Crud<Animal> {
      * @return boolean
      */
     @Override
-    public boolean remover(Animal animal) {
+    public boolean remover(int a) {
+        try {
+            animal.getAnimais().remove(a);
+            serializar(arquivoSerializado, animal);
+        } catch (Exception ex) {
+            Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return true;
     }
 
     /**
-     * Busca por id de um animal cadastrado
+     * Busca por um nome de um animal cadastrado
      *
-     * @author Amadeu Carvalho
+     * @author Thiago Viotto
+     * @param nome
      * @return Animal
      */
     @Override
     public Animal buscar(int id) {
+
         return null;
     }
 
@@ -145,6 +156,7 @@ public class AnimalDAO extends Serializa implements Crud<Animal> {
      *
      * @author Amadeu Carvalho
      * @return Animal
+     * @throws java.lang.Exception
      */
     public Animal load() throws Exception {
         if (Files.exists(arquivoSerializado)) {
@@ -154,5 +166,15 @@ public class AnimalDAO extends Serializa implements Crud<Animal> {
             LOG.info("Usando " + arquivoCsv.toString());
             return new Animal(carregarArquivo());
         }
+    }
+
+    public List<Animal> buscarNome(String nomeAnimal) {
+         List<Animal> animais = new ArrayList<>();         
+         for(Animal a : animal.getAnimais()){
+             if (a.getNomeAnimal().contains(nomeAnimal)){
+                 animais.add(a);
+             }
+         }                
+        return animais;
     }
 }

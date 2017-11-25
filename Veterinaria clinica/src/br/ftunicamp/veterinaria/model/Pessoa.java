@@ -6,6 +6,8 @@
 package br.ftunicamp.veterinaria.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -13,7 +15,8 @@ import java.io.Serializable;
  */
 public class Pessoa implements Serializable {
 
-    transient private int codPessoa;
+    private int codPessoa;
+    private String cpf;
     private String nome;
     private String nascimentoPessoa;
     private String cep;
@@ -26,8 +29,9 @@ public class Pessoa implements Serializable {
     private String email;
     private int tipo;
     private String genero;
+    private List<Pessoa> pessoas;
 
-    public Pessoa(int codPessoa, String nome, String nascimentoPessoa, String cep, String estado, String cidade, String bairro, String rua, int numCasa, String telefone, String email, int tipo, String genero) {
+    public Pessoa(int codPessoa, String cpf,String nome, String nascimentoPessoa, String cep, String estado, String cidade, String bairro, String rua, int numCasa, String telefone, String email, int tipo, String genero) {
         this.codPessoa = codPessoa;
         this.nome = nome;
         this.nascimentoPessoa = nascimentoPessoa;
@@ -41,14 +45,22 @@ public class Pessoa implements Serializable {
         this.email = email;
         this.tipo = tipo;
         this.genero = genero;
+        this.cpf = cpf;
     }
-
-    public Pessoa() {
+    
+    public Pessoa(){
+        pessoas = new ArrayList<>();
     }
 
     public Pessoa(int codPessoa) {
         this.codPessoa = codPessoa;
     }
+    
+    public Pessoa(List<Pessoa> p) {
+        pessoas = new ArrayList<>();
+        pessoas = p;
+    }
+    
 
     public String getGenero() {
         return genero;
@@ -66,6 +78,15 @@ public class Pessoa implements Serializable {
         this.codPessoa = codPessoa;
     }
 
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    
     public String getNome() {
         return nome;
     }
@@ -153,14 +174,13 @@ public class Pessoa implements Serializable {
     public void setTipo(int tipo) {
         this.tipo = tipo;
     }
-
-    private void writeObject(java.io.ObjectOutputStream stream) throws java.io.IOException {
-        // liberar o stream
-        stream.defaultWriteObject();
+    
+    public List<Pessoa> getPessoas() {
+        return pessoas;
     }
 
-    private void readObject(java.io.ObjectInputStream stream) throws java.io.IOException, ClassNotFoundException {
-        // liberar stream
-        stream.defaultReadObject();
+    public void setAnimais(List<Pessoa> pessoas) {
+        this.pessoas = pessoas;
     }
+
 }

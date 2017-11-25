@@ -6,7 +6,6 @@
 package br.ftunicamp.veterinaria.dao;
 
 import br.ftunicamp.veterinaria.interfaces.Crud;
-import br.ftunicamp.veterinaria.model.Animal;
 import br.ftunicamp.veterinaria.model.Consulta;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -23,7 +22,8 @@ import java.util.logging.Logger;
  *
  * @author a101334
  */
-public class ConsultaDAO {
+public class ConsultaDAO extends Serializa implements Crud<Consulta> {
+
     private static final Logger LOG = Logger.getLogger(AnimalDAO.class.getName());
     private static final String CSV_FILENAME = "consulta.csv";
     private static final String SERIAL_FILENAME = "consulta.dat";
@@ -37,14 +37,14 @@ public class ConsultaDAO {
         arquivoSerializado = FileSystems.getDefault().getPath(SERIAL_FILENAME);
         consulta = load();
     }
-    
+
     /**
      * Insere a consulta na lista e em seguida serializa
      *
-     * @author Alex Rafael
-     * @param a - animal a ser cadastrado
+     * @author Amadeu Carvalho
+     * @param c - consulta a ser cadastrada
+     * @return 
      */
-    
     @Override
     public boolean inserir(Consulta c) {
         try {
@@ -55,11 +55,24 @@ public class ConsultaDAO {
         }
         return true;
     }
-    
-     /**
-     * @author Alex Rafael
+
+    /**
+     * Busca por um nome de um animal cadastrado
+     *
+     * @author Thiago Viotto
+     * @param nome
+     * @return Consulta
+     */
+    @Override
+    public Consulta buscar(int id) {
+        
+        return null;
+    }
+
+    /**
+     * @author Amadeu Carvalho
      * @return List<Consulta>
-     * Retorna uma lista de Consultas
+     * Retorna uma lista de consultas
      */
     @Override
     public List<Consulta> listar() {
@@ -70,9 +83,47 @@ public class ConsultaDAO {
         }
         return null;
     }
-    
+
     /**
-     * @author Alex Rafael
+     * Faz uma marcacao no arquivo .csv ou .dat de arquivo excluido caso a
+     * operação seja concluda com sucesso retorna true
+     *
+     * @author Amadeu Carvalho
+     * @param consulta
+     * @return 
+     */
+    @Override
+    public boolean atualizar(Consulta c, int linha) {
+        consulta.getConsultas().set(linha, c);
+        try {
+            serializar(arquivoSerializado, consulta);
+        } catch (Exception ex) {
+            Logger.getLogger(ConsultaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return true;
+    }
+
+   /**
+     * Faz uma marcacao no arquivo .csv ou .dat de arquivo excluido caso a
+     * operação seja concluida com sucesso retorna true
+     *
+     * @author Amadeu Carvalho
+     * @param consulta
+     * @return boolean
+     */
+    @Override
+    public boolean remover(int c) {
+        try {
+            consulta.getConsultas().remove(c);
+            serializar(arquivoSerializado, consulta);
+        } catch (Exception ex) {
+            Logger.getLogger(ConsultaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return true;
+    }
+
+    /**
+     * @author Amadeu Carvalho
      * @return List<Animal>
      * Carrega um arquivo csv pré-definido e retorna uma lista
      */
@@ -91,60 +142,25 @@ public class ConsultaDAO {
             while ((line = source.readLine()) != null) {
                 String dado[] = line.split(";");
                 //System.out.println(line);
-                consulta.setCodConsulta(Integer.parseInt(dado[0]));
-                consulta.setDataConsulta(dado[2]);
-                consulta.setTratamento(Integer.parseInt(dado[3]));
+                consulta = new Consulta(Integer.parseInt(dado[0]), dado[1],
+                        Integer.parseInt(dado[2]), Integer.parseInt(dado[3]), dado[4], Integer.parseInt(dado[5]));                
+                consultas.add(consulta);
             }
             return consultas;
         } catch (IOException ex) {
-            Logger.getLogger(AnimalDAO.class.getName()).
-                    log(Level.SEVERE, "carregarAnimais", ex);
+            Logger.getLogger(ConsultaDAO.class.getName()).
+                    log(Level.SEVERE, "carregarConsultas", ex);
         }
         return null;
     }
     
     /**
-     * Faz uma marcacao no arquivo .csv ou .dat de arquivo excluido caso a
-     * operação seja concluda com sucesso retorna true
-     *
-     * @author Alex Rafael
-     * @param consulta
-     */
-    @Override
-    public boolean atualizar(Consulta consulta) {
-        return true;
-    }
-
-    /**
-     * Faz uma marcacao no arquivo .csv ou .dat de arquivo excluido caso a
-     * operação seja concluida com sucesso retorna true
-     *
-     * @author Amadeu Carvalho
-     * @param consulta
-     * @return boolean
-     */
-    @Override
-    public boolean remover(Consulta consulta) {
-        return true;
-    }
-
-    /**
-     * Busca por id de uma consulta cadastrado
-     *
-     * @author Amadeu Carvalho
-     * @return Animal
-     */
-    @Override
-    public Consulta buscar(int id) {
-        return null;
-    }
-
-    /**
      * Verifica se um arquivo .dat existe caso não exista chama o método para
      * carregar um csv
      *
-     * @author Alex Rafael
+     * @author Amadeu Carvalho
      * @return Consulta
+     * @throws java.lang.Exception
      */
     public Consulta load() throws Exception {
         if (Files.exists(arquivoSerializado)) {
@@ -152,10 +168,8 @@ public class ConsultaDAO {
             return (Consulta) loadSerialized(arquivoSerializado);
         } else {
             LOG.info("Usando " + arquivoCsv.toString());
-            return new Consulta (carregarArquivo());
+            return new Consulta(carregarArquivo());
         }
     }
-
-
 
 }

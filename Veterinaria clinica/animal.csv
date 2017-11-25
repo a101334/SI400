@@ -1,2 +1,3 @@
-"Codigo Animal";"Nome Animal";"Nascimento Animal";"Espécie";"Raca";"CodigoPessoa";"Sexo"
-0;"Dominic";"14/04/2010";"Cachorro";"NULL";0;"M"
+Codigo Animal;Nome Animal;Nascimento Animal;Espécie;Raca;Codigo Pessoa;Sexo
+0;Dominic;14-04-2010;Cachorro;NULL;0;M
+1;Hanny;14-05-2000;Cachorro;Boxer;0;F

@@ -24,9 +24,6 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Sair"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem1ActionPerformed"/>
-              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -48,12 +45,12 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="menuUsuarios">
+        <Menu class="javax.swing.JMenu" name="menuSecretaria">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Usuarios"/>
+            <Property name="text" type="java.lang.String" value="Secretaria"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuUsuariosActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuSecretariaActionPerformed"/>
           </Events>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="itemSecretaria">
@@ -62,14 +59,6 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemSecretariaActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="itemVeterinario">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Veterinario"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemVeterinarioActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -106,6 +95,24 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemAnimaisActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="menuVeterinario">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Veterin&#xe1;rio"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuVeterinarioActionPerformed"/>
+          </Events>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="itemVeterinario">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Veterin&#xe1;rios"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemVeterinarioActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
