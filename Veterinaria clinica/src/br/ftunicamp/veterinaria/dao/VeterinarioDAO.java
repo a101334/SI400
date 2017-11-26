@@ -85,12 +85,24 @@ public class VeterinarioDAO extends Serializa implements Crud<Veterinario> {
 
     @Override
     public boolean atualizar(Veterinario v, int linha) {
-        return false;
+         veterinario.getVeterinarios().set(linha, v);
+        try {
+            serializar(arquivo2Serializado, veterinario);
+        } catch (Exception ex) {
+            Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return true;
     }
 
     @Override
     public boolean remover(int id) {
-        return false;
+       try {
+            veterinario.getVeterinarios().remove(id);
+            serializar(arquivo2Serializado, veterinario);
+         } catch (Exception ex) {
+            Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return true;
     }
 
     /**
@@ -138,6 +150,16 @@ public class VeterinarioDAO extends Serializa implements Crud<Veterinario> {
         return null;
     }
 
+    @Override
+    public List<Veterinario> buscarNome(String nomeVeterinario) {
+         List<Veterinario> veterinarios = new ArrayList<>();         
+         for(Veterinario v : veterinario.getVeterinarios()){
+             if (v.getNome().contains(nomeVeterinario)){
+                 veterinarios.add(v);
+             }
+         }                
+        return veterinarios;
+    }
     /**
      * Verifica se um arquivo .dat existe caso não exista chama o método para
      * carregar um csv

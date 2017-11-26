@@ -28,12 +28,12 @@ public class TelaVeterinario extends javax.swing.JInternalFrame {
      */
     VeterinarioControle veterinarioControle = new VeterinarioControle();
     Veterinario veterinario = new Veterinario();
-    
+
     public TelaVeterinario() {
         initComponents();
         preencherTabelaVeterinario();
     }
-    
+
     private void preencherTabelaVeterinario() {
         DefaultTableModel tabela = (DefaultTableModel) tabelaVeterinario.getModel();
         tabela.setNumRows(0);
@@ -53,7 +53,7 @@ public class TelaVeterinario extends javax.swing.JInternalFrame {
                     v.getNumCasa(),
                     v.getTelefone(),
                     v.getGenero(),
-                    v.getEmail(),               
+                    v.getEmail(),
                     v.getSalario()
                 });
             }
@@ -61,15 +61,16 @@ public class TelaVeterinario extends javax.swing.JInternalFrame {
 
         }
     }
-    
-/*    private void preencherTabelaBuscar(String nome) {
+
+    private void preencherTabelaBuscar(String nome) {
         DefaultTableModel tabela = (DefaultTableModel) tabelaVeterinario.getModel();
         tabela.setNumRows(0);
-        Veterinario v = new Veterinario();
+        List<Veterinario> veterinarios = new ArrayList<Veterinario>();
         VeterinarioControle veterinarioControle = new VeterinarioControle();
         try {
-            v = veterinarioControle.buscar(nome);
-            tabela.addRow(new Object[]{
+            veterinarios = veterinarioControle.buscarNome(nome);
+            for (Veterinario v : veterinarios) {
+                tabela.addRow(new Object[]{
                     v.getNome(),
                     v.getNascimentoPessoa(),
                     v.getCep(),
@@ -80,12 +81,13 @@ public class TelaVeterinario extends javax.swing.JInternalFrame {
                     v.getNumCasa(),
                     v.getTelefone(),
                     v.getGenero(),
-                    v.getEmail(),               
+                    v.getEmail(),
                     v.getSalario()
                 });
+            }
         } catch (Exception e) {
         }
-    }*/
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -112,7 +114,6 @@ public class TelaVeterinario extends javax.swing.JInternalFrame {
         lblBairoo = new javax.swing.JLabel();
         txtRua = new javax.swing.JTextField();
         lblRua = new javax.swing.JLabel();
-        txtGenero = new javax.swing.JTextField();
         lblGenero = new javax.swing.JLabel();
         txtTelefone = new javax.swing.JTextField();
         lblTelefone = new javax.swing.JLabel();
@@ -124,10 +125,14 @@ public class TelaVeterinario extends javax.swing.JInternalFrame {
         txtSalario = new javax.swing.JTextField();
         lblSalario = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
         txtBuscar = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txtCpf = new javax.swing.JTextField();
+        btnAtualizar = new javax.swing.JButton();
+        btnRemover = new javax.swing.JButton();
+        radioone = new javax.swing.JRadioButton();
+        radiotwo = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -200,11 +205,16 @@ public class TelaVeterinario extends javax.swing.JInternalFrame {
                 return types [columnIndex];
             }
         });
+        tabelaVeterinario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaVeterinarioMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tabelaVeterinario);
 
         btnInserir1.setBackground(new java.awt.Color(255, 255, 255));
-        btnInserir1.setFont(new java.awt.Font("Cambria", 1, 48)); // NOI18N
-        btnInserir1.setForeground(new java.awt.Color(51, 102, 255));
+        btnInserir1.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
+        btnInserir1.setForeground(new java.awt.Color(0, 51, 204));
         btnInserir1.setText("Inserir");
         btnInserir1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -217,14 +227,38 @@ public class TelaVeterinario extends javax.swing.JInternalFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/source/icon/guard-icon.png"))); // NOI18N
 
-        jButton1.setText("Buscar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnBuscar.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
+        btnBuscar.setForeground(new java.awt.Color(0, 51, 255));
+        btnBuscar.setText("Buscar por nome");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnBuscarActionPerformed(evt);
             }
         });
 
         jLabel2.setText("CPF");
+
+        btnAtualizar.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
+        btnAtualizar.setForeground(new java.awt.Color(0, 51, 204));
+        btnAtualizar.setText("Atualizar");
+        btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtualizarActionPerformed(evt);
+            }
+        });
+
+        btnRemover.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
+        btnRemover.setForeground(new java.awt.Color(0, 51, 204));
+        btnRemover.setText("Remover");
+        btnRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoverActionPerformed(evt);
+            }
+        });
+
+        radioone.setText("M");
+
+        radiotwo.setText("F");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -275,38 +309,40 @@ public class TelaVeterinario extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel2)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(txtCpf)))))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(lblTelefone)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(lblGenero)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblEmail)
-                                .addComponent(lblSalario))
-                            .addGap(18, 18, 18)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtSalario)
-                                .addComponent(txtEmail)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblEmail)
+                            .addComponent(lblSalario))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtSalario, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
+                            .addComponent(txtEmail)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblTelefone)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)
+                        .addComponent(lblGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(radioone)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(radiotwo)))
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(131, 131, 131)
+                        .addGap(42, 42, 42)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(64, 64, 64)
+                        .addGap(180, 180, 180)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btnInserir1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnInserir1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtBuscar)
+                            .addComponent(btnAtualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnRemover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 799, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -350,8 +386,9 @@ public class TelaVeterinario extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblTelefone)
                             .addComponent(lblGenero)
-                            .addComponent(txtGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(radioone)
+                            .addComponent(radiotwo))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblEmail)
@@ -361,16 +398,20 @@ public class TelaVeterinario extends javax.swing.JInternalFrame {
                             .addComponent(txtSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblSalario)))
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(28, 28, 28)
-                        .addComponent(btnInserir1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(42, Short.MAX_VALUE))
+                        .addComponent(btnInserir1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnBuscar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         pack();
@@ -405,7 +446,12 @@ public class TelaVeterinario extends javax.swing.JInternalFrame {
             veterinario.setTipo(2); //veterinario
             veterinario.setNumCasa(Integer.parseInt(txtNumero.getText()));
             veterinario.setEmail(txtEmail.getText());
-            veterinario.setGenero(txtGenero.getText());
+            if(radioone.isSelected()){
+                veterinario.setGenero(radioone.getText());
+            }else{
+                if(radiotwo.isSelected())
+                    veterinario.setGenero(radiotwo.getText());
+            }
             veterinario.setSalario(Float.parseFloat(txtSalario.getText()));
             veterinarioControle.insertPessoa(veterinario);
             preencherTabelaVeterinario();
@@ -421,10 +467,87 @@ public class TelaVeterinario extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNomeActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         String aux = txtBuscar.getText();
-      //  preencherTabelaBuscar(aux);
-    }//GEN-LAST:event_jButton1ActionPerformed
+        preencherTabelaBuscar(aux);
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
+        VeterinarioControle veterinarioControle = new VeterinarioControle();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        java.util.Date dateStr;
+        try {
+            dateStr = formatter.parse(formatter.format(nascimento.getCalendar().getTime()));
+            veterinario.setCodPessoa(tabelaVeterinario.getSelectedRow());
+            veterinario.setCpf(txtCpf.getText());
+            veterinario.setNome(txtNome.getText());
+            veterinario.setNascimentoPessoa(formatter.format(dateStr));
+            veterinario.setCep(txtCEP.getText());
+            veterinario.setEstado(txtEstado.getText());
+            veterinario.setCidade(txtCidade.getText());
+            veterinario.setBairro(txtBairro.getText());
+            veterinario.setRua(txtRua.getText());
+            veterinario.setTelefone(txtTelefone.getText());
+            veterinario.setTipo(2); //veterinario
+            veterinario.setNumCasa(Integer.parseInt(txtNumero.getText()));
+            veterinario.setEmail(txtEmail.getText());
+            if(radioone.isSelected()){
+                veterinario.setGenero(radioone.getText());
+            }else{
+                if(radiotwo.isSelected())
+                    veterinario.setGenero(radiotwo.getText());
+            }
+            veterinario.setSalario(Float.parseFloat(txtSalario.getText()));
+            veterinarioControle.atualizarPessoa(veterinario, tabelaVeterinario.getSelectedRow());
+            preencherTabelaVeterinario();
+            limparTela();
+            TelaConsulta consulta = new TelaConsulta();
+            consulta.preencherCombo();
+        } catch (ParseException ex) {
+            Logger.getLogger(TelaVeterinario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnAtualizarActionPerformed
+
+    private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
+        VeterinarioControle animalControle = new VeterinarioControle();
+        animalControle.remover(tabelaVeterinario.getSelectedRow());
+        limparTela();
+        preencherTabelaVeterinario();
+    }//GEN-LAST:event_btnRemoverActionPerformed
+
+    private void tabelaVeterinarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaVeterinarioMouseClicked
+        List<Veterinario> veterinarios = new ArrayList<Veterinario>();
+        VeterinarioControle veterinarioControle = new VeterinarioControle();
+        veterinarios = veterinarioControle.listar();
+        veterinario = veterinarios.get(tabelaVeterinario.getSelectedRow());//pegar os valores da linha e coluna       
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        java.util.Date dateStr;
+        try {
+            dateStr = formatter.parse(formatter.format(nascimento.getCalendar().getTime()));
+            txtCpf.setText(veterinario.getCpf());
+            txtNome.setText(veterinario.getNome());
+            //veterinario.setNascimentoPessoa(formatter.format(dateStr));
+            txtCEP.setText(veterinario.getCep());
+            txtEstado.setText(veterinario.getEstado());
+            txtCidade.setText(veterinario.getCidade());
+            txtBairro.setText(veterinario.getBairro());
+            txtRua.setText(veterinario.getRua());
+            txtTelefone.setText(veterinario.getTelefone());
+            //veterinario.setTipo(2); //veterinario
+            txtNumero.setText(Integer.toString(veterinario.getNumCasa()));
+            txtEmail.setText(veterinario.getEmail());
+            if(radioone.isSelected()){
+                radioone.setText(veterinario.getGenero());
+            }else{
+                if(radiotwo.isSelected())
+                    radiotwo.setText(veterinario.getGenero());
+            }
+            txtSalario.setText(Float.toString(veterinario.getSalario()));
+
+        } catch (ParseException ex) {
+            Logger.getLogger(TelaVeterinario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_tabelaVeterinarioMouseClicked
 
     private void limparTela() {
         for (int i = 0; i < getContentPane().getComponentCount(); i++) {
@@ -438,11 +561,13 @@ public class TelaVeterinario extends javax.swing.JInternalFrame {
             }
         }
     }
-   
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAtualizar;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnInserir1;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnRemover;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane2;
@@ -459,6 +584,8 @@ public class TelaVeterinario extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblSalario;
     private javax.swing.JLabel lblTelefone;
     private com.toedter.calendar.JCalendar nascimento;
+    private javax.swing.JRadioButton radioone;
+    private javax.swing.JRadioButton radiotwo;
     private javax.swing.JTable tabelaVeterinario;
     private javax.swing.JTextField txtBairro;
     private javax.swing.JTextField txtBuscar;
@@ -467,7 +594,6 @@ public class TelaVeterinario extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtCpf;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtEstado;
-    private javax.swing.JTextField txtGenero;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtNumero;
     private javax.swing.JTextField txtRua;

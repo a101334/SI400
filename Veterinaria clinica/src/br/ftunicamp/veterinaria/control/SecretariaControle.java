@@ -28,12 +28,13 @@ public class SecretariaControle {
         }
     }
 
-    public ArrayList<Secretaria> buscarNome(String nome) {
+    public List<Secretaria> buscarNome(String nome) {
+        SecretariaDAO dao;
         try {
-            //          PessoaDAO dao = new PessoaDAO();
-            //        return dao.buscarNome(nome);
+            dao = new SecretariaDAO();
+            return (dao.buscarNome(nome));
         } catch (Exception ex) {
-            //JOptionPane.showMessageDialog(null, "Erro ao cadastrar Cliente", "Erro", 0);
+            Logger.getLogger(SecretariaControle.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -68,5 +69,25 @@ public class SecretariaControle {
             Logger.getLogger(AnimalControle.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+
+    public void remover(int secretariaId) {
+       SecretariaDAO dao;
+        try {
+            dao = new SecretariaDAO();
+            dao.remover(secretariaId);
+        } catch (Exception ex) {
+            Logger.getLogger(AnimalControle.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void atualizar(Secretaria s, int linha) {
+       SecretariaDAO dao;
+        try {
+            dao = new SecretariaDAO();
+            dao.atualizar(s, linha);
+        } catch (Exception ex) {
+            Logger.getLogger(AnimalControle.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

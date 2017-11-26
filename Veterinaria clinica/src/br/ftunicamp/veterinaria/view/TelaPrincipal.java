@@ -5,6 +5,9 @@
  */
 package br.ftunicamp.veterinaria.view;
 
+import java.beans.PropertyVetoException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 
@@ -193,13 +196,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuAnimaisActionPerformed
 
     private void itemAgendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAgendaActionPerformed
-        // TODO add your handling code here:
-
-        telaConsulta.setVisible(true);
-        telVeterinario.setVisible(false);
-        telCliente.setVisible(false);
-        telAnimais.setVisible(false);
-        telSecretaria.setVisible(false);
+        try {
+            telVeterinario.setVisible(false);
+            telAnimais.setVisible(false);
+            telSecretaria.setVisible(false);
+            telCliente.setVisible(false);
+            telaConsulta = new TelaConsulta();
+            jDesktopMain.add(telaConsulta);
+            telaConsulta.setMaximum(true);
+            telaConsulta.setVisible(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_itemAgendaActionPerformed
 
     private void itemSecretariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemSecretariaActionPerformed
