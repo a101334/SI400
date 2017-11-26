@@ -22,16 +22,6 @@ public class PessoaControle {
             JOptionPane.showMessageDialog(null, "Usuario ou senha inválido", "Erro", 2);
         }
     }
-
-    public ArrayList<Pessoa> buscarNome(String nome) {
-        try {
-            //          PessoaDAO dao = new PessoaDAO();
-            //        return dao.buscarNome(nome);
-        } catch (Exception ex) {
-            //JOptionPane.showMessageDialog(null, "Erro ao cadastrar Cliente", "Erro", 0);
-        }
-        return null;
-    }
    
     public void insertPessoa(Pessoa pessoa) {
         PessoaDAO dao;
@@ -63,6 +53,37 @@ public class PessoaControle {
             Logger.getLogger(AnimalControle.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+    
+    public List<Pessoa> buscarNome(String nome) {
+        PessoaDAO dao;
+        try {
+            dao = new PessoaDAO();
+            return (dao.buscarNome(nome));
+        } catch (Exception ex) {
+            Logger.getLogger(PessoaControle.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public void remover(int clienteId) {
+         PessoaDAO dao;
+        try {
+            dao = new PessoaDAO();
+            dao.remover(clienteId);
+        } catch (Exception ex) {
+            Logger.getLogger(AnimalControle.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public static void atualizar(Pessoa p, int linha) {
+       PessoaDAO dao;
+        try {
+            dao = new PessoaDAO();
+            dao.atualizar(p, linha);
+        } catch (Exception ex) {
+            Logger.getLogger(PessoaControle.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

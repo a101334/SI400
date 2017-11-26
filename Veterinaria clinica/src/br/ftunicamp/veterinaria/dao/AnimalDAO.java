@@ -168,6 +168,7 @@ public class AnimalDAO extends Serializa implements Crud<Animal> {
         }
     }
 
+    @Override
     public List<Animal> buscarNome(String nomeAnimal) {
          List<Animal> animais = new ArrayList<>();         
          for(Animal a : animal.getAnimais()){

@@ -14,6 +14,7 @@ import java.util.List;
 public interface Crud<T> {
     boolean inserir(T classe);
     T buscar(int id);
+    List buscarNome(String nome);
     List listar();
     boolean atualizar(T classe, int linha);
     boolean remover(int id);

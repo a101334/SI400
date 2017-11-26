@@ -94,12 +94,35 @@ public class PessoaDAO extends Serializa implements Crud<Pessoa> {
 
     @Override
     public boolean atualizar(Pessoa p , int linha) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        pessoa.getPessoas().set(linha, p);
+        try {
+            serializar(arquivo2Serializado, pessoa);
+        } catch (Exception ex) {
+            Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return true;
     }
 
     @Override
     public boolean remover(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       try {
+            pessoa.getPessoas().remove(id);
+            serializar(arquivo2Serializado, pessoa);
+        } catch (Exception ex) {
+            Logger.getLogger(AnimalDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return true;
+    }
+    
+    @Override
+    public List<Pessoa> buscarNome(String nomePessoa) {
+         List<Pessoa> pessoas = new ArrayList<>();         
+         for(Pessoa p : pessoa.getPessoas()){
+             if (p.getNome().contains(nomePessoa)){
+                 pessoas.add(p);
+             }
+         }                
+        return pessoas;
     }
 
     /**

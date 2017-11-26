@@ -172,4 +172,9 @@ public class ConsultaDAO extends Serializa implements Crud<Consulta> {
         }
     }
 
+    @Override
+    public List buscarNome(String nome) {
+        return null;
+    }
+
 }

@@ -21,7 +21,7 @@ public class ConsultaControle {
         ConsultaDAO dao;
         try {
             dao = new ConsultaDAO();
-            dao.inserir(consulta);
+            dao.inserir(consulta);            
         } catch (Exception ex) {
             Logger.getLogger(ConsultaControle.class.getName()).log(Level.SEVERE, null, ex);
         }
