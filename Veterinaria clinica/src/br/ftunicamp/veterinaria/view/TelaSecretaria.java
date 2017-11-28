@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
@@ -62,34 +63,6 @@ public class TelaSecretaria extends javax.swing.JInternalFrame {
         }
     }
     
-    private void preencherTabelaBuscar(String nome) {
-        DefaultTableModel tabela = (DefaultTableModel) tabelaSecretaria.getModel();
-        tabela.setNumRows(0);
-        List<Secretaria> secretarias = new ArrayList<Secretaria>();
-        SecretariaControle secretariaControle = new SecretariaControle();
-        try {
-            secretarias = secretariaControle.buscarNome(nome);
-            for (Secretaria s : secretarias) {
-            tabela.addRow(new Object[]{
-                    s.getNome(),
-                    s.getNascimentoPessoa(),
-                    s.getCep(),
-                    s.getEstado(),
-                    s.getCidade(),
-                    s.getBairro(),
-                    s.getRua(),
-                    s.getNumCasa(),
-                    s.getTelefone(),
-                    s.getGenero(),
-                    s.getEmail(),
-                    s.getSalario(),
-                    s.getLogin()
-                });
-            }
-        } catch (Exception e) {
-        }
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -104,7 +77,6 @@ public class TelaSecretaria extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         nascimento = new com.toedter.calendar.JCalendar();
         jLabel3 = new javax.swing.JLabel();
-        txtCEP = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtEstado = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -115,7 +87,6 @@ public class TelaSecretaria extends javax.swing.JInternalFrame {
         txtRua = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        txtTelefone = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
@@ -123,7 +94,6 @@ public class TelaSecretaria extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaSecretaria = new javax.swing.JTable();
         jLabel25 = new javax.swing.JLabel();
-        txtSalario = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         txtLogin = new javax.swing.JTextField();
@@ -132,16 +102,18 @@ public class TelaSecretaria extends javax.swing.JInternalFrame {
         txtCidade = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         btnBuscar = new javax.swing.JButton();
-        txtBuscar = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
-        txtCpf = new javax.swing.JTextField();
         btnAtualizar = new javax.swing.JButton();
         btnRemover = new javax.swing.JButton();
         radioone = new javax.swing.JRadioButton();
         radiotwo = new javax.swing.JRadioButton();
+        lblSuccess = new javax.swing.JLabel();
+        txtCep = new javax.swing.JFormattedTextField();
+        txtCpf = new javax.swing.JFormattedTextField();
+        txtTelefone = new javax.swing.JFormattedTextField();
+        txtSalario = new javax.swing.JFormattedTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
-        setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel2.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
@@ -182,7 +154,6 @@ public class TelaSecretaria extends javax.swing.JInternalFrame {
         jLabel11.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
         jLabel11.setText("Email");
 
-        btnInserir.setBackground(new java.awt.Color(255, 255, 255));
         btnInserir.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         btnInserir.setForeground(new java.awt.Color(255, 0, 0));
         btnInserir.setText("Inserir");
@@ -263,6 +234,29 @@ public class TelaSecretaria extends javax.swing.JInternalFrame {
 
         radiotwo.setText("F");
 
+        lblSuccess.setForeground(new java.awt.Color(0, 51, 255));
+        lblSuccess.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        try {
+            txtCep.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            txtCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            txtTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) ####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        txtSalario.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -286,16 +280,16 @@ public class TelaSecretaria extends javax.swing.JInternalFrame {
                                 .addComponent(txtCidade))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtCEP, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtCep, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(36, 36, 36)
                                 .addComponent(jLabel4)))
                         .addGap(10, 10, 10)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtEstado)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel16)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(18, 18, 18)
                                 .addComponent(txtCpf))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel8)
@@ -305,10 +299,6 @@ public class TelaSecretaria extends javax.swing.JInternalFrame {
                         .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtEmail))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel25)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtSalario))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -321,18 +311,24 @@ public class TelaSecretaria extends javax.swing.JInternalFrame {
                                 .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
                                 .addComponent(jLabel10)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(radioone)
                                 .addGap(18, 18, 18)
                                 .addComponent(radiotwo))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel13)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(jLabel25)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(txtSalario))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(jLabel13)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel14)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -351,8 +347,10 @@ public class TelaSecretaria extends javax.swing.JInternalFrame {
                             .addComponent(btnAtualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnInserir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnRemover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnBuscar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnBuscar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(112, 112, 112)
+                        .addComponent(lblSuccess, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(152, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -374,9 +372,9 @@ public class TelaSecretaria extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel3)
-                                    .addComponent(txtCEP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel4)
-                                    .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jLabel1))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -398,9 +396,9 @@ public class TelaSecretaria extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
                             .addComponent(jLabel10)
-                            .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(radioone)
-                            .addComponent(radiotwo))
+                            .addComponent(radiotwo)
+                            .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel11)
@@ -418,8 +416,10 @@ public class TelaSecretaria extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel12)
+                        .addGap(14, 14, 14)
+                        .addComponent(lblSuccess)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -429,11 +429,9 @@ public class TelaSecretaria extends javax.swing.JInternalFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel5))))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -451,7 +449,7 @@ public class TelaSecretaria extends javax.swing.JInternalFrame {
             secretaria.setCpf(txtCpf.getText());
             secretaria.setNome(txtNome.getText());
             secretaria.setNascimentoPessoa(formatter.format(dateStr));
-            secretaria.setCep(txtCEP.getText());
+            secretaria.setCep(txtCep.getText());
             secretaria.setEstado(txtEstado.getText());
             secretaria.setCidade(txtCidade.getText());
             secretaria.setBairro(txtBairro.getText());
@@ -471,9 +469,12 @@ public class TelaSecretaria extends javax.swing.JInternalFrame {
             secretaria.setSalario(Float.parseFloat(txtSalario.getText()));
             secretariaControle.insertPessoa(secretaria);
             preencherTabelaSecretaria();
+            lblSuccess.setText("Secretária: " + secretaria.getNome() + " cadastrado com sucesso!");      
             limparTela();
         } catch (ParseException ex) {
             Logger.getLogger(TelaSecretaria.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NumberFormatException ex){
+            JOptionPane.showMessageDialog(null, "Neste campo é permitido somente numeros","Erro", 0);
         }
     }
 
@@ -495,8 +496,10 @@ public class TelaSecretaria extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtEstadoActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        String aux = txtBuscar.getText();
-        preencherTabelaBuscar(aux);
+        TelaConsultaSecretaria telaConsultaSecretaria = new TelaConsultaSecretaria();
+        telaConsultaSecretaria.setVisible(true);
+        telaConsultaSecretaria.setLocationRelativeTo(null);
+        //consultas.listarConsultas();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
@@ -509,7 +512,7 @@ public class TelaSecretaria extends javax.swing.JInternalFrame {
             secretaria.setCpf(txtCpf.getText());
             secretaria.setNome(txtNome.getText());
             secretaria.setNascimentoPessoa(formatter.format(dateStr));
-            secretaria.setCep(txtCEP.getText());
+            secretaria.setCep(txtCep.getText());
             secretaria.setEstado(txtEstado.getText());
             secretaria.setCidade(txtCidade.getText());
             secretaria.setBairro(txtBairro.getText());
@@ -529,15 +532,19 @@ public class TelaSecretaria extends javax.swing.JInternalFrame {
             secretaria.setSalario(Float.parseFloat(txtSalario.getText()));
             secretariaControle.atualizar(secretaria, tabelaSecretaria.getSelectedRow());
             preencherTabelaSecretaria();
+            lblSuccess.setText("Secretária: " + secretaria.getNome() + " atualizado com sucesso!");
             limparTela();
         } catch (ParseException ex) {
             Logger.getLogger(TelaSecretaria.class.getName()).log(Level.SEVERE, null, ex);
-        }                   
+        } catch (NumberFormatException ex){
+            JOptionPane.showMessageDialog(null, "Neste campo é permitido somente numeros","Erro", 0);
+        }                  
     }//GEN-LAST:event_btnAtualizarActionPerformed
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
         SecretariaControle animalControle = new SecretariaControle();
         animalControle.remover(tabelaSecretaria.getSelectedRow());
+        lblSuccess.setText("Secretária: " + secretaria.getNome() + " removido com sucesso!");
         limparTela();
         preencherTabelaSecretaria();
     }//GEN-LAST:event_btnRemoverActionPerformed
@@ -553,7 +560,7 @@ public class TelaSecretaria extends javax.swing.JInternalFrame {
         txtCpf.setText(secretaria.getCpf());
         txtNome.setText(secretaria.getNome());
         //secretaria.setNascimentoPessoa(formatter.format(dateStr));
-        txtCEP.setText(secretaria.getCep());
+        txtCep.setText(secretaria.getCep());
         txtEstado.setText(secretaria.getEstado());
         txtCidade.setText(secretaria.getCidade());
         txtBairro.setText(secretaria.getBairro());
@@ -597,23 +604,23 @@ public class TelaSecretaria extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblSuccess;
     private com.toedter.calendar.JCalendar nascimento;
     private javax.swing.JRadioButton radioone;
     private javax.swing.JRadioButton radiotwo;
     private javax.swing.JTable tabelaSecretaria;
     private javax.swing.JTextField txtBairro;
-    private javax.swing.JTextField txtBuscar;
-    private javax.swing.JTextField txtCEP;
+    private javax.swing.JFormattedTextField txtCep;
     private javax.swing.JTextField txtCidade;
-    private javax.swing.JTextField txtCpf;
+    private javax.swing.JFormattedTextField txtCpf;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtEstado;
     private javax.swing.JTextField txtLogin;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtNumero;
     private javax.swing.JTextField txtRua;
-    private javax.swing.JTextField txtSalario;
+    private javax.swing.JFormattedTextField txtSalario;
     private javax.swing.JTextField txtSenha;
-    private javax.swing.JTextField txtTelefone;
+    private javax.swing.JFormattedTextField txtTelefone;
     // End of variables declaration//GEN-END:variables
 }

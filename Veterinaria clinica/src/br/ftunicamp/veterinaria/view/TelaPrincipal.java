@@ -8,7 +8,6 @@ package br.ftunicamp.veterinaria.view;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 
 /**
@@ -26,13 +25,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
     TelaSecretaria telSecretaria = new TelaSecretaria();
     TelaVeterinario telVeterinario = new TelaVeterinario();
 
-    public TelaPrincipal() {
+    public TelaPrincipal() throws PropertyVetoException {
         initComponents();
         jDesktopMain.add(telaConsulta);
         jDesktopMain.add(telAnimais);
         jDesktopMain.add(telCliente);
         jDesktopMain.add(telSecretaria);
         jDesktopMain.add(telVeterinario);
+        telaConsulta.setMaximum(true);
+        telaConsulta.setVisible(true);
 
     }
 
@@ -64,6 +65,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuArquivo.setText("Arquivo");
 
         jMenuItem1.setText("Sair");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         menuArquivo.add(jMenuItem1);
 
         jMenuBar1.add(menuArquivo);
@@ -211,36 +217,51 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_itemAgendaActionPerformed
 
     private void itemSecretariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemSecretariaActionPerformed
-        // TODO add your handling code here:
-
-        telSecretaria.setVisible(true);
-        telVeterinario.setVisible(false);
-        telaConsulta.setVisible(false);
-        telCliente.setVisible(false);
-        telAnimais.setVisible(false);
-
-
+        try {
+            telVeterinario.setVisible(false);
+            telAnimais.setVisible(false);
+            telSecretaria.setVisible(false);
+            telCliente.setVisible(false);
+            telaConsulta.setVisible(false);
+            telSecretaria = new TelaSecretaria();
+            jDesktopMain.add(telSecretaria);
+            telSecretaria.setMaximum(true);
+            telSecretaria.setVisible(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_itemSecretariaActionPerformed
 
     private void itemClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemClientesActionPerformed
         // TODO add your handling code here:
-        telVeterinario.setVisible(false);
-        telSecretaria.setVisible(false);
-        telaConsulta.setVisible(false);
-        telCliente.setVisible(true);
-        telAnimais.setVisible(false);
+        try {
+            telVeterinario.setVisible(false);
+            telSecretaria.setVisible(false);
+            telaConsulta.setVisible(false);
+            telAnimais.setVisible(false);
+            telCliente = new TelaCliente();
+            jDesktopMain.add(telCliente);
+            telCliente.setMaximum(true);
+            telCliente.setVisible(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_itemClientesActionPerformed
 
     private void itemAnimaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAnimaisActionPerformed
         // TODO add your handling code here:
-
-        telVeterinario.setVisible(false);
-        telSecretaria.setVisible(false);
-        telaConsulta.setVisible(false);
-        telCliente.setVisible(false);
-        telAnimais = new TelaAnimais();
-        jDesktopMain.add(telAnimais);
-        telAnimais.setVisible(true);
+        try {
+            telVeterinario.setVisible(false);
+            telSecretaria.setVisible(false);
+            telaConsulta.setVisible(false);
+            telCliente.setVisible(false);
+            telAnimais = new TelaAnimais();
+            jDesktopMain.add(telAnimais);
+            telAnimais.setMaximum(true);
+            telAnimais.setVisible(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }//GEN-LAST:event_itemAnimaisActionPerformed
 
@@ -255,14 +276,28 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuVeterinarioActionPerformed
 
     private void itemVeterinarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemVeterinarioActionPerformed
-        // TODO add your handling code here:
-
+        try {
+            telVeterinario.setVisible(true);
+            telSecretaria.setVisible(false);
+            telaConsulta.setVisible(false);
+            telCliente.setVisible(false);
+            telAnimais.setVisible(false);
+            telVeterinario = new TelaVeterinario();
+            jDesktopMain.add(telVeterinario);
+            telVeterinario.setMaximum(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
         telVeterinario.setVisible(true);
-        telSecretaria.setVisible(false);
-        telaConsulta.setVisible(false);
-        telCliente.setVisible(false);
-        telAnimais.setVisible(false);
+
+
     }//GEN-LAST:event_itemVeterinarioActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        this.setVisible(false);
+        JFrame telaLogin = new TelaLogin();
+        telaLogin.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

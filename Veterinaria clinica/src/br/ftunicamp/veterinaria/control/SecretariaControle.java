@@ -3,7 +3,6 @@
  * Prof.Dr.Ivan Ricarte
  * Curso: Tec.Análise e Desenvolvimento de Sistemas
  */
-
 package br.ftunicamp.veterinaria.control;
 
 import br.ftunicamp.veterinaria.dao.SecretariaDAO;
@@ -13,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,12 +20,34 @@ import javax.swing.JOptionPane;
  * @author Thiago Henrique Viotto
  */
 public class SecretariaControle {
-    public void login(String usuario, String senha) {
-        if (usuario.equals("secretaria") && senha.equals("1234")) {
-            new TelaPrincipal().setVisible(true);
-        } else{
-            JOptionPane.showMessageDialog(null, "Usuario ou senha inválido", "Erro", 2);
+
+    public boolean login(String usuario, String senha) {
+        SecretariaDAO dao;
+        try {
+            dao = new SecretariaDAO();
+            List<Secretaria> secretarias = new ArrayList<>();
+            secretarias = dao.listar();
+            if (usuario.equals("admin") && senha.equals("admin")) {
+                JFrame tela = new TelaPrincipal();
+                tela.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                tela.setVisible(true);
+                return true;
+            } else {
+                for (Secretaria s : secretarias) {
+                    if (usuario.equals(s.getLogin()) && senha.equals(s.getSenha())) {
+                        JFrame tela = new TelaPrincipal();
+                        tela.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                        tela.setVisible(true);
+                        return true;
+                    }
+                }
+                JOptionPane.showMessageDialog(null, "Usuario ou senha inválido", "Erro", 2);
+                return false;
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(SecretariaControle.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return false;
     }
 
     public List<Secretaria> buscarNome(String nome) {
@@ -38,7 +60,7 @@ public class SecretariaControle {
         }
         return null;
     }
-   
+
     public void insertPessoa(Secretaria secretaria) {
         SecretariaDAO dao;
         try {
@@ -59,7 +81,7 @@ public class SecretariaControle {
         }
         return null;
     }
-    
+
     public Secretaria buscar(int id) {
         SecretariaDAO dao;
         try {
@@ -72,7 +94,7 @@ public class SecretariaControle {
     }
 
     public void remover(int secretariaId) {
-       SecretariaDAO dao;
+        SecretariaDAO dao;
         try {
             dao = new SecretariaDAO();
             dao.remover(secretariaId);
@@ -82,7 +104,7 @@ public class SecretariaControle {
     }
 
     public void atualizar(Secretaria s, int linha) {
-       SecretariaDAO dao;
+        SecretariaDAO dao;
         try {
             dao = new SecretariaDAO();
             dao.atualizar(s, linha);

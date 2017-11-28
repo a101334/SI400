@@ -19,9 +19,11 @@ public class Consulta implements Serializable {
     private Veterinario veterinario;
     private String historico;
     private Pessoa pessoa;
+    private String statusPagamento;
+    private float valorConsulta;
     private List<Consulta>consultas;
     
-    public Consulta(int codConsulta, String dataConsulta, int codAnimal, int codVeterinario, String historico,int codPessoa) {
+    public Consulta(int codConsulta, String dataConsulta, int codAnimal, int codVeterinario, String historico,int codPessoa, String statusPagamento, float valorConsulta) {
         animal = new Animal();
         veterinario = new Veterinario();
         this.codConsulta = codConsulta;
@@ -30,6 +32,24 @@ public class Consulta implements Serializable {
         this.veterinario.setCodVeterinario(codVeterinario);
         this.pessoa.setCodPessoa(codPessoa);
         this.historico = historico;
+        this.statusPagamento = statusPagamento;
+        this.valorConsulta = valorConsulta;
+    }
+
+    public String getStatusPagamento() {
+        return statusPagamento;
+    }
+
+    public void setStatusPagamento(String statusPagamento) {
+        this.statusPagamento = statusPagamento;
+    }
+
+    public float getValorConsulta() {
+        return valorConsulta;
+    }
+
+    public void setValorConsulta(float valorConsulta) {
+        this.valorConsulta = valorConsulta;
     }
 
     public Consulta(){}

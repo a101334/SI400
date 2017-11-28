@@ -33,8 +33,8 @@ public class main {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JFrame tela = new TelaPrincipal();
-                tela.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                JFrame tela = new TelaLogin();
+               // tela.setExtendedState(JFrame.MAXIMIZED_BOTH);
                 tela.setVisible(true);
              //   new TelaPrincipal().setVisible(true);
             }
