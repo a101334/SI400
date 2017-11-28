@@ -65,7 +65,8 @@ public class ConsultaDAO extends Serializa implements Crud<Consulta> {
      */
     @Override
     public Consulta buscar(int id) {
-        
+        if(consulta.getCodConsulta() == id)
+            return consulta;
         return null;
     }
 
@@ -143,7 +144,7 @@ public class ConsultaDAO extends Serializa implements Crud<Consulta> {
                 String dado[] = line.split(";");
                 //System.out.println(line);
                 consulta = new Consulta(Integer.parseInt(dado[0]), dado[1],
-                        Integer.parseInt(dado[2]), Integer.parseInt(dado[3]), dado[4], Integer.parseInt(dado[5]));                
+                        Integer.parseInt(dado[2]), Integer.parseInt(dado[3]), dado[4], Integer.parseInt(dado[5]), dado[6] , Float.parseFloat(dado[7]));                
                 consultas.add(consulta);
             }
             return consultas;

@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
@@ -32,6 +34,9 @@ public class TelaVeterinario extends javax.swing.JInternalFrame {
     public TelaVeterinario() {
         initComponents();
         preencherTabelaVeterinario();
+        ButtonGroup buttonGroup = new ButtonGroup();
+        buttonGroup.add(radioone);
+        buttonGroup.add(radiotwo);
     }
 
     private void preencherTabelaVeterinario() {
@@ -62,33 +67,6 @@ public class TelaVeterinario extends javax.swing.JInternalFrame {
         }
     }
 
-    private void preencherTabelaBuscar(String nome) {
-        DefaultTableModel tabela = (DefaultTableModel) tabelaVeterinario.getModel();
-        tabela.setNumRows(0);
-        List<Veterinario> veterinarios = new ArrayList<Veterinario>();
-        VeterinarioControle veterinarioControle = new VeterinarioControle();
-        try {
-            veterinarios = veterinarioControle.buscarNome(nome);
-            for (Veterinario v : veterinarios) {
-                tabela.addRow(new Object[]{
-                    v.getNome(),
-                    v.getNascimentoPessoa(),
-                    v.getCep(),
-                    v.getEstado(),
-                    v.getCidade(),
-                    v.getBairro(),
-                    v.getRua(),
-                    v.getNumCasa(),
-                    v.getTelefone(),
-                    v.getGenero(),
-                    v.getEmail(),
-                    v.getSalario()
-                });
-            }
-        } catch (Exception e) {
-        }
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -100,11 +78,9 @@ public class TelaVeterinario extends javax.swing.JInternalFrame {
 
         lblNome = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
-        nascimento = new com.toedter.calendar.JCalendar();
         lblNacimento = new javax.swing.JLabel();
         txtEstado = new javax.swing.JTextField();
         lblEstado = new javax.swing.JLabel();
-        txtCEP = new javax.swing.JTextField();
         lblCep = new javax.swing.JLabel();
         txtCidade = new javax.swing.JTextField();
         lblCidade = new javax.swing.JLabel();
@@ -115,24 +91,26 @@ public class TelaVeterinario extends javax.swing.JInternalFrame {
         txtRua = new javax.swing.JTextField();
         lblRua = new javax.swing.JLabel();
         lblGenero = new javax.swing.JLabel();
-        txtTelefone = new javax.swing.JTextField();
         lblTelefone = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         lblEmail = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabelaVeterinario = new javax.swing.JTable();
         btnInserir1 = new javax.swing.JButton();
-        txtSalario = new javax.swing.JTextField();
         lblSalario = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         btnBuscar = new javax.swing.JButton();
-        txtBuscar = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        txtCpf = new javax.swing.JTextField();
         btnAtualizar = new javax.swing.JButton();
         btnRemover = new javax.swing.JButton();
         radioone = new javax.swing.JRadioButton();
         radiotwo = new javax.swing.JRadioButton();
+        nascimento = new com.toedter.calendar.JCalendar();
+        lblSuccess = new javax.swing.JLabel();
+        txtCep = new javax.swing.JFormattedTextField();
+        txtCpf = new javax.swing.JFormattedTextField();
+        txtTelefone = new javax.swing.JFormattedTextField();
+        txtSalario = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -144,8 +122,6 @@ public class TelaVeterinario extends javax.swing.JInternalFrame {
                 txtNomeActionPerformed(evt);
             }
         });
-
-        nascimento.setForeground(new java.awt.Color(0, 153, 255));
 
         lblNacimento.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
         lblNacimento.setText("Nascimento");
@@ -177,12 +153,6 @@ public class TelaVeterinario extends javax.swing.JInternalFrame {
         lblGenero.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
         lblGenero.setText("Gênero");
 
-        txtTelefone.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTelefoneActionPerformed(evt);
-            }
-        });
-
         lblTelefone.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
         lblTelefone.setText("Telefone");
 
@@ -212,7 +182,6 @@ public class TelaVeterinario extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(tabelaVeterinario);
 
-        btnInserir1.setBackground(new java.awt.Color(255, 255, 255));
         btnInserir1.setFont(new java.awt.Font("Cambria", 1, 18)); // NOI18N
         btnInserir1.setForeground(new java.awt.Color(0, 51, 204));
         btnInserir1.setText("Inserir");
@@ -260,6 +229,27 @@ public class TelaVeterinario extends javax.swing.JInternalFrame {
 
         radiotwo.setText("F");
 
+        lblSuccess.setForeground(new java.awt.Color(51, 51, 255));
+        lblSuccess.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        try {
+            txtCep.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            txtCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            txtTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) ####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -267,6 +257,14 @@ public class TelaVeterinario extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(lblCep)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtCep, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblEstado)
+                        .addGap(10, 10, 10)
+                        .addComponent(txtEstado))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(lblBairoo)
@@ -282,87 +280,75 @@ public class TelaVeterinario extends javax.swing.JInternalFrame {
                             .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(lblNacimento)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(nascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(lblRua)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(txtRua))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(lblCidade)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txtCidade))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(lblCep)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txtCEP, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(lblEstado)))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(10, 10, 10)
-                                    .addComponent(txtEstado))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabel2)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtCpf)))))
+                            .addComponent(txtRua)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblEmail)
                             .addComponent(lblSalario))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtSalario, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
-                            .addComponent(txtEmail)))
+                            .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
+                            .addComponent(txtSalario)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblTelefone)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(19, 19, 19)
                         .addComponent(lblGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(radioone)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(radiotwo)))
-                .addGap(12, 12, 12)
+                        .addComponent(radiotwo))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblCidade)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(42, 42, 42)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(180, 180, 180)
+                        .addGap(121, 121, 121)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnInserir1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtBuscar)
                             .addComponent(btnAtualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnRemover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 799, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 799, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(72, Short.MAX_VALUE))
+                        .addGap(60, 60, 60)
+                        .addComponent(lblSuccess, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(84, 84, 84))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblNome))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblNacimento))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(lblNacimento)
+                            .addComponent(nascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblCep)
-                            .addComponent(txtCEP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblEstado)
-                            .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -370,8 +356,7 @@ public class TelaVeterinario extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblCidade)
                             .addComponent(txtCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)
-                            .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel2))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblBairoo)
@@ -386,32 +371,37 @@ public class TelaVeterinario extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblTelefone)
                             .addComponent(lblGenero)
-                            .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(radioone)
-                            .addComponent(radiotwo))
+                            .addComponent(radiotwo)
+                            .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblEmail)
                             .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblSalario)))
+                            .addComponent(lblSalario)
+                            .addComponent(txtSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(btnInserir1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnBuscar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(8, 8, 8)
+                        .addComponent(lblSuccess)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(btnInserir1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnBuscar))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(38, Short.MAX_VALUE))
+                        .addGap(9, 9, 9)
+                        .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         pack();
@@ -420,10 +410,6 @@ public class TelaVeterinario extends javax.swing.JInternalFrame {
     private void txtRuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRuaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtRuaActionPerformed
-
-    private void txtTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefoneActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTelefoneActionPerformed
 
     private void btnInserir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserir1ActionPerformed
         // TODO add your handling code here:
@@ -437,7 +423,7 @@ public class TelaVeterinario extends javax.swing.JInternalFrame {
             veterinario.setCpf(txtCpf.getText());
             veterinario.setNome(txtNome.getText());
             veterinario.setNascimentoPessoa(formatter.format(dateStr));
-            veterinario.setCep(txtCEP.getText());
+            veterinario.setCep(txtCep.getText());
             veterinario.setEstado(txtEstado.getText());
             veterinario.setCidade(txtCidade.getText());
             veterinario.setBairro(txtBairro.getText());
@@ -455,11 +441,14 @@ public class TelaVeterinario extends javax.swing.JInternalFrame {
             veterinario.setSalario(Float.parseFloat(txtSalario.getText()));
             veterinarioControle.insertPessoa(veterinario);
             preencherTabelaVeterinario();
+            lblSuccess.setText("Veterinario " + veterinario.getNome() + " cadastrador com sucesso!");
             limparTela();
             TelaConsulta consulta = new TelaConsulta();
             consulta.preencherCombo();
         } catch (ParseException ex) {
             Logger.getLogger(TelaVeterinario.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NumberFormatException ex){
+            JOptionPane.showMessageDialog(null, "Neste campo é permitido somente numeros","Erro", 0);
         }
     }//GEN-LAST:event_btnInserir1ActionPerformed
 
@@ -468,8 +457,10 @@ public class TelaVeterinario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtNomeActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        String aux = txtBuscar.getText();
-        preencherTabelaBuscar(aux);
+        TelaConsultaVeterianaio telaConsultaVeterianaio = new TelaConsultaVeterianaio();
+        telaConsultaVeterianaio.setVisible(true);
+        telaConsultaVeterianaio.setLocationRelativeTo(null);
+        //consultas.listarConsultas();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
@@ -482,7 +473,7 @@ public class TelaVeterinario extends javax.swing.JInternalFrame {
             veterinario.setCpf(txtCpf.getText());
             veterinario.setNome(txtNome.getText());
             veterinario.setNascimentoPessoa(formatter.format(dateStr));
-            veterinario.setCep(txtCEP.getText());
+            veterinario.setCep(txtCep.getText());
             veterinario.setEstado(txtEstado.getText());
             veterinario.setCidade(txtCidade.getText());
             veterinario.setBairro(txtBairro.getText());
@@ -500,17 +491,21 @@ public class TelaVeterinario extends javax.swing.JInternalFrame {
             veterinario.setSalario(Float.parseFloat(txtSalario.getText()));
             veterinarioControle.atualizarPessoa(veterinario, tabelaVeterinario.getSelectedRow());
             preencherTabelaVeterinario();
+            lblSuccess.setText("Veterinario " + veterinario.getNome() + " atualizado com sucesso!");
             limparTela();
             TelaConsulta consulta = new TelaConsulta();
             consulta.preencherCombo();
         } catch (ParseException ex) {
             Logger.getLogger(TelaVeterinario.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NumberFormatException ex){
+            JOptionPane.showMessageDialog(null, "Neste campo é permitido somente numeros","Erro", 0);
         }
     }//GEN-LAST:event_btnAtualizarActionPerformed
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
         VeterinarioControle animalControle = new VeterinarioControle();
         animalControle.remover(tabelaVeterinario.getSelectedRow());
+        lblSuccess.setText("Veterinario " + veterinario.getNome() + " removido com sucesso!");
         limparTela();
         preencherTabelaVeterinario();
     }//GEN-LAST:event_btnRemoverActionPerformed
@@ -527,7 +522,7 @@ public class TelaVeterinario extends javax.swing.JInternalFrame {
             txtCpf.setText(veterinario.getCpf());
             txtNome.setText(veterinario.getNome());
             //veterinario.setNascimentoPessoa(formatter.format(dateStr));
-            txtCEP.setText(veterinario.getCep());
+            txtCep.setText(veterinario.getCep());
             txtEstado.setText(veterinario.getEstado());
             txtCidade.setText(veterinario.getCidade());
             txtBairro.setText(veterinario.getBairro());
@@ -582,22 +577,22 @@ public class TelaVeterinario extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblNumero;
     private javax.swing.JLabel lblRua;
     private javax.swing.JLabel lblSalario;
+    private javax.swing.JLabel lblSuccess;
     private javax.swing.JLabel lblTelefone;
     private com.toedter.calendar.JCalendar nascimento;
     private javax.swing.JRadioButton radioone;
     private javax.swing.JRadioButton radiotwo;
     private javax.swing.JTable tabelaVeterinario;
     private javax.swing.JTextField txtBairro;
-    private javax.swing.JTextField txtBuscar;
-    private javax.swing.JTextField txtCEP;
+    private javax.swing.JFormattedTextField txtCep;
     private javax.swing.JTextField txtCidade;
-    private javax.swing.JTextField txtCpf;
+    private javax.swing.JFormattedTextField txtCpf;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtEstado;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtNumero;
     private javax.swing.JTextField txtRua;
     private javax.swing.JTextField txtSalario;
-    private javax.swing.JTextField txtTelefone;
+    private javax.swing.JFormattedTextField txtTelefone;
     // End of variables declaration//GEN-END:variables
 }

@@ -17,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class TelaConsultas extends javax.swing.JFrame {
 
+    Consulta consulta = new Consulta();
     /**
      * Creates new form TelaConsultas
      */
@@ -35,50 +36,136 @@ public class TelaConsultas extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaConsultas = new javax.swing.JTable();
+        btnRemover = new javax.swing.JButton();
+        btnAtualizar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        cbxStatus = new javax.swing.JComboBox<>();
+        txtValor = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
         tabelaConsultas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Data", "Animal", "Dono", "Veterinario"
+                "Data", "Animal", "Dono", "Veterinario", "Valor", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
+        tabelaConsultas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaConsultasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabelaConsultas);
+
+        btnRemover.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        btnRemover.setText("Remover");
+        btnRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoverActionPerformed(evt);
+            }
+        });
+
+        btnAtualizar.setFont(new java.awt.Font("Cambria", 1, 14)); // NOI18N
+        btnAtualizar.setText("Atualizar");
+        btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtualizarActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
+        jLabel1.setText("Valor");
+
+        jLabel2.setFont(new java.awt.Font("Cambria", 0, 14)); // NOI18N
+        jLabel2.setText("Status do pagamento");
+
+        cbxStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "andamento", "concluído", "bloqueado" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(149, 149, 149)
+                .addComponent(btnRemover)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAtualizar)
+                .addGap(152, 152, 152))
+            .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 656, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 656, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jLabel1)
+                            .addGap(27, 27, 27)
+                            .addComponent(txtValor))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(cbxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(102, Short.MAX_VALUE)
+                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(cbxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(77, 77, 77))
+                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRemover)
+                    .addComponent(btnAtualizar))
+                .addGap(25, 25, 25))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
+        ConsultaControle consultaControle = new ConsultaControle();
+        consultaControle.remover(tabelaConsultas.getSelectedRow());
+        listarConsultas();
+    }//GEN-LAST:event_btnRemoverActionPerformed
+
+    private void tabelaConsultasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaConsultasMouseClicked
+        List<Consulta> consultas = new ArrayList<Consulta>();
+        ConsultaControle consultaControle = new ConsultaControle();
+        consultas = consultaControle.listar();
+        consulta = consultas.get(tabelaConsultas.getSelectedRow());//pegar os valores da linha e coluna
+        txtValor.setText(Float.toString(consulta.getValorConsulta()));
+        cbxStatus.getModel().setSelectedItem(consulta.getStatusPagamento());
+    }//GEN-LAST:event_tabelaConsultasMouseClicked
+
+    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
+        ConsultaControle consultaControle = new ConsultaControle();
+        consulta.setValorConsulta(Float.parseFloat(txtValor.getText()));
+        consulta.setStatusPagamento(cbxStatus.getModel().getSelectedItem().toString());
+        consultaControle.atualizar(consulta, tabelaConsultas.getSelectedRow());
+        listarConsultas();
+    }//GEN-LAST:event_btnAtualizarActionPerformed
 
     public void listarConsultas() {
         DefaultTableModel tabela = (DefaultTableModel) tabelaConsultas.getModel();
@@ -92,7 +179,9 @@ public class TelaConsultas extends javax.swing.JFrame {
                     c.getDataConsulta(),
                     c.getAnimal().getNomeAnimal(),
                     c.getPessoa().getNome(),
-                    c.getVeterinario().getNome()
+                    c.getVeterinario().getNome(),
+                    c.getValorConsulta(),
+                    c.getStatusPagamento()
                 });
             }
         } catch (Exception e) {
@@ -101,7 +190,13 @@ public class TelaConsultas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAtualizar;
+    private javax.swing.JButton btnRemover;
+    private javax.swing.JComboBox<String> cbxStatus;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabelaConsultas;
+    private javax.swing.JTextField txtValor;
     // End of variables declaration//GEN-END:variables
 }

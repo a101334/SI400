@@ -3,10 +3,10 @@ package br.ftunicamp.veterinaria.control;
 import br.ftunicamp.veterinaria.dao.PessoaDAO;
 import br.ftunicamp.veterinaria.model.Pessoa;
 import br.ftunicamp.veterinaria.view.TelaPrincipal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,13 +15,7 @@ import javax.swing.JOptionPane;
  */
 public class PessoaControle {
 
-    public void login(String usuario, String senha) {
-        if (usuario.equals("secretaria") && senha.equals("1234")) {
-            new TelaPrincipal().setVisible(true);
-        } else{
-            JOptionPane.showMessageDialog(null, "Usuario ou senha inválido", "Erro", 2);
-        }
-    }
+
    
     public void insertPessoa(Pessoa pessoa) {
         PessoaDAO dao;
