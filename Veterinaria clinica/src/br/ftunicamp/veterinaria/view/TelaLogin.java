@@ -141,7 +141,10 @@ public class TelaLogin extends javax.swing.JFrame {
 
     private void btnEnterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnterActionPerformed
         SecretariaControle secretariaControle = new SecretariaControle();
-        secretariaControle.login(txtLogin.getText(), txtSenha.getText());
+        boolean fechar;
+        fechar = secretariaControle.login(txtLogin.getText(), txtSenha.getText());
+        if(fechar == true)
+            this.setVisible(false);
     }//GEN-LAST:event_btnEnterActionPerformed
 
     /**
